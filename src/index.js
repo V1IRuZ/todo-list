@@ -1,3 +1,3 @@
-import { printTodo } from "./new-todo";
+import { projects } from "./projects";
 
-printTodo();
+console.log(projects);
