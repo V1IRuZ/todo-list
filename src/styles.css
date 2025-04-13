@@ -49,6 +49,7 @@
   /* Variables */
   :root {
     --system-ui: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --btn-padding: 0.5em 1em;
     /* Colors */
     /* background */
     --ligth-gray: #F5F5F5;
@@ -95,3 +96,66 @@
     color: var(--off-white);
     cursor: pointer;
   }
+
+  /* Add project modal */
+
+  dialog {
+    margin: 0 auto;
+    top: 20vh;
+    padding: 1.5em;
+    border-radius: 30px;
+    font-weight: 900;
+    color: var(--dark-gray);
+  }
+
+  .project-form {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1em;
+  }
+
+  .project-form h2 {
+    font-size: 2rem;
+  }
+
+  .project-form > div {
+    display: flex;
+    gap: 0.5em;
+  }
+
+  label[for=name] {
+    font-size: 1.5rem;
+  }
+
+  input[type=text] {
+    height: 40px;
+    font-size: 1.5rem;
+    padding-left: 0.2em;
+    outline: none;
+    border: 2px solid var(--medium-gray);
+    border-radius: 10px;
+    color: var(--dark-gray);
+  }
+
+  .project-form > div > button {
+    font-size: 1.2rem;
+    padding: var(--btn-padding);
+    border-radius: 30px;
+    color: var(--off-white);
+    cursor: pointer;
+  }
+
+
+  .submit-project {
+    background-color: var(--soft-green);
+  }
+
+  .close-project {
+    background-color: var(--warm-red);
+  }
+
+  ::backdrop {
+    background-color: var(--medium-gray);
+    opacity: 0.7;
+  }
+
