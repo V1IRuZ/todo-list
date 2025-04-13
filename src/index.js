@@ -1,4 +1,10 @@
+import { getProjectModal } from "./modals";
 import { projects } from "./projects";
 import "./styles.css";
 
-console.log(projects);
+function renderChanges () {
+    getProjectModal();
+    console.log(projects);
+}
+
+renderChanges();

@@ -8,6 +8,19 @@
 <body>
     <header>
         <button class="add-project">Add New Project</button>
+        <dialog class="project-modal" id="project-modal">
+            <form action="" method="dialog" class="project-form">
+                <h2>Create a new project</h2>
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="project-name" required>
+                </div>
+                <div>
+                    <button type="submit" class="submit-project">Submit</button>
+                    <button class="close-project">Close</button>
+                </div>
+            </form>
+        </dialog>
     </header>
     <div id="content">
 

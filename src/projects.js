@@ -32,7 +32,7 @@ const switchActiveProject = (projects, projectName) => {
     activeProject = projects.find(project => project.name === projectName);
 }
 
-const AddToDoToCurrentProject = (currentProject, title, description, dueDate, priority) => {
+const AddToDoToCurrentProject = (title, description, dueDate, priority) => {
     const newToDo = new Todo(title, description, dueDate, priority);
     activeProject.tasks.push(newToDo);
 }
@@ -47,4 +47,4 @@ switchActiveProject(projects, "Restaurant App");
 AddToDoToCurrentProject(activeProject, "Legday", "Lower body 2", "13.11.2025", "Medium");
 console.log(activeProject)
 
-export { projects }
+export { makeNewProject, projects }
