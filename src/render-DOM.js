@@ -2,11 +2,12 @@ import { projects } from "./projects";
 
 const content = document.querySelector("#content");
 
-
 const aside = document.createElement("aside");
 const main = document.createElement("main");
 
 const myProjects = document.createElement("div");
+myProjects.classList.add("my-projects");
+
 const myProjectsH1 = document.createElement("h1");
 myProjectsH1.textContent = "My Projects";
 
@@ -16,11 +17,15 @@ aside.appendChild(myProjects);
 const createProjectCard = (projects) => {
     projects.forEach(project => {
         const projectCard = document.createElement("div");
-        const projectCardH1 = document.createElement("h1");
-        projectCardH1.textContent = `${project.name}`;
+        projectCard.classList.add("project-card");
 
-        projectCard.appendChild(projectCardH1);
-        aside.appendChild(projectCard);
+        const projectCardBtn = document.createElement("button");
+        projectCardBtn.classList.add("project-btn");
+        projectCardBtn.textContent = `${project.name}`;
+
+        projectCard.appendChild(projectCardBtn);
+        myProjects.appendChild(projectCard);
+        aside.appendChild(myProjects);
     })
 }
 
@@ -30,17 +35,15 @@ const resetDOM = (container) => {
     }
 }
 
-const updateAsideDOM = () => {
-    resetDOM(aside);
+const updateProjectsDOM = () => {
+    resetDOM(myProjects);
     createProjectCard(projects);
 }
 
-
-
 function renderDOM() {
-    
+    updateProjectsDOM();
     content.appendChild(aside);
     content.appendChild(main);
 }
 
-export {resetDOM, updateAsideDOM, renderDOM}
+export {resetDOM, updateProjectsDOM, renderDOM}

@@ -78,6 +78,7 @@
 
   button {
     border-style: none;
+    cursor: pointer;
   }
 
   /* Header */
@@ -94,7 +95,6 @@
     border-radius: 30px;
     background-color: var(--sky-blue);
     color: var(--off-white);
-    cursor: pointer;
   }
 
   /* Add project modal */
@@ -142,7 +142,6 @@
     padding: var(--btn-padding);
     border-radius: 30px;
     color: var(--off-white);
-    cursor: pointer;
   }
 
 
@@ -159,3 +158,33 @@
     opacity: 0.7;
   }
 
+  /* Content container */
+
+  #content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  /* aside */
+
+  aside {
+    padding: 2em;
+  }
+
+  aside > h1 {
+    padding-bottom: 1em;
+    font-size: 2rem;
+  }
+
+  .my-projects {
+    display: grid;
+    grid-template-rows:  repeat(3, 1fr);
+    gap: 1em;
+  }
+
+  .project-btn {
+    padding: var(--btn-padding);
+    background-color: var(--sky-blue);
+    color: var(--off-white);
+    border-radius: 30px;
+  }

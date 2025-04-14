@@ -28,7 +28,7 @@ const removeProject = (array, index) => {
     array.splice(index, 1);
 }
 
-const switchActiveProject = (projects, projectName) => {
+const switchActiveProject = (projectName) => {
     activeProject = projects.find(project => project.name === projectName);
 }
 
@@ -41,8 +41,7 @@ makeNewProject("Workout");
 makeNewProject("Everyday tasks");
 makeNewProject("Restaurant App");
 
-switchActiveProject(projects, "Workout");
-switchActiveProject(projects, "Restaurant App");
+switchActiveProject("Workout");
 
 AddToDoToCurrentProject(activeProject, "Legday", "Lower body 2", "13.11.2025", "Medium");
 console.log(activeProject)
