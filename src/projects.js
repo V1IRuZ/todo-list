@@ -19,6 +19,10 @@ class Project {
 const projects = [];
 let activeProject = projects[0];
 
+const getProjects = () => projects;
+
+const getActiveProject = () => activeProject;
+
 const makeNewProject = (name) => {
     const project = new Project(name);
     projects.push(project);
@@ -46,4 +50,4 @@ switchActiveProject("Workout");
 AddToDoToCurrentProject(activeProject, "Legday", "Lower body 2", "13.11.2025", "Medium");
 console.log(activeProject)
 
-export { makeNewProject, projects }
+export { makeNewProject, getActiveProject, getProjects }

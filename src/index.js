@@ -1,11 +1,11 @@
 import { renderDOM } from "./render-DOM";
 import { getProjectModal } from "./modals";
-import { projects } from "./projects";
+import { getProjects } from "./projects";
 import "./styles.css";
 
 function renderChanges () {
     getProjectModal();
-    console.log(projects);
+    console.log(getProjects());
 }
 renderDOM();
 renderChanges();

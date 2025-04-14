@@ -1,9 +1,11 @@
-import { projects } from "./projects";
+import { getProjects, getActiveProject } from "./projects";
+
+const projects = getProjects();
+const activeProject = getActiveProject();
 
 const content = document.querySelector("#content");
 
 const aside = document.createElement("aside");
-const main = document.createElement("main");
 
 const myProjects = document.createElement("div");
 myProjects.classList.add("my-projects");
@@ -39,6 +41,23 @@ const updateProjectsDOM = () => {
     resetDOM(myProjects);
     createProjectCard(projects);
 }
+
+const main = document.createElement("main");
+
+const activeProjectDiv = document.createElement("div");
+activeProjectDiv.classList.add("active-project");
+
+const activeProjectH1 = document.createElement("h1");
+activeProjectH1.textContent = `${activeProject.name}`;
+
+const addNewToDoBtn = document.createElement("button");
+addNewToDoBtn.textContent = "Add new task";
+
+
+activeProjectDiv.appendChild(activeProjectH1);
+activeProjectDiv.appendChild(addNewToDoBtn);
+
+main.appendChild(activeProjectDiv)
 
 function renderDOM() {
     updateProjectsDOM();

@@ -79,6 +79,9 @@
   button {
     border-style: none;
     cursor: pointer;
+    padding: 0.5em 1em;
+    border-radius: 30px;
+
   }
 
   /* Header */
@@ -90,9 +93,7 @@
 
 
   .add-project {
-    padding: 0.5em 1em;
     border: 2px solid var(--off-white);
-    border-radius: 30px;
     background-color: var(--sky-blue);
     color: var(--off-white);
   }
@@ -183,8 +184,19 @@
   }
 
   .project-btn {
-    padding: var(--btn-padding);
     background-color: var(--sky-blue);
     color: var(--off-white);
-    border-radius: 30px;
+  }
+
+  /* main */
+
+  .active-project {
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .active-project > button {
+    background-color: var(--sky-blue);
+    color: var(--off-white);
   }
