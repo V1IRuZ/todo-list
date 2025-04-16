@@ -17,7 +17,7 @@ class Project {
 }
 
 const projects = [];
-let activeProject = projects[0];
+let activeProject;
 
 const getProjects = () => projects;
 
@@ -32,8 +32,8 @@ const removeProject = (array, index) => {
     array.splice(index, 1);
 }
 
-const switchActiveProject = (projectName) => {
-    activeProject = projects.find(project => project.name === projectName);
+const switchActiveProject = (index) => {
+   return activeProject = projects[index];
 }
 
 const AddToDoToCurrentProject = (title, description, dueDate, priority) => {
@@ -45,9 +45,8 @@ makeNewProject("Workout");
 makeNewProject("Everyday tasks");
 makeNewProject("Restaurant App");
 
-switchActiveProject("Workout");
 
-AddToDoToCurrentProject(activeProject, "Legday", "Lower body 2", "13.11.2025", "Medium");
-console.log(activeProject)
+// AddToDoToCurrentProject(activeProject, "Legday", "Lower body 2", "13.11.2025", "Medium");
+// console.log(activeProject)
 
-export { makeNewProject, getActiveProject, getProjects }
+export { makeNewProject, getActiveProject, getProjects, switchActiveProject }

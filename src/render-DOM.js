@@ -1,7 +1,6 @@
-import { getProjects, getActiveProject } from "./projects";
+import { getProjects, getActiveProject, switchActiveProject } from "./projects";
 
 const projects = getProjects();
-const activeProject = getActiveProject();
 
 const content = document.querySelector("#content");
 
@@ -17,13 +16,21 @@ aside.appendChild(myProjectsH1);
 aside.appendChild(myProjects);
 
 const createProjectCard = (projects) => {
-    projects.forEach(project => {
+    projects.forEach((project, index) => {
         const projectCard = document.createElement("div");
         projectCard.classList.add("project-card");
 
         const projectCardBtn = document.createElement("button");
         projectCardBtn.classList.add("project-btn");
         projectCardBtn.textContent = `${project.name}`;
+        projectCardBtn.setAttribute("data-index", index);
+
+        projectCardBtn.addEventListener("click", (e) => {
+            let projectIndex = e.target.getAttribute("data-index");
+            switchActiveProject(+projectIndex);
+            updateActiveProjectH1();
+            console.log(getProjects());
+        });
 
         projectCard.appendChild(projectCardBtn);
         myProjects.appendChild(projectCard);
@@ -42,13 +49,24 @@ const updateProjectsDOM = () => {
     createProjectCard(projects);
 }
 
+
+
 const main = document.createElement("main");
 
 const activeProjectDiv = document.createElement("div");
 activeProjectDiv.classList.add("active-project");
 
 const activeProjectH1 = document.createElement("h1");
-activeProjectH1.textContent = `${activeProject.name}`;
+
+function updateActiveProjectH1() {
+    if (!getActiveProject()) {
+        return
+    }
+    
+    activeProjectH1.textContent = `${getActiveProject().name}`;
+}
+
+updateActiveProjectH1();
 
 const addNewToDoBtn = document.createElement("button");
 addNewToDoBtn.textContent = "Add new task";
