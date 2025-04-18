@@ -1,4 +1,4 @@
-import { updateProjectsDOM } from "./render-DOM";
+import { renderDOM } from "./render-DOM";
 import { makeNewProject } from "./projects";
 
 export function getProjectModal() {
@@ -15,8 +15,8 @@ export function getProjectModal() {
         const projectName = document.querySelector("#name").value;
 
         makeNewProject(projectName);
-        updateProjectsDOM();
-
+        renderDOM();
+        
         projectModal.close();
         projectForm.reset();
 
