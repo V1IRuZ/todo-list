@@ -1,5 +1,6 @@
 import { renderDOM } from "./render-DOM";
 import { makeNewProject } from "./projects";
+import { closeModal } from "./utils";
 
 export function getProjectModal() {
     const addProjectBtn = document.querySelector(".add-project");
@@ -17,18 +18,14 @@ export function getProjectModal() {
         makeNewProject(projectName);
         renderDOM();
         
-        projectModal.close();
-        projectForm.reset();
-
-        e.preventDefault();
+        closeModal(e, projectModal, projectForm)
     }) 
 
     const closeProjectModal = document.querySelector(".close-project");
 
     closeProjectModal.addEventListener("click", (e) => {
-        projectModal.close();
-        projectForm.reset();
-        e.preventDefault();
+        closeModal(e, projectModal, projectForm)
     });
+
 }
 

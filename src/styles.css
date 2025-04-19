@@ -196,7 +196,7 @@
     justify-content: space-between;
   }
 
-  .active-project > button {
+  .add-task {
     background-color: var(--sky-blue);
     color: var(--off-white);
   }

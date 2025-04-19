@@ -4,4 +4,11 @@ const resetDOM = (container) => {
     }
 }
 
-export {resetDOM}
+function closeModal (event, modal, form) {
+    modal.close();
+    form.reset();
+
+    event.preventDefault();
+}
+
+export {resetDOM, closeModal}
