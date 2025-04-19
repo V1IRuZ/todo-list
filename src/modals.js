@@ -26,6 +26,5 @@ export function getProjectModal() {
     closeProjectModal.addEventListener("click", (e) => {
         closeModal(e, projectModal, projectForm)
     });
-
 }
 

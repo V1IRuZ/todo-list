@@ -39,6 +39,33 @@ makeFormFieldsetDivs("Title", "task-title", "text");
 makeFormFieldsetDivs("Description", "task-description", "text");
 makeFormFieldsetDivs("Date", "task-start", "date");
 
+const taskFormPriorityDiv = document.createElement("div");
+
+const taskFormPriorityLabel = document.createElement("label");
+taskFormPriorityLabel.textContent = "Priority";
+taskFormPriorityLabel.setAttribute("for", "priority");
+
+const taskFormPrioritySelect = document.createElement("select");
+taskFormPrioritySelect.id = "priority";
+
+function makePriorityOption(name) {
+    const priorityOption = document.createElement("option");
+    priorityOption.textContent = name
+    priorityOption.value = name
+
+    taskFormPrioritySelect.appendChild(priorityOption);
+}
+
+makePriorityOption("Low");
+makePriorityOption("Medium");
+makePriorityOption("High");
+makePriorityOption("Critical");
+
+taskFormPriorityDiv.appendChild(taskFormPriorityLabel)
+taskFormPriorityDiv.appendChild(taskFormPrioritySelect);
+taskFormFieldset.appendChild(taskFormPriorityDiv)
+
+
 
 const taskModalBtnsDiv = document.createElement("div");
 
@@ -64,7 +91,12 @@ addNewToDoBtn.addEventListener("click", () => {
 })
 
 taskForm.addEventListener("submit", e => {
+    const taskTitle = document.querySelector("#task-title").value;
+    const taskDescription = document.querySelector("#task-description").value;
+    const taskDueDate = document.querySelector("#task-start").value;
+    const taskPriority = document.querySelector("#priority").value;
 
+    addToDoToCurrentProject(taskTitle, taskDescription, taskDueDate, taskPriority);
     closeModal(e, taskModal, taskForm);
 })
 

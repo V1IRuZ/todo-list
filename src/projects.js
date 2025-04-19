@@ -36,9 +36,10 @@ const switchActiveProject = (index) => {
    return activeProject = projects[index];
 }
 
-const AddToDoToCurrentProject = (title, description, dueDate, priority) => {
+const addToDoToCurrentProject = (title, description, dueDate, priority) => {
     const newToDo = new Todo(title, description, dueDate, priority);
     activeProject.tasks.push(newToDo);
+    console.log(activeProject.tasks);
 }
 
 makeNewProject("Workout");
@@ -49,4 +50,4 @@ makeNewProject("Restaurant App");
 // AddToDoToCurrentProject(activeProject, "Legday", "Lower body 2", "13.11.2025", "Medium");
 // console.log(activeProject)
 
-export { makeNewProject, getActiveProject, getProjects, switchActiveProject }
+export { makeNewProject, getActiveProject, getProjects, switchActiveProject, addToDoToCurrentProject }
