@@ -42,6 +42,14 @@ const addToDoToCurrentProject = (title, description, dueDate, priority) => {
     console.log(activeProject.tasks);
 }
 
+function withActiveProject(callback) {
+    if (!activeProject) {
+        return;
+    }
+    callback(activeProject);
+}
+
+
 makeNewProject("Workout");
 makeNewProject("Everyday tasks");
 makeNewProject("Restaurant App");
@@ -50,4 +58,4 @@ makeNewProject("Restaurant App");
 // AddToDoToCurrentProject(activeProject, "Legday", "Lower body 2", "13.11.2025", "Medium");
 // console.log(activeProject)
 
-export { makeNewProject, getActiveProject, getProjects, switchActiveProject, addToDoToCurrentProject }
+export { makeNewProject, getActiveProject, getProjects, switchActiveProject, addToDoToCurrentProject, withActiveProject }

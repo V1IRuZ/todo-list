@@ -1,4 +1,5 @@
-import { getActiveProject, addToDoToCurrentProject } from "./projects";
+import { renderActiveProjectDOM } from "./main-project-DOM";
+import { addToDoToCurrentProject, withActiveProject } from "./projects";
 import { closeModal } from "./utils";
 
 const addNewToDoBtn = document.createElement("button");
@@ -98,6 +99,7 @@ taskForm.addEventListener("submit", e => {
 
     addToDoToCurrentProject(taskTitle, taskDescription, taskDueDate, taskPriority);
     closeModal(e, taskModal, taskForm);
+    renderActiveProjectDOM();
 })
 
 taskModalCloseBtn.addEventListener("click", e => {
@@ -105,12 +107,10 @@ taskModalCloseBtn.addEventListener("click", e => {
 })
 
 function addTasksDOM(container) {
-    if(!getActiveProject()) {
-        return
-    }
-
-    container.appendChild(addNewToDoBtn);
-    container.appendChild(taskModal);
+    withActiveProject(() => {
+        container.appendChild(addNewToDoBtn);
+        container.appendChild(taskModal);
+    })
 }
 
 export { addTasksDOM }
