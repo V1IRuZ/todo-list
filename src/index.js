@@ -1,6 +1,6 @@
 import { renderDOM } from "./render-DOM";
 import { getProjectModal } from "./modals";
-import { getProjects } from "./projects";
+import { getProjects, defaultProject } from "./projects";
 import "./styles.css";
 
 function renderChanges () {

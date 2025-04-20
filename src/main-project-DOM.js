@@ -1,4 +1,4 @@
-import { getActiveProject, withActiveProject } from "./projects";
+import { withActiveProject } from "./projects";
 import { addTasksDOM } from "./task-modal";
 import { resetDOM } from "./utils";
 
@@ -24,6 +24,7 @@ function updateActiveProjectH1() {
 }
 
 const showTasksDiv = document.createElement("div");
+showTasksDiv.classList.add("view-tasks");
 
 function makeTaskCard() {
     resetDOM(showTasksDiv);
@@ -38,8 +39,22 @@ function makeTaskCard() {
 
             const makeTaskCardTitle = document.createElement("p");
             makeTaskCardTitle.textContent = `${task.title}`
+
+            const makeTaskCardDueDate = document.createElement("p");
+            makeTaskCardDueDate.textContent = `${task.dueDate}`
+
+            const checkBoxDiv = document.createElement("div");
+            const label = document.createElement("label");
+            const input = document.createElement("input");
+            input.setAttribute("type", "checkbox");
             
+            checkBoxDiv.appendChild(label);
+            checkBoxDiv.appendChild(input);
+
             makeTaskCardDiv.appendChild(makeTaskCardTitle);
+            makeTaskCardDiv.appendChild(makeTaskCardDueDate);
+            makeTaskCardDiv.appendChild(checkBoxDiv);
+            
             showTasksDiv.appendChild(makeTaskCardDiv);
         })
     })
