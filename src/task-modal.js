@@ -7,11 +7,12 @@ addNewToDoBtn.classList.add("add-task");
 addNewToDoBtn.textContent = "Add new task";
 
 const taskModal = document.createElement("dialog");
+taskModal.id = "task-modal"
 
 const taskForm = document.createElement("form");
 taskForm.setAttribute("action", "");
 taskForm.setAttribute("method", "dialog");
-taskForm.classList.add("task-modal");
+taskForm.classList.add("task-form");
 
 const taskFormHeader = document.createElement("h1");
 taskFormHeader.textContent = "Add to do task";
@@ -69,6 +70,7 @@ taskFormFieldset.appendChild(taskFormPriorityDiv)
 
 
 const taskModalBtnsDiv = document.createElement("div");
+taskModalBtnsDiv.classList.add("task-btns");
 
 const taskModalSubmitBtn = document.createElement("button");
 taskModalSubmitBtn.textContent = "Submit";
@@ -77,6 +79,7 @@ taskModalSubmitBtn.classList.add("submit-task");
 
 const taskModalCloseBtn = document.createElement("button");
 taskModalCloseBtn.textContent = "Close";
+taskModalCloseBtn.classList.add("close-task");
 
 taskModalBtnsDiv.appendChild(taskModalSubmitBtn);
 taskModalBtnsDiv.appendChild(taskModalCloseBtn);
