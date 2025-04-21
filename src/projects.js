@@ -69,4 +69,4 @@ makeNewProject("Restaurant App");
 
 
 
-export { makeNewProject, getActiveProject, getProjects, switchActiveProject, addToDoToCurrentProject, withActiveProject, defaultProject }
+export { makeNewProject, getActiveProject, getProjects, switchActiveProject, addToDoToCurrentProject, withActiveProject, defaultProject, removeProject }

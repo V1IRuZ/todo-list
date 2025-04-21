@@ -73,7 +73,7 @@ function makeTaskCard() {
             detailsDescription.textContent = `${task.description}`;
         
             const detailPriority = document.createElement("p");
-            detailPriority.textContent = `${task.priority}`;
+            detailPriority.textContent = `Priority: ${task.priority}`;
         
             detailsDiv.appendChild(detailsDescription);
             detailsDiv.appendChild(detailPriority);
@@ -91,11 +91,16 @@ function showHideDetails(element) {
     element.classList.toggle("hide");
 }
 
+function changeButtonText(event) {
+    event.target.textContent = event.target.textContent === "details" ? "hide" : "details";
+}
+
 addGlobalEventListener("click", ".details-btn", e => {
     let parentContainer = e.target.closest(".card-container");
     let details = parentContainer.querySelector(".details");
-    
+
     showHideDetails(details);
+    changeButtonText(e);
 })
 
 const renderActiveProjectDOM = () => {

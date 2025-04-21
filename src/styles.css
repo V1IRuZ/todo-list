@@ -257,6 +257,14 @@
     padding: var(--btn-padding)
   }
 
+  .details {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    padding: var(--btn-padding);
+  }
+
   .hide {
     display: none;
   }
+
+ 
