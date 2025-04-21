@@ -21,7 +21,13 @@ let activeProject;
 
 const getProjects = () => projects;
 
-const getActiveProject = () => activeProject;
+const setActiveProject = () => {
+    activeProject = projects.length > 0 ? projects[0] : null;
+};
+
+const getActiveProjectIndex = () => {
+    return projects.indexOf(activeProject);
+}
 
 const makeNewProject = (name) => {
     const project = new Project(name);
@@ -29,8 +35,8 @@ const makeNewProject = (name) => {
     return project;
 }
 
-const removeProject = (array, index) => {
-    array.splice(index, 1);
+const removeProject = (index) => {
+    projects.splice(index, 1);
 }
 
 const switchActiveProject = (index) => {
@@ -69,4 +75,4 @@ makeNewProject("Restaurant App");
 
 
 
-export { makeNewProject, getActiveProject, getProjects, switchActiveProject, addToDoToCurrentProject, withActiveProject, defaultProject, removeProject }
+export { makeNewProject, setActiveProject, getProjects, switchActiveProject, addToDoToCurrentProject, withActiveProject, defaultProject, removeProject, getActiveProjectIndex }

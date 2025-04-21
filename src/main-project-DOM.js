@@ -14,6 +14,12 @@ activeProjectH1.textContent = "No project selected";
 activeProjectHeaderDiv.appendChild(activeProjectH1)
 
 const addTasksDiv = document.createElement("div");
+const removeProjectBtn = document.createElement("button");
+removeProjectBtn.textContent = "Delete";
+removeProjectBtn.classList.add("remove-project");
+
+addTasksDiv.appendChild(removeProjectBtn);
+
 activeProjectHeaderDiv.appendChild(addTasksDiv);
 
 
