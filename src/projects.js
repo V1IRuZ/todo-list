@@ -40,7 +40,6 @@ const switchActiveProject = (index) => {
 const addToDoToCurrentProject = (title, description, dueDate, priority) => {
     const newToDo = new Todo(title, description, dueDate, priority);
     activeProject.tasks.push(newToDo);
-    console.log(activeProject.tasks);
 }
 
 function withActiveProject(callback) {

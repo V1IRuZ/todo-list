@@ -11,4 +11,10 @@ function closeModal (event, modal, form) {
     event.preventDefault();
 }
 
-export {resetDOM, closeModal}
+function addGlobalEventListener(type, selector, callback) {
+    document.addEventListener(type, e => {
+        if (e.target.matches(selector)) callback(e);
+    })
+}
+
+export {resetDOM, closeModal, addGlobalEventListener}

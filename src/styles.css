@@ -235,13 +235,28 @@
   .view-tasks {
     display: grid; 
     gap: 1em;
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+  }
+
+  .card-container {
+    font-size: 1.5rem;
+    border: 2px solid var(--dark-gray);
   }
 
   .task-card {
     display: grid;
-    grid-template-columns: 5fr 2fr 1fr;
-    font-size: 1.5rem;
-    border: 2px solid var(--dark-gray);
+    grid-template-columns: 5fr 2fr 1fr 1fr;
     padding: var(--btn-padding);
+  }
+
+  .details-btn {
+    background-color: var(--sky-blue);
+    color: var(--off-white);
+    font-size: 1rem;
+    font-weight: 900;
+    padding: var(--btn-padding)
+  }
+
+  .hide {
+    display: none;
   }

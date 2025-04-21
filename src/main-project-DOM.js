@@ -1,6 +1,6 @@
 import { withActiveProject } from "./projects";
 import { addTasksDOM } from "./task-modal";
-import { resetDOM } from "./utils";
+import { resetDOM, addGlobalEventListener } from "./utils";
 
 const main = document.createElement("main");
 
@@ -31,9 +31,11 @@ function makeTaskCard() {
 
     withActiveProject((activeProject) => {
         const tasks = activeProject.tasks
-        console.log(tasks);
 
-        tasks.forEach(task => {
+        tasks.forEach((task, index) => {
+            const makeCardContainer = document.createElement("div");
+            makeCardContainer.classList.add("card-container");
+
             const makeTaskCardDiv = document.createElement("div");
             makeTaskCardDiv.classList.add("task-card");
 
@@ -47,6 +49,13 @@ function makeTaskCard() {
             const label = document.createElement("label");
             const input = document.createElement("input");
             input.setAttribute("type", "checkbox");
+
+            const detailsBtnDiv = document.createElement("div");
+            const detailsBtn = document.createElement("button");
+            detailsBtn.setAttribute("data-index", index);
+            detailsBtn.classList.add("details-btn");
+            detailsBtn.textContent = "details";
+            detailsBtnDiv.appendChild(detailsBtn)
             
             checkBoxDiv.appendChild(label);
             checkBoxDiv.appendChild(input);
@@ -54,12 +63,40 @@ function makeTaskCard() {
             makeTaskCardDiv.appendChild(makeTaskCardTitle);
             makeTaskCardDiv.appendChild(makeTaskCardDueDate);
             makeTaskCardDiv.appendChild(checkBoxDiv);
-            
-            showTasksDiv.appendChild(makeTaskCardDiv);
+            makeTaskCardDiv.appendChild(detailsBtnDiv);
+
+            const detailsDiv = document.createElement("div");
+            detailsDiv.classList.add("details");
+            detailsDiv.classList.add("hide");
+
+            const detailsDescription = document.createElement("p");
+            detailsDescription.textContent = `${task.description}`;
+        
+            const detailPriority = document.createElement("p");
+            detailPriority.textContent = `${task.priority}`;
+        
+            detailsDiv.appendChild(detailsDescription);
+            detailsDiv.appendChild(detailPriority);
+    
+
+            makeCardContainer.appendChild(makeTaskCardDiv);
+            makeCardContainer.appendChild(detailsDiv);
+
+            showTasksDiv.appendChild(makeCardContainer);
         })
     })
 }
 
+function showHideDetails(element) {
+    element.classList.toggle("hide");
+}
+
+addGlobalEventListener("click", ".details-btn", e => {
+    let parentContainer = e.target.closest(".card-container");
+    let details = parentContainer.querySelector(".details");
+    
+    showHideDetails(details);
+})
 
 const renderActiveProjectDOM = () => {
     updateActiveProjectH1();
