@@ -1,5 +1,5 @@
 import { renderDOM } from "./render-DOM";
-import { makeNewProject } from "./projects";
+import { makeNewProject, setActiveProject } from "./projects";
 import { closeModal } from "./utils";
 
 export function getProjectModal() {
@@ -16,6 +16,7 @@ export function getProjectModal() {
         const projectName = document.querySelector("#name").value;
 
         makeNewProject(projectName);
+        setActiveProject();
         renderDOM();
         
         closeModal(e, projectModal, projectForm)

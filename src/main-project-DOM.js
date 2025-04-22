@@ -1,4 +1,4 @@
-import { withActiveProject } from "./projects";
+import { withActiveProject, getActiveProject } from "./projects";
 import { addTasksDOM } from "./task-modal";
 import { resetDOM, addGlobalEventListener } from "./utils";
 
@@ -17,16 +17,23 @@ const addTasksDiv = document.createElement("div");
 const removeProjectBtn = document.createElement("button");
 removeProjectBtn.textContent = "Delete";
 removeProjectBtn.classList.add("remove-project");
-
 addTasksDiv.appendChild(removeProjectBtn);
 
 activeProjectHeaderDiv.appendChild(addTasksDiv);
 
+function addProjectDeleteBtn(container) {
+    withActiveProject(() => {
+        container.appendChild(removeProjectBtn);
+    })
+}
 
 function updateActiveProjectH1() {
-    withActiveProject((activeProject) => {
-        activeProjectH1.textContent = `${activeProject.name}`;
-    })
+    if (!getActiveProject()) {
+        resetDOM(addTasksDiv)
+        activeProjectH1.textContent = "No projects";
+        return
+    }
+        activeProjectH1.textContent = `${getActiveProject().name}`
 }
 
 const showTasksDiv = document.createElement("div");
@@ -111,6 +118,7 @@ addGlobalEventListener("click", ".details-btn", e => {
 
 const renderActiveProjectDOM = () => {
     updateActiveProjectH1();
+    addProjectDeleteBtn(addTasksDiv);
     addTasksDOM(addTasksDiv);
     activeProjectDiv.appendChild(activeProjectHeaderDiv);
 

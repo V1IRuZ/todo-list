@@ -21,6 +21,8 @@ let activeProject;
 
 const getProjects = () => projects;
 
+const getActiveProject = () => activeProject;
+
 const setActiveProject = () => {
     activeProject = projects.length > 0 ? projects[0] : null;
 };
@@ -75,4 +77,4 @@ makeNewProject("Restaurant App");
 
 
 
-export { makeNewProject, setActiveProject, getProjects, switchActiveProject, addToDoToCurrentProject, withActiveProject, defaultProject, removeProject, getActiveProjectIndex }
+export { makeNewProject, getActiveProject, setActiveProject, getProjects, switchActiveProject, addToDoToCurrentProject, withActiveProject, defaultProject, removeProject, getActiveProjectIndex }

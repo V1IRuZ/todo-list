@@ -17,4 +17,5 @@ function addGlobalEventListener(type, selector, callback) {
     })
 }
 
+
 export {resetDOM, closeModal, addGlobalEventListener}

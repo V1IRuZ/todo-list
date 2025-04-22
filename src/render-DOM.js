@@ -8,7 +8,7 @@ addGlobalEventListener("click", ".remove-project", e => {
         let index = getActiveProjectIndex();
         removeProject(index);
         setActiveProject();
-        renderDOM()
+        renderDOM();
     })
 })
 
