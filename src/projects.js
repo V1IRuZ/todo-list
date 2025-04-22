@@ -41,6 +41,10 @@ const removeProject = (index) => {
     projects.splice(index, 1);
 }
 
+const removeTask = (index) => {
+    activeProject.tasks.splice(index, 1);
+}
+
 const switchActiveProject = (index) => {
    return activeProject = projects[index];
 }
@@ -77,4 +81,4 @@ makeNewProject("Restaurant App");
 
 
 
-export { makeNewProject, getActiveProject, setActiveProject, getProjects, switchActiveProject, addToDoToCurrentProject, withActiveProject, defaultProject, removeProject, getActiveProjectIndex }
+export { makeNewProject, getActiveProject, setActiveProject, getProjects, switchActiveProject, addToDoToCurrentProject, withActiveProject, defaultProject, removeProject, removeTask, getActiveProjectIndex }

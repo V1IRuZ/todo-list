@@ -267,4 +267,10 @@
     display: none;
   }
 
- 
+  .remove-project,
+  .remove-task {
+    background-color: var(--warm-red);
+    color: var(--off-white);
+    padding: var(--btn-padding);
+    font-size: 1rem;
+  }

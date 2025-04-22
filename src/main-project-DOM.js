@@ -90,10 +90,21 @@ function makeTaskCard() {
         
             detailsDiv.appendChild(detailsDescription);
             detailsDiv.appendChild(detailPriority);
-    
+            
+            const buttonsDiv = document.createElement("button");
+            buttonsDiv.classList.add("edit-tasks")
+            buttonsDiv.classList.add("hide");
 
+            const removeTaskBtn = document.createElement("button");
+            removeTaskBtn.classList.add("remove-task");
+            removeTaskBtn.textContent = "delete";
+            removeTaskBtn.setAttribute("data-index", index);
+
+            buttonsDiv.appendChild(removeTaskBtn);
+            
             makeCardContainer.appendChild(makeTaskCardDiv);
             makeCardContainer.appendChild(detailsDiv);
+            makeCardContainer.appendChild(buttonsDiv);
 
             showTasksDiv.appendChild(makeCardContainer);
         })
@@ -111,8 +122,10 @@ function changeButtonText(event) {
 addGlobalEventListener("click", ".details-btn", e => {
     let parentContainer = e.target.closest(".card-container");
     let details = parentContainer.querySelector(".details");
+    let buttons = parentContainer.querySelector(".edit-tasks");
 
     showHideDetails(details);
+    showHideDetails(buttons);
     changeButtonText(e);
 })
 
