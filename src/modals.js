@@ -64,16 +64,20 @@ function getTaskModal() {
 
 function editTaskModal() {
     
-    const activeProjectTasks = getActiveProject().tasks;
-    const editTaskBtns = document.querySelectorAll(".edit-btn");
+    const tasks = document.querySelector(".view-tasks");
 
-    editTaskBtns.forEach((button, index) => {
-        button.addEventListener("click", e => {
+    tasks.addEventListener("click", e => {
+        if(e.target.classList.contains("edit-btn")) {
+            const activeProjectTasks = getActiveProject().tasks;
+            let index = e.target.getAttribute("data-index");
+
             taskTitle.value = `${activeProjectTasks[index].title}`;
-            console.log("clicked");
+            taskDescription.value = `${activeProjectTasks[index].description}`;
+            taskDueDate.value = `${activeProjectTasks[index].dueDate}`;
+            taskPriority.value = `${activeProjectTasks[index].priority}`;
 
             taskModal.showModal();
-        })
+        }
     })
 }
 
