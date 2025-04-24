@@ -1,5 +1,4 @@
 import { withActiveProject, getActiveProject } from "./projects";
-import { addTasksDOM } from "./task-modal";
 import { resetDOM, addGlobalEventListener } from "./utils";
 
 const main = document.createElement("main");
@@ -14,6 +13,12 @@ activeProjectH1.textContent = "No project selected";
 activeProjectHeaderDiv.appendChild(activeProjectH1)
 
 const addTasksDiv = document.createElement("div");
+
+const addNewToDoBtn = document.createElement("button");
+addNewToDoBtn.classList.add("add-task");
+addNewToDoBtn.textContent = "Add new task";
+addTasksDiv.appendChild(addNewToDoBtn);
+
 const removeProjectBtn = document.createElement("button");
 removeProjectBtn.textContent = "Delete";
 removeProjectBtn.classList.add("remove-project");
@@ -21,8 +26,9 @@ addTasksDiv.appendChild(removeProjectBtn);
 
 activeProjectHeaderDiv.appendChild(addTasksDiv);
 
-function addProjectDeleteBtn(container) {
+function addActiveProjectBtns(container) {
     withActiveProject(() => {
+        container.appendChild(addNewToDoBtn);
         container.appendChild(removeProjectBtn);
     })
 }
@@ -91,7 +97,7 @@ function makeTaskCard() {
             detailsDiv.appendChild(detailsDescription);
             detailsDiv.appendChild(detailPriority);
             
-            const buttonsDiv = document.createElement("button");
+            const buttonsDiv = document.createElement("div");
             buttonsDiv.classList.add("edit-tasks")
             buttonsDiv.classList.add("hide");
 
@@ -100,7 +106,13 @@ function makeTaskCard() {
             removeTaskBtn.textContent = "delete";
             removeTaskBtn.setAttribute("data-index", index);
 
+            const ediTaskBtn = document.createElement("button");
+            ediTaskBtn.classList.add("edit-btn");
+            ediTaskBtn.textContent = "edit";
+            ediTaskBtn.setAttribute("data-index", index);
+
             buttonsDiv.appendChild(removeTaskBtn);
+            buttonsDiv.appendChild(ediTaskBtn);
             
             makeCardContainer.appendChild(makeTaskCardDiv);
             makeCardContainer.appendChild(detailsDiv);
@@ -131,8 +143,7 @@ addGlobalEventListener("click", ".details-btn", e => {
 
 const renderActiveProjectDOM = () => {
     updateActiveProjectH1();
-    addProjectDeleteBtn(addTasksDiv);
-    addTasksDOM(addTasksDiv);
+    addActiveProjectBtns(addTasksDiv);
     activeProjectDiv.appendChild(activeProjectHeaderDiv);
 
     makeTaskCard();

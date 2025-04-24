@@ -18,6 +18,12 @@ addGlobalEventListener("click", ".remove-task", e => {
     renderActiveProjectDOM();
 })
 
+// TESTI PAINIKE MUOKKAUSTA VARTEN
+// addGlobalEventListener("click", ".edit-btn", e => {
+//     const editModal = document.querySelector("#task-modal");
+//     editModal.showModal();
+// })
+
 const content = document.querySelector("#content");
 
 function renderDOM() {
