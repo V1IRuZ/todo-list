@@ -41,18 +41,11 @@ const removeProject = (index) => {
     projects.splice(index, 1);
 }
 
-const removeTask = (index) => {
-    activeProject.tasks.splice(index, 1);
-}
 
 const switchActiveProject = (index) => {
    return activeProject = projects[index];
 }
 
-const addToDoToCurrentProject = (title, description, dueDate, priority) => {
-    const newToDo = new Todo(title, description, dueDate, priority);
-    activeProject.tasks.push(newToDo);
-}
 
 function withActiveProject(callback) {
     if (!activeProject) {
@@ -65,12 +58,12 @@ const defaultProject = () => {
     const myProject = makeNewProject("Everyday tasks");
     activeProject = myProject;
 
-    addToDoToCurrentProject("Brush teeth", "Wash thoroughly with a 2-minute timer", "2025-06-23", "High");
-    addToDoToCurrentProject("Take allergy medicine", "1 allergy tablet and 2 sprays in both nostrils", "2025-06-25", "Critical");
-    addToDoToCurrentProject("Visit the store", "Buy milk, bread and eggs", "2025-06-21", "Medium");
-    addToDoToCurrentProject("Visit the library", "Borrow study books", "2025-06-20", "Medium");
-    addToDoToCurrentProject("Dentist", "Book an appointment for a dental check-up", "2025-06-20", "High");
-    addToDoToCurrentProject("Play videogames", "After a long day, relax and play some video games", "2025-06-22", "Low");
+    activeProject.addToDo(new Todo("Brush teeth", "Wash thoroughly with a 2-minute timer", "2025-06-23", "High"));
+    activeProject.addToDo(new Todo("Take allergy medicine", "1 allergy tablet and 2 sprays in both nostrils", "2025-06-25", "Critical"));
+    activeProject.addToDo(new Todo("Visit the store", "Buy milk, bread and eggs", "2025-06-21", "Medium"));
+    activeProject.addToDo(new Todo("Visit the library", "Borrow study books", "2025-06-20", "Medium"));
+    activeProject.addToDo(new Todo("Dentist", "Book an appointment for a dental check-up", "2025-06-20", "High"));
+    activeProject.addToDo(new Todo("Play videogames", "After a long day, relax and play some video games", "2025-06-22", "Low"));
 }
 
 defaultProject();
@@ -81,4 +74,4 @@ makeNewProject("Restaurant App");
 
 
 
-export { makeNewProject, getActiveProject, setActiveProject, getProjects, switchActiveProject, addToDoToCurrentProject, withActiveProject, defaultProject, removeProject, removeTask, getActiveProjectIndex }
+export { makeNewProject, getActiveProject, setActiveProject, getProjects, switchActiveProject, withActiveProject, defaultProject, removeProject, getActiveProjectIndex }

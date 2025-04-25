@@ -1,6 +1,7 @@
 import { renderDOM } from "./render-DOM";
 import { renderActiveProjectDOM } from "./main-project-DOM";
-import { makeNewProject, setActiveProject, addToDoToCurrentProject, getActiveProject } from "./projects";
+import { Todo } from "./new-todo";
+import { makeNewProject, setActiveProject, getActiveProject } from "./projects";
 import { closeModal } from "./utils";
 
 // Project modal
@@ -51,7 +52,8 @@ function getTaskModal() {
     })
 
     taskForm.addEventListener("submit", e => {
-        addToDoToCurrentProject(taskTitle.value, taskDescription.value, taskDueDate.value, taskPriority.value);
+        const toDo = new Todo(taskTitle.value, taskDescription.value, taskDueDate.value, taskPriority.value)
+        getActiveProject().addToDo(toDo);
         closeModal(e, taskModal, taskForm);
         renderActiveProjectDOM();
     })
