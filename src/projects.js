@@ -1,22 +1,8 @@
-import { Todo } from "./new-todo";
-
-class Project {
-    tasks = [];
-
-    constructor(name) {
-        this.name = name;
-    }
-
-    addToDo(todo) {
-        this.tasks.push(todo)
-    }
-
-    removeToDo(index) {
-        this.tasks.splice(index, 1);
-    }
-}
+import { Todo } from "./create-todo";
+import { Project } from "./create-project";
 
 const projects = [];
+
 let activeProject;
 
 const getProjects = () => projects;

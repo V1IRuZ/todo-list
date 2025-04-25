@@ -14,10 +14,6 @@ class Todo {
     }
 }
 
-// const makeToDo = (title, description, dueDate, priority) => {
-//     return new Todo(title, description, dueDate, priority);
-// }
-
 export { Todo }
 
 

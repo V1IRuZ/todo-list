@@ -1,6 +1,6 @@
 import { renderDOM } from "./render-DOM";
 import { renderActiveProjectDOM } from "./main-project-DOM";
-import { Todo } from "./new-todo";
+import { Todo } from "./create-todo";
 import { makeNewProject, setActiveProject, getActiveProject } from "./projects";
 import { closeModal } from "./utils";
 
