@@ -1,4 +1,4 @@
-import { withActiveProject, removeProject, removeTask, getActiveProjectIndex, setActiveProject } from "./projects";
+import { withActiveProject, getActiveProject, removeTask, getActiveProjectIndex, setActiveProject } from "./projects";
 import  { addGlobalEventListener } from "./utils";
 import { renderProjectListDOM } from "./aside-DOM";
 import { renderActiveProjectDOM } from "./main-project-DOM";
@@ -13,16 +13,10 @@ addGlobalEventListener("click", ".remove-project", e => {
 })
 
 addGlobalEventListener("click", ".remove-task", e => {
-    let index = getActiveProjectIndex();
-    removeTask(index);
+    let index = e.target.getAttribute("data-index");
+    getActiveProject().removeToDo(index);
     renderActiveProjectDOM();
 })
-
-// TESTI PAINIKE MUOKKAUSTA VARTEN
-// addGlobalEventListener("click", ".edit-btn", e => {
-//     const editModal = document.querySelector("#task-modal");
-//     editModal.showModal();
-// })
 
 const content = document.querySelector("#content");
 
