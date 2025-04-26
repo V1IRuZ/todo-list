@@ -1,5 +1,4 @@
-import { getProjects, switchActiveProject } from "./projects";
-import { renderActiveProjectDOM } from "./main-project-DOM";
+import { getProjects} from "./projects";
 import { resetDOM } from "./utils";
 
 const aside = document.createElement("aside");
@@ -26,16 +25,6 @@ const createProjectCard = (projects) => {
         myProjects.appendChild(projectCard);
     })
 }
-
-
-myProjects.addEventListener("click", (e) => {
-    if (e.target.classList.contains("project-btn")) {
-        let projectIndex = e.target.getAttribute("data-index");
-        switchActiveProject(+projectIndex);
-        renderActiveProjectDOM();
-    }
-});
-
 
 const renderProjectListDOM = () => {
     const projects = getProjects();

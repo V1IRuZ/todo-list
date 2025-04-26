@@ -1,4 +1,6 @@
-const resetDOM = (container) => {
+import { withActiveProject, getActiveProject } from "./projects";
+
+function resetDOM(container) {
     while (container.firstChild) {
         container.removeChild(container.lastChild);
     }
@@ -17,5 +19,30 @@ function addGlobalEventListener(type, selector, callback) {
     })
 }
 
+function showHideDetails(element) {
+    element.classList.toggle("hide");
+}
 
-export {resetDOM, closeModal, addGlobalEventListener}
+function changeButtonText(event) {
+    event.target.textContent = event.target.textContent === "details" ? "hide" : "details";
+}
+
+function updateActiveProjectHeader(container, element) {
+    if (!getActiveProject()) {
+        resetDOM(container)
+        element.textContent = "No projects";
+        return
+    }
+        element.textContent = `${getActiveProject().name}`
+}
+
+function addActiveProjectBtns(container, ...buttons) {
+    withActiveProject(() => {
+        buttons.forEach(button => {
+            container.appendChild(button);
+        })
+    })
+}
+
+
+export {resetDOM, closeModal, addGlobalEventListener, showHideDetails, changeButtonText, addActiveProjectBtns, updateActiveProjectHeader}

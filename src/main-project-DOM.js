@@ -1,5 +1,5 @@
-import { withActiveProject, getActiveProject } from "./projects";
-import { resetDOM, addGlobalEventListener } from "./utils";
+import { withActiveProject } from "./projects";
+import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns } from "./utils";
 
 const main = document.createElement("main");
 
@@ -25,22 +25,6 @@ removeProjectBtn.classList.add("remove-project");
 addTasksDiv.appendChild(removeProjectBtn);
 
 activeProjectHeaderDiv.appendChild(addTasksDiv);
-
-function addActiveProjectBtns(container) {
-    withActiveProject(() => {
-        container.appendChild(addNewToDoBtn);
-        container.appendChild(removeProjectBtn);
-    })
-}
-
-function updateActiveProjectH1() {
-    if (!getActiveProject()) {
-        resetDOM(addTasksDiv)
-        activeProjectH1.textContent = "No projects";
-        return
-    }
-        activeProjectH1.textContent = `${getActiveProject().name}`
-}
 
 const showTasksDiv = document.createElement("div");
 showTasksDiv.classList.add("view-tasks");
@@ -123,27 +107,10 @@ function makeTaskCard() {
     })
 }
 
-function showHideDetails(element) {
-    element.classList.toggle("hide");
-}
-
-function changeButtonText(event) {
-    event.target.textContent = event.target.textContent === "details" ? "hide" : "details";
-}
-
-addGlobalEventListener("click", ".details-btn", e => {
-    let parentContainer = e.target.closest(".card-container");
-    let details = parentContainer.querySelector(".details");
-    let buttons = parentContainer.querySelector(".edit-tasks");
-
-    showHideDetails(details);
-    showHideDetails(buttons);
-    changeButtonText(e);
-})
 
 const renderActiveProjectDOM = () => {
-    updateActiveProjectH1();
-    addActiveProjectBtns(addTasksDiv);
+    updateActiveProjectHeader(addTasksDiv, activeProjectH1);
+    addActiveProjectBtns(addTasksDiv, addNewToDoBtn, removeProjectBtn);
     activeProjectDiv.appendChild(activeProjectHeaderDiv);
 
     makeTaskCard();
