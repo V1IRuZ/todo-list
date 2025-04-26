@@ -1,11 +1,11 @@
 import { renderDOM } from "./render-DOM";
-import { getProjectModal, getTaskModal, editTaskModal } from "./modals";
+import { getProjectModal, addTaskModal, editTaskModal } from "./modals";
 import { getProjects } from "./projects";
 import "./styles.css";
 
 function renderChanges () {
     renderDOM();
-    getTaskModal();
+    addTaskModal();
     getProjectModal();
     editTaskModal();
     console.log(getProjects());

@@ -44,22 +44,27 @@ function getProjectModal() {
 }
 
 
-function getTaskModal() {
+function addTaskModal() {
     const addNewToDoBtn = document.querySelector(".add-task");
 
     addNewToDoBtn.addEventListener("click", () => {
+        taskForm.classList.add("create");
         taskModal.showModal();
     })
 
     taskForm.addEventListener("submit", e => {
-        const toDo = new Todo(taskTitle.value, taskDescription.value, taskDueDate.value, taskPriority.value)
-        getActiveProject().addToDo(toDo);
-        closeModal(e, taskModal, taskForm);
-        renderActiveProjectDOM();
+        if (e.target.classList.contains("create")) {
+            const toDo = new Todo(taskTitle.value, taskDescription.value, taskDueDate.value, taskPriority.value)
+            getActiveProject().addToDo(toDo);
+            closeModal(e, taskModal, taskForm);
+            renderActiveProjectDOM();
+            taskForm.classList.remove("create");
+        }
     })
 
     taskModalCloseBtn.addEventListener("click", e => {
         closeModal(e, taskModal, taskForm);
+        taskForm.classList.remove("create");
     })
 }
 
@@ -78,11 +83,30 @@ function editTaskModal() {
             taskDueDate.value = `${activeProjectTasks[index].dueDate}`;
             taskPriority.value = `${activeProjectTasks[index].priority}`;
 
+            taskForm.classList.add("edit");
+            taskForm.setAttribute("data-index", index);
+
             taskModal.showModal();
         }
+    })
+
+    taskForm.addEventListener("submit", e => {
+        if (e.target.classList.contains("edit")) {
+            let index = e.target.getAttribute("data-index");
+            getActiveProject().tasks[index].editToDo(taskTitle.value, taskDescription.value, taskDueDate.value, taskPriority.value);
+            closeModal(e, taskModal, taskForm);
+            renderActiveProjectDOM();
+            taskForm.classList.remove("edit");
+            taskForm.removeAttribute("data-index");
+        }
+
+        taskModalCloseBtn.addEventListener("click", e => {
+            closeModal(e, taskModal, taskForm);
+            taskForm.classList.remove("edit");
+        })
     })
 }
 
 
-export { getProjectModal, getTaskModal, editTaskModal }
+export { getProjectModal, addTaskModal, editTaskModal }
 

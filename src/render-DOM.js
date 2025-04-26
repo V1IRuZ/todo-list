@@ -1,4 +1,4 @@
-import { withActiveProject, getActiveProject, removeTask, getActiveProjectIndex, setActiveProject } from "./projects";
+import { withActiveProject, getActiveProject, removeProject, getActiveProjectIndex, setActiveProject } from "./projects";
 import  { addGlobalEventListener } from "./utils";
 import { renderProjectListDOM } from "./aside-DOM";
 import { renderActiveProjectDOM } from "./main-project-DOM";
