@@ -206,9 +206,15 @@
     border-style: none;
   }
 
-  fieldset > div {
+  fieldset > div,
+  .time > div {
     display: grid;
     grid-template-rows: 1fr 2fr;
+  }
+
+  .time {
+    display: flex;
+    gap: 1em;
   }
 
   .task-btns {
@@ -233,6 +239,13 @@
   }
 
   .view-tasks {
+    display: flex;
+    flex-direction: column; 
+    gap: 2em;
+  }
+
+  .completed-tasks,
+  .uncompleted-tasks {
     display: grid; 
     gap: 1em;
     grid-template-rows: 1fr;

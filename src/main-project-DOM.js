@@ -1,5 +1,5 @@
 import { withActiveProject } from "./projects";
-import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns } from "./utils";
+import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, addCardtoContainer, updateCheckMark } from "./utils";
 
 const main = document.createElement("main");
 
@@ -29,8 +29,15 @@ activeProjectHeaderDiv.appendChild(addTasksDiv);
 const showTasksDiv = document.createElement("div");
 showTasksDiv.classList.add("view-tasks");
 
+const uncompletedContainer = document.createElement("div");
+uncompletedContainer.classList.add("uncompleted-tasks");
+
+const completedContainer = document.createElement("div");
+completedContainer.classList.add("completed-tasks");
+
 function makeTaskCard() {
-    resetDOM(showTasksDiv);
+    resetDOM(uncompletedContainer);
+    resetDOM(completedContainer);
 
     withActiveProject((activeProject) => {
         const tasks = activeProject.tasks
@@ -50,8 +57,12 @@ function makeTaskCard() {
 
             const checkBoxDiv = document.createElement("div");
             const label = document.createElement("label");
-            const input = document.createElement("input");
-            input.setAttribute("type", "checkbox");
+            label.setAttribute("for", `completion${index}`);
+
+            const checkbox = document.createElement("input");
+            checkbox.id = `completion${index}`
+            checkbox.setAttribute("type", "checkbox");
+            checkbox.setAttribute("data-index", index);
 
             const detailsBtnDiv = document.createElement("div");
             const detailsBtn = document.createElement("button");
@@ -61,7 +72,7 @@ function makeTaskCard() {
             detailsBtnDiv.appendChild(detailsBtn)
             
             checkBoxDiv.appendChild(label);
-            checkBoxDiv.appendChild(input);
+            checkBoxDiv.appendChild(checkbox);
 
             makeTaskCardDiv.appendChild(makeTaskCardTitle);
             makeTaskCardDiv.appendChild(makeTaskCardDueDate);
@@ -102,10 +113,16 @@ function makeTaskCard() {
             makeCardContainer.appendChild(detailsDiv);
             makeCardContainer.appendChild(buttonsDiv);
 
-            showTasksDiv.appendChild(makeCardContainer);
+            updateCheckMark(task, checkbox);
+            addCardtoContainer(task, makeCardContainer, uncompletedContainer, completedContainer);
+
+            showTasksDiv.appendChild(uncompletedContainer);
+            showTasksDiv.appendChild(completedContainer);
         })
     })
 }
+
+
 
 
 const renderActiveProjectDOM = () => {

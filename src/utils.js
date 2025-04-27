@@ -44,5 +44,23 @@ function addActiveProjectBtns(container, ...buttons) {
     })
 }
 
+function updateCheckMark(task, input) {
+    if (task.complete) {
+        input.setAttribute("checked", true);
+        input.disabled = true;
+    }
+}
 
-export {resetDOM, closeModal, addGlobalEventListener, showHideDetails, changeButtonText, addActiveProjectBtns, updateActiveProjectHeader}
+function addCardtoContainer(task, card, uncompletedContainer, completedContainer) {
+    if (!task.complete) {
+        uncompletedContainer.appendChild(card);
+    }
+
+    if (task.complete) {
+        completedContainer.appendChild(card);
+        card.style.backgroundColor = "green";
+    }
+}
+
+
+export {resetDOM, closeModal, addGlobalEventListener, showHideDetails, changeButtonText, addActiveProjectBtns, updateActiveProjectHeader, addCardtoContainer, updateCheckMark}

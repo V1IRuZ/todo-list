@@ -18,6 +18,7 @@ const taskModalCloseBtn = document.querySelector(".close-task");
 const taskTitle = document.querySelector("#task-title");
 const taskDescription = document.querySelector("#task-description");
 const taskDueDate = document.querySelector("#task-start");
+const taskRemainder = document.querySelector("#remainder");
 const taskPriority = document.querySelector("#priority");
 
 
@@ -54,7 +55,7 @@ function addTaskModal() {
 
     taskForm.addEventListener("submit", e => {
         if (e.target.classList.contains("create")) {
-            const toDo = new Todo(taskTitle.value, taskDescription.value, taskDueDate.value, taskPriority.value)
+            const toDo = new Todo(taskTitle.value, taskDescription.value, taskDueDate.value, taskRemainder.value, taskPriority.value)
             getActiveProject().addToDo(toDo);
             closeModal(e, taskModal, taskForm);
             renderActiveProjectDOM();
@@ -81,6 +82,7 @@ function editTaskModal() {
             taskTitle.value = `${activeProjectTasks[index].title}`;
             taskDescription.value = `${activeProjectTasks[index].description}`;
             taskDueDate.value = `${activeProjectTasks[index].dueDate}`;
+            taskDueDate.value = `${activeProjectTasks[index].remainder}`;
             taskPriority.value = `${activeProjectTasks[index].priority}`;
 
             taskForm.classList.add("edit");
@@ -93,7 +95,7 @@ function editTaskModal() {
     taskForm.addEventListener("submit", e => {
         if (e.target.classList.contains("edit")) {
             let index = e.target.getAttribute("data-index");
-            getActiveProject().tasks[index].editToDo(taskTitle.value, taskDescription.value, taskDueDate.value, taskPriority.value);
+            getActiveProject().tasks[index].editToDo(taskTitle.value, taskDescription.value, taskDueDate.value, taskRemainder.value, taskPriority.value);
             closeModal(e, taskModal, taskForm);
             renderActiveProjectDOM();
             taskForm.classList.remove("edit");

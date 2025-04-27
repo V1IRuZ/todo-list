@@ -18,12 +18,26 @@
                     <label for="task-description">Description</label>
                     <input type="text" id="task-description">
                 </div>
-                <div>
-                    <label for="task-start">Date</label>
-                    <input type="date" id="task-start">
+                <div class="time">
+                    <div>
+                        <label for="task-start">Date</label>
+                        <input type="date" id="task-start">
+                    </div>
+                    <div>
+                        <label for="remainder">Remainder</label>
+                        <select name="task-remainder" id="remainder">
+                            <option value="1">daily</option>
+                            <option value="2">every other day</option>
+                            <option value="3">every third day</option>
+                            <option value="7">weekly</option>
+                            <option value="14">biweekly</option>
+                            <option value="30">monthly</option>
+                            <option value="0">none</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
-                    <label for="priority"></label>
+                    <label for="priority">Priority</label>
                     <select name="task-priority" id="priority">
                         <option value="Low">Low</option>
                         <option value="Medium">Medium</option>

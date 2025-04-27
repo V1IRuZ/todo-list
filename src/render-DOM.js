@@ -34,6 +34,20 @@ addGlobalEventListener("click", ".project-btn", e => {
         renderActiveProjectDOM();
 })
 
+addGlobalEventListener("click", 'input[type="checkbox"]', e => {
+    let index = e.target.getAttribute("data-index");
+    let activeProjectTask = getActiveProject().tasks[index];
+    if (e.target.checked) {
+        console.log(e.target.checked);
+        activeProjectTask.setToDoCompleted();
+        console.log(activeProjectTask.updateDueToDate());
+        renderActiveProjectDOM();
+    } else {
+        activeProjectTask.setToDoUncompleted();
+        renderActiveProjectDOM();
+    }
+})
+
 const content = document.querySelector("#content");
 
 function renderDOM() {
