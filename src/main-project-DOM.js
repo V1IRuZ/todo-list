@@ -1,5 +1,5 @@
 import { withActiveProject } from "./projects";
-import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, addCardtoContainer, updateCheckMark } from "./utils";
+import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, updateCheckMark } from "./utils";
 
 const main = document.createElement("main");
 
@@ -29,15 +29,32 @@ activeProjectHeaderDiv.appendChild(addTasksDiv);
 const showTasksDiv = document.createElement("div");
 showTasksDiv.classList.add("view-tasks");
 
-const uncompletedContainer = document.createElement("div");
-uncompletedContainer.classList.add("uncompleted-tasks");
 
-const completedContainer = document.createElement("div");
-completedContainer.classList.add("completed-tasks");
+const todayContainer = document.createElement("div");
+todayContainer.classList.add("today-container");
+
+const todayH1 = document.createElement("h1");
+todayH1.textContent = "Today tasks";
+todayContainer.appendChild(todayH1);
+
+const todayCardsList = document.createElement("div");
+todayCardsList.classList.add("today");
+todayContainer.appendChild(todayCardsList)
+
+const upcomingContainer = document.createElement("div");
+upcomingContainer.classList.add("upcoming-container");
+
+const upcomingH1 = document.createElement("h1");
+upcomingH1.textContent = "Upcoming tasks"
+upcomingContainer.appendChild(upcomingH1)
+
+const upcomingCardsList = document.createElement("div");
+upcomingCardsList.classList.add("upcoming");
+upcomingContainer.appendChild(upcomingCardsList);
 
 function makeTaskCard() {
-    resetDOM(uncompletedContainer);
-    resetDOM(completedContainer);
+    resetDOM(todayCardsList);
+    resetDOM(upcomingCardsList);
 
     withActiveProject((activeProject) => {
         const tasks = activeProject.tasks
@@ -114,15 +131,20 @@ function makeTaskCard() {
             makeCardContainer.appendChild(buttonsDiv);
 
             updateCheckMark(task, checkbox);
-            addCardtoContainer(task, makeCardContainer, uncompletedContainer, completedContainer);
 
-            showTasksDiv.appendChild(uncompletedContainer);
-            showTasksDiv.appendChild(completedContainer);
+
+            if (isDueDate(task)) {
+                todayCardsList.appendChild(makeCardContainer);
+            } else {
+                upcomingCardsList.appendChild(makeCardContainer);
+            }
+
+            showTasksDiv.appendChild(todayContainer);
+            showTasksDiv.appendChild(upcomingContainer);
+
         })
     })
 }
-
-
 
 
 const renderActiveProjectDOM = () => {

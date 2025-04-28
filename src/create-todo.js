@@ -35,7 +35,7 @@ class Todo {
 
             this.dueDate = format(addDays(this.#today, +this.remainder), "yyyy-MM-dd");
         }
-        
+
         console.log(this.dueDate);
     }
 }

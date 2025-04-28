@@ -1,4 +1,13 @@
 import { withActiveProject, getActiveProject } from "./projects";
+import { format, addDays, isBefore, isEqual, isAfter } from "date-fns";
+
+function showCurrentDate() {
+    return format(new Date(), "yyyy-MM-dd");
+}
+
+function isDueDate (task) {
+    return isEqual(showCurrentDate(), task.dueDate);
+}
 
 function resetDOM(container) {
     while (container.firstChild) {
@@ -45,6 +54,15 @@ function addActiveProjectBtns(container, ...buttons) {
 }
 
 function updateCheckMark(task, input) {
+    const dueDateToday = isEqual(showCurrentDate(), task.dueDate);
+    console.log(dueDateToday);
+    if (!dueDateToday) {
+        input.disabled = true;
+    }
+
+    if (!task.complete && dueDateToday) {
+        input.disabled = false;
+    }
     if (task.complete) {
         input.setAttribute("checked", true);
         input.disabled = true;
@@ -62,5 +80,11 @@ function addCardtoContainer(task, card, uncompletedContainer, completedContainer
     }
 }
 
+function showWhenTaskCompleted(task) {
+    const today = format(new Date(), "yyyy-MM-dd");
+    const test = isEqual(today, task.dayCompleted);
+    console.log(test);
+}   
 
-export {resetDOM, closeModal, addGlobalEventListener, showHideDetails, changeButtonText, addActiveProjectBtns, updateActiveProjectHeader, addCardtoContainer, updateCheckMark}
+
+export {resetDOM, closeModal, addGlobalEventListener, showHideDetails, changeButtonText, addActiveProjectBtns, updateActiveProjectHeader, addCardtoContainer, updateCheckMark, showWhenTaskCompleted, isDueDate}

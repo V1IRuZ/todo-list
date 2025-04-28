@@ -1,7 +1,8 @@
 import { withActiveProject, getActiveProject, removeProject, getActiveProjectIndex, setActiveProject, switchActiveProject } from "./projects";
-import  { addGlobalEventListener, showHideDetails, changeButtonText } from "./utils";
+import  { addGlobalEventListener, showHideDetails, changeButtonText, showWhenTaskCompleted } from "./utils";
 import { renderProjectListDOM } from "./aside-DOM";
 import { renderActiveProjectDOM } from "./main-project-DOM";
+import { addDays, format } from "date-fns";
 
 addGlobalEventListener("click", ".details-btn", e => {
     let parentContainer = e.target.closest(".card-container");
@@ -38,14 +39,22 @@ addGlobalEventListener("click", 'input[type="checkbox"]', e => {
     let index = e.target.getAttribute("data-index");
     let activeProjectTask = getActiveProject().tasks[index];
     if (e.target.checked) {
-        console.log(e.target.checked);
         activeProjectTask.setToDoCompleted();
+        showWhenTaskCompleted(activeProjectTask);
         console.log(activeProjectTask.updateDueToDate());
         renderActiveProjectDOM();
     } else {
         activeProjectTask.setToDoUncompleted();
         renderActiveProjectDOM();
     }
+})
+
+let today = "2025-04-28";
+// Testing
+addGlobalEventListener("click", ".test", e => {
+    
+    today = format(addDays(today, 1), "yyyy-MM-dd");
+    console.log(today);
 })
 
 const content = document.querySelector("#content");
