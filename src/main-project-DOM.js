@@ -55,6 +55,7 @@ upcomingContainer.appendChild(upcomingCardsList);
 function addCardstoContainer() {
     withActiveProject((activeProject) => {
         const isTodayTasks = activeProject.tasks.some(task => isDueDate(task))
+        const isUpcomingTasks = activeProject.tasks.some(task => !isDueDate(task))
 
         todayContainer.remove();
         upcomingContainer.remove();
@@ -62,13 +63,16 @@ function addCardstoContainer() {
         if (activeProject.tasks.length === 0) {
             return;
         }
-
-        showTasksDiv.appendChild(upcomingContainer);
+  
 
         if (isTodayTasks) {
             showTasksDiv.prepend(todayContainer);
             console.log(activeProject.tasks);
         } 
+
+        if (isUpcomingTasks) {
+            showTasksDiv.appendChild(upcomingContainer);
+        }
     })
 }
 
