@@ -41,7 +41,6 @@ addGlobalEventListener("click", 'input[type="checkbox"]', e => {
     if (e.target.checked) {
         activeProjectTask.setToDoCompleted();
         showWhenTaskCompleted(activeProjectTask);
-        console.log(activeProjectTask.updateDueToDate());
         renderActiveProjectDOM();
     } else {
         activeProjectTask.setToDoUncompleted();

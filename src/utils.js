@@ -55,7 +55,6 @@ function addActiveProjectBtns(container, ...buttons) {
 
 function updateCheckMark(task, input) {
     const dueDateToday = isEqual(showCurrentDate(), task.dueDate);
-    console.log(dueDateToday);
     if (!dueDateToday) {
         input.disabled = true;
     }

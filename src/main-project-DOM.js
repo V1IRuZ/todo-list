@@ -52,6 +52,27 @@ const upcomingCardsList = document.createElement("div");
 upcomingCardsList.classList.add("upcoming");
 upcomingContainer.appendChild(upcomingCardsList);
 
+function addCardstoContainer() {
+    withActiveProject((activeProject) => {
+        const isTodayTasks = activeProject.tasks.some(task => isDueDate(task))
+
+        todayContainer.remove();
+        upcomingContainer.remove();
+
+        if (activeProject.tasks.length === 0) {
+            return;
+        }
+
+        showTasksDiv.appendChild(upcomingContainer);
+
+        if (isTodayTasks) {
+            showTasksDiv.prepend(todayContainer);
+            console.log(activeProject.tasks);
+        } 
+    })
+}
+
+
 function makeTaskCard() {
     resetDOM(todayCardsList);
     resetDOM(upcomingCardsList);
@@ -139,9 +160,6 @@ function makeTaskCard() {
                 upcomingCardsList.appendChild(makeCardContainer);
             }
 
-            showTasksDiv.appendChild(todayContainer);
-            showTasksDiv.appendChild(upcomingContainer);
-
         })
     })
 }
@@ -153,6 +171,7 @@ const renderActiveProjectDOM = () => {
     activeProjectDiv.appendChild(activeProjectHeaderDiv);
 
     makeTaskCard();
+    addCardstoContainer();
     activeProjectDiv.appendChild(showTasksDiv);
     
     main.appendChild(activeProjectDiv)
