@@ -1,5 +1,5 @@
-import { eventActions } from "./render-DOM";
-import { updateDOM } from "./main-project-DOM";
+import { eventActions } from "./events";
+import { updateDOM } from "./DOM";
 import { getProjectModal, addTaskModal, editTaskModal } from "./modals";
 import { getProjects } from "./projects";
 import "./styles.css";

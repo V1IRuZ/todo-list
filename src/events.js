@@ -1,6 +1,6 @@
 import { withActiveProject, getActiveProject, removeProject, getActiveProjectIndex, setActiveProject, switchActiveProject } from "./projects";
 import  { addGlobalEventListener, showHideDetails, changeButtonText, showWhenTaskCompleted } from "./utils";
-import { updateMainDOM, updateDOM } from "./main-project-DOM";
+import { updateMainDOM, updateDOM } from "./DOM";
 import { addDays, format } from "date-fns";
 
 export function eventActions() {
