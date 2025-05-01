@@ -1,7 +1,6 @@
 import { withActiveProject, getActiveProject, removeProject, getActiveProjectIndex, setActiveProject, switchActiveProject } from "./projects";
 import  { addGlobalEventListener, showHideDetails, changeButtonText, showWhenTaskCompleted } from "./utils";
-import { renderProjectListDOM } from "./aside-DOM";
-import { renderActiveProjectDOM } from "./main-project-DOM";
+import { renderActiveProjectDOM, renderProjectListDOM } from "./main-project-DOM";
 import { addDays, format } from "date-fns";
 
 addGlobalEventListener("click", ".details-btn", e => {
@@ -19,7 +18,7 @@ addGlobalEventListener("click", ".remove-project", e => {
         let index = getActiveProjectIndex();
         removeProject(index);
         setActiveProject();
-        renderDOM();
+        renderDOM(); 
     })
 })
 

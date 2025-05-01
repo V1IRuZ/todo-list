@@ -1,6 +1,46 @@
-import { withActiveProject } from "./projects";
+import { withActiveProject, getProjects } from "./projects";
 import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, updateCheckMark } from "./utils";
 
+// aside
+const aside = document.createElement("aside");
+
+const myProjectsH1 = document.createElement("h1");
+myProjectsH1.textContent = "My Projects";
+aside.appendChild(myProjectsH1);
+
+const myProjects = document.createElement("div");
+myProjects.classList.add("my-projects");
+aside.appendChild(myProjects);
+
+const makeProjectCard = (project, index) => {
+    const projectCard = document.createElement("div");
+    projectCard.classList.add("project-card");
+
+    const projectCardBtn = document.createElement("button");
+    projectCardBtn.classList.add("project-btn");
+    projectCardBtn.textContent = `${project.name}`;
+    projectCardBtn.setAttribute("data-index", index);
+
+    projectCard.appendChild(projectCardBtn);
+    return projectCard;
+}
+
+const updateProjectCards = () => {
+    resetDOM(myProjects)
+    const projects = getProjects();
+
+    projects.forEach((project, index) => {
+        const card = makeProjectCard(project, index);
+        myProjects.appendChild(card);
+    })
+}
+
+const renderProjectListDOM = () => {
+    updateProjectCards();
+    return aside;
+} 
+
+// main
 const main = document.createElement("main");
 
 const activeProjectDiv = document.createElement("div");
@@ -183,4 +223,4 @@ const renderActiveProjectDOM = () => {
     return main;
 }
 
-export {renderActiveProjectDOM}
+export {renderActiveProjectDOM, renderProjectListDOM}
