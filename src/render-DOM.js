@@ -55,7 +55,7 @@ addGlobalEventListener("click", ".test", e => {
     console.log(today);
 })
 
-const content = document.querySelector("#content");
+const content = document.querySelector("#page");
 
 function renderDOM() {
     const main = renderActiveProjectDOM()

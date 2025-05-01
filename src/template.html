@@ -6,6 +6,19 @@
     <title>To Do</title>
 </head>
 <body>
+    <dialog class="project-modal" id="project-modal">
+        <form action="" method="dialog" class="project-form">
+            <h2>Create a new project</h2>
+            <div>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="project-name" required>
+            </div>
+            <div>
+                <button type="submit" class="submit-project">Submit</button>
+                <button class="close-project">Close</button>
+            </div>
+        </form>
+    </dialog>
     <dialog class="task-modal">
         <form action="" method="dialog" class="task-form">
             <h1>Add to do task</h1>
@@ -52,26 +65,12 @@
             </div>
         </form>
     </dialog>
-    <header>
-        <button class="add-project">Add New Project</button>
-        <dialog class="project-modal" id="project-modal">
-            <form action="" method="dialog" class="project-form">
-                <h2>Create a new project</h2>
-                <div>
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="project-name" required>
-                </div>
-                <div>
-                    <button type="submit" class="submit-project">Submit</button>
-                    <button class="close-project">Close</button>
-                </div>
-            </form>
-        </dialog>
-        <button class="test">Test</button>
-    </header>
-    <div id="content">
-
+    <div id="page">
+        <header>
+            <button class="add-project">Add New Project</button>    
+            <button class="test">Test</button>
+        </header>
+        <footer>footer</footer>
     </div>
-    <footer>footer</footer>
 </body>
 </html>
