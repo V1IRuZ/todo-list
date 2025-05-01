@@ -1,5 +1,7 @@
-import { withActiveProject, getProjects } from "./projects";
+import { withActiveProject, getProjects, getActiveProject } from "./projects";
 import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, updateCheckMark } from "./utils";
+
+const content = document.querySelector("#page");
 
 // aside
 const aside = document.createElement("aside");
@@ -11,6 +13,8 @@ aside.appendChild(myProjectsH1);
 const myProjects = document.createElement("div");
 myProjects.classList.add("my-projects");
 aside.appendChild(myProjects);
+
+content.appendChild(aside);
 
 const makeProjectCard = (project, index) => {
     const projectCard = document.createElement("div");
@@ -35,7 +39,7 @@ const updateProjectCards = () => {
     })
 }
 
-const renderProjectListDOM = () => {
+const updateAsideDOM = () => {
     updateProjectCards();
     return aside;
 } 
@@ -43,8 +47,6 @@ const renderProjectListDOM = () => {
 // main
 // Active project header
 const main = document.createElement("main");
-
-const mainContent = document.createElement("div");
 
 const activeProjectHeaderDiv = document.createElement("div");
 activeProjectHeaderDiv.classList.add("active-project");
@@ -66,10 +68,19 @@ removeProjectBtn.classList.add("remove-project");
 addTasksDiv.appendChild(removeProjectBtn);
 
 activeProjectHeaderDiv.appendChild(addTasksDiv);
+main.appendChild(activeProjectHeaderDiv);
+
+function updateSelectedProject() {
+    updateActiveProjectHeader(addTasksDiv, activeProjectH1);
+    addActiveProjectBtns(addTasksDiv, addNewToDoBtn, removeProjectBtn);
+}
 
 // Task Cards
-const showTasksDiv = document.createElement("div");
-showTasksDiv.classList.add("view-tasks");
+const activeProjectTasks = document.createElement("div");
+activeProjectTasks.classList.add("view-tasks");
+main.appendChild(activeProjectTasks)
+
+content.appendChild(main);
 
 const makeContainerToTasksFactory = (className, headerText) => {
     const container = document.createElement("div");
@@ -104,11 +115,11 @@ function displayContainer() {
         }
 
         if (isTodayTasks) {
-            showTasksDiv.prepend(today.container);
+            activeProjectTasks.prepend(today.container);
         } 
 
         if (isUpcomingTasks) {
-            showTasksDiv.appendChild(upcoming.container);
+            activeProjectTasks.appendChild(upcoming.container);
         }
     })
 }
@@ -196,42 +207,43 @@ const makeCardExtension = (task, index) => {
 }
 
 
-function updateTaskCards() {
+function updateTaskCardsToContainers() {
     resetDOM(today.cardsContainer);
     resetDOM(upcoming.cardsContainer);
 
-    withActiveProject((activeProject) => {
-        const tasks = activeProject.tasks
+    const tasks = getActiveProject().tasks;
 
-        tasks.forEach((task, index) => {
-            const card = makeMainTaskCard(task, index);
-            const cardExtendion = makeCardExtension(task, index);
-            
-            card.appendChild(cardExtendion);
+    tasks.forEach((task, index) => {
+        const card = makeMainTaskCard(task, index);
+        const cardExtendion = makeCardExtension(task, index);
+        
+        card.appendChild(cardExtendion);
 
-            if (isDueDate(task)) {
-                today.cardsContainer.appendChild(card);
-            } else {
-                upcoming.cardsContainer.appendChild(card);
-            }
+        if (isDueDate(task)) {
+            today.cardsContainer.appendChild(card);
+        } else {
+            upcoming.cardsContainer.appendChild(card);
+        }
+    })
+}
 
-        })
+function updateTaskLists() {
+    withActiveProject(() => {
+        updateTaskCardsToContainers();
+        displayContainer();        
     })
 }
 
 
-const renderActiveProjectDOM = () => {
-    updateActiveProjectHeader(addTasksDiv, activeProjectH1);
-    addActiveProjectBtns(addTasksDiv, addNewToDoBtn, removeProjectBtn);
-    mainContent.appendChild(activeProjectHeaderDiv);
-
-    updateTaskCards();
-    displayContainer();
-    mainContent.appendChild(showTasksDiv);
-    
-    main.appendChild(mainContent)
-
+const updateMainDOM = () => {
+    updateSelectedProject()
+    updateTaskLists();
     return main;
 }
 
-export {renderActiveProjectDOM, renderProjectListDOM}
+const updateDOM = () => {
+    updateAsideDOM();
+    updateMainDOM();
+}
+
+export {updateMainDOM, updateDOM}

@@ -13,7 +13,7 @@ class Todo {
         this.priority = priority;
     }
 
-    editToDo(title, description, dueDate, priority) {
+    editToDo(title, description, dueDate, remainder, priority) {
         if (title !== undefined) this.title = title;
         if (description !== undefined) this.description = description;
         if (dueDate !== undefined) this.dueDate = dueDate;

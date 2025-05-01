@@ -1,5 +1,4 @@
-import { renderDOM } from "./render-DOM";
-import { renderActiveProjectDOM } from "./main-project-DOM";
+import { updateMainDOM, updateDOM } from "./main-project-DOM";
 import { Todo } from "./create-todo";
 import { makeNewProject, setActiveProject, getActiveProject } from "./projects";
 import { closeModal } from "./utils";
@@ -32,7 +31,7 @@ function getProjectModal() {
 
         makeNewProject(projectName);
         setActiveProject();
-        renderDOM();
+        updateDOM();
         
         closeModal(e, projectModal, projectForm)
     }) 
@@ -58,7 +57,7 @@ function addTaskModal() {
             const toDo = new Todo(taskTitle.value, taskDescription.value, taskDueDate.value, taskRemainder.value, taskPriority.value)
             getActiveProject().addToDo(toDo);
             closeModal(e, taskModal, taskForm);
-            renderActiveProjectDOM();
+            updateMainDOM();
             taskForm.classList.remove("create");
         }
     })
@@ -82,7 +81,7 @@ function editTaskModal() {
             taskTitle.value = `${activeProjectTasks[index].title}`;
             taskDescription.value = `${activeProjectTasks[index].description}`;
             taskDueDate.value = `${activeProjectTasks[index].dueDate}`;
-            taskDueDate.value = `${activeProjectTasks[index].remainder}`;
+            taskRemainder.value = `${activeProjectTasks[index].remainder}`;
             taskPriority.value = `${activeProjectTasks[index].priority}`;
 
             taskForm.classList.add("edit");
@@ -97,7 +96,7 @@ function editTaskModal() {
             let index = e.target.getAttribute("data-index");
             getActiveProject().tasks[index].editToDo(taskTitle.value, taskDescription.value, taskDueDate.value, taskRemainder.value, taskPriority.value);
             closeModal(e, taskModal, taskForm);
-            renderActiveProjectDOM();
+            updateMainDOM();
             taskForm.classList.remove("edit");
             taskForm.removeAttribute("data-index");
         }
