@@ -41,9 +41,10 @@ const renderProjectListDOM = () => {
 } 
 
 // main
+// Active project header
 const main = document.createElement("main");
 
-const activeProjectDiv = document.createElement("div");
+const mainContent = document.createElement("div");
 
 const activeProjectHeaderDiv = document.createElement("div");
 activeProjectHeaderDiv.classList.add("active-project");
@@ -66,142 +67,152 @@ addTasksDiv.appendChild(removeProjectBtn);
 
 activeProjectHeaderDiv.appendChild(addTasksDiv);
 
+// Task Cards
 const showTasksDiv = document.createElement("div");
 showTasksDiv.classList.add("view-tasks");
 
+const makeContainerToTasksFactory = (className, headerText) => {
+    const container = document.createElement("div");
+    container.classList.add(className);
 
-const todayContainer = document.createElement("div");
-todayContainer.classList.add("today-container");
+    const containerH1 = document.createElement("h1");
+    containerH1.textContent = headerText;
+    container.appendChild(containerH1);
 
-const todayH1 = document.createElement("h1");
-todayH1.textContent = "Today tasks";
-todayContainer.appendChild(todayH1);
+    const cardsContainer = document.createElement("div");
+    container.appendChild(cardsContainer);
 
-const todayCardsList = document.createElement("div");
-todayCardsList.classList.add("today");
-todayContainer.appendChild(todayCardsList)
+    return {
+        container,
+        cardsContainer
+    }
+}
 
-const upcomingContainer = document.createElement("div");
-upcomingContainer.classList.add("upcoming-container");
+const today = makeContainerToTasksFactory("today-container", "Today's tasks");
+const upcoming = makeContainerToTasksFactory("upcoming-container", "Upcoming tasks");
 
-const upcomingH1 = document.createElement("h1");
-upcomingH1.textContent = "Upcoming tasks"
-upcomingContainer.appendChild(upcomingH1)
-
-const upcomingCardsList = document.createElement("div");
-upcomingCardsList.classList.add("upcoming");
-upcomingContainer.appendChild(upcomingCardsList);
-
-function addCardstoContainer() {
+function displayContainer() {
     withActiveProject((activeProject) => {
         const isTodayTasks = activeProject.tasks.some(task => isDueDate(task))
         const isUpcomingTasks = activeProject.tasks.some(task => !isDueDate(task))
 
-        todayContainer.remove();
-        upcomingContainer.remove();
+        today.container.remove();
+        upcoming.container.remove();
 
         if (activeProject.tasks.length === 0) {
             return;
         }
-  
 
         if (isTodayTasks) {
-            showTasksDiv.prepend(todayContainer);
-            console.log(activeProject.tasks);
+            showTasksDiv.prepend(today.container);
         } 
 
         if (isUpcomingTasks) {
-            showTasksDiv.appendChild(upcomingContainer);
+            showTasksDiv.appendChild(upcoming.container);
         }
     })
 }
 
+const makeMainTaskCard = (task, index) => {
+    const taskCard = document.createElement("div");
+    taskCard.classList.add("card-container");
+    
+    const mainTaskInfo = document.createElement("div");
+    mainTaskInfo.classList.add("task-card");
+    
+    const taskCardTitle = document.createElement("p");
+    taskCardTitle.textContent = `${task.title}`
+    mainTaskInfo.appendChild(taskCardTitle)
+    
+    const taskCardDueDate = document.createElement("p");
+    taskCardDueDate.textContent = `${task.dueDate}`
+    mainTaskInfo.appendChild(taskCardDueDate)
+    
+    const checkBoxDiv = document.createElement("div");
 
-function makeTaskCard() {
-    resetDOM(todayCardsList);
-    resetDOM(upcomingCardsList);
+    const label = document.createElement("label");
+    label.setAttribute("for", `completion${index}`);
+    checkBoxDiv.appendChild(label);
+    
+    const checkbox = document.createElement("input");
+    checkbox.id = `completion${index}`
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("data-index", index);
+    checkBoxDiv.appendChild(checkbox);
+    mainTaskInfo.appendChild(checkBoxDiv)
+    
+    const detailsBtnDiv = document.createElement("div");
+
+    const detailsBtn = document.createElement("button");
+    detailsBtn.setAttribute("data-index", index);
+    detailsBtn.classList.add("details-btn");
+    detailsBtn.textContent = "details";
+
+    detailsBtnDiv.appendChild(detailsBtn)
+    mainTaskInfo.appendChild(detailsBtnDiv)
+
+    taskCard.appendChild(mainTaskInfo);
+
+    updateCheckMark(task, checkbox);
+    return taskCard;
+}
+
+
+const makeCardExtension = (task, index) => {
+    const detailsDiv = document.createElement("div");
+    detailsDiv.classList.add("details");
+    detailsDiv.classList.add("hide");
+
+    const infoDiv = document.createElement("div");
+    infoDiv.classList.add("task-info");
+
+    const taskDescription = document.createElement("p");
+    taskDescription.textContent = `${task.description}`;
+    infoDiv.appendChild(taskDescription);
+
+    const taskPriority = document.createElement("p");
+    taskPriority.textContent = `Priority: ${task.priority}`;
+    infoDiv.appendChild(taskPriority);
+
+    detailsDiv.appendChild(infoDiv);
+
+    const buttonsDiv = document.createElement("div");
+    buttonsDiv.classList.add("edit-tasks")
+
+    const removeTaskBtn = document.createElement("button");
+    removeTaskBtn.classList.add("remove-task");
+    removeTaskBtn.textContent = "delete";
+    removeTaskBtn.setAttribute("data-index", index);
+    buttonsDiv.appendChild(removeTaskBtn);
+
+    const ediTaskBtn = document.createElement("button");
+    ediTaskBtn.classList.add("edit-btn");
+    ediTaskBtn.textContent = "edit";
+    ediTaskBtn.setAttribute("data-index", index);
+    buttonsDiv.appendChild(ediTaskBtn);
+
+    detailsDiv.appendChild(buttonsDiv);
+    return detailsDiv;
+}
+
+
+function updateTaskCards() {
+    resetDOM(today.cardsContainer);
+    resetDOM(upcoming.cardsContainer);
 
     withActiveProject((activeProject) => {
         const tasks = activeProject.tasks
 
         tasks.forEach((task, index) => {
-            const makeCardContainer = document.createElement("div");
-            makeCardContainer.classList.add("card-container");
-
-            const makeTaskCardDiv = document.createElement("div");
-            makeTaskCardDiv.classList.add("task-card");
-
-            const makeTaskCardTitle = document.createElement("p");
-            makeTaskCardTitle.textContent = `${task.title}`
-
-            const makeTaskCardDueDate = document.createElement("p");
-            makeTaskCardDueDate.textContent = `${task.dueDate}`
-
-            const checkBoxDiv = document.createElement("div");
-            const label = document.createElement("label");
-            label.setAttribute("for", `completion${index}`);
-
-            const checkbox = document.createElement("input");
-            checkbox.id = `completion${index}`
-            checkbox.setAttribute("type", "checkbox");
-            checkbox.setAttribute("data-index", index);
-
-            const detailsBtnDiv = document.createElement("div");
-            const detailsBtn = document.createElement("button");
-            detailsBtn.setAttribute("data-index", index);
-            detailsBtn.classList.add("details-btn");
-            detailsBtn.textContent = "details";
-            detailsBtnDiv.appendChild(detailsBtn)
+            const card = makeMainTaskCard(task, index);
+            const cardExtendion = makeCardExtension(task, index);
             
-            checkBoxDiv.appendChild(label);
-            checkBoxDiv.appendChild(checkbox);
-
-            makeTaskCardDiv.appendChild(makeTaskCardTitle);
-            makeTaskCardDiv.appendChild(makeTaskCardDueDate);
-            makeTaskCardDiv.appendChild(checkBoxDiv);
-            makeTaskCardDiv.appendChild(detailsBtnDiv);
-
-            const detailsDiv = document.createElement("div");
-            detailsDiv.classList.add("details");
-            detailsDiv.classList.add("hide");
-
-            const detailsDescription = document.createElement("p");
-            detailsDescription.textContent = `${task.description}`;
-        
-            const detailPriority = document.createElement("p");
-            detailPriority.textContent = `Priority: ${task.priority}`;
-        
-            detailsDiv.appendChild(detailsDescription);
-            detailsDiv.appendChild(detailPriority);
-            
-            const buttonsDiv = document.createElement("div");
-            buttonsDiv.classList.add("edit-tasks")
-            buttonsDiv.classList.add("hide");
-
-            const removeTaskBtn = document.createElement("button");
-            removeTaskBtn.classList.add("remove-task");
-            removeTaskBtn.textContent = "delete";
-            removeTaskBtn.setAttribute("data-index", index);
-
-            const ediTaskBtn = document.createElement("button");
-            ediTaskBtn.classList.add("edit-btn");
-            ediTaskBtn.textContent = "edit";
-            ediTaskBtn.setAttribute("data-index", index);
-
-            buttonsDiv.appendChild(removeTaskBtn);
-            buttonsDiv.appendChild(ediTaskBtn);
-            
-            makeCardContainer.appendChild(makeTaskCardDiv);
-            makeCardContainer.appendChild(detailsDiv);
-            makeCardContainer.appendChild(buttonsDiv);
-
-            updateCheckMark(task, checkbox);
-
+            card.appendChild(cardExtendion);
 
             if (isDueDate(task)) {
-                todayCardsList.appendChild(makeCardContainer);
+                today.cardsContainer.appendChild(card);
             } else {
-                upcomingCardsList.appendChild(makeCardContainer);
+                upcoming.cardsContainer.appendChild(card);
             }
 
         })
@@ -212,13 +223,13 @@ function makeTaskCard() {
 const renderActiveProjectDOM = () => {
     updateActiveProjectHeader(addTasksDiv, activeProjectH1);
     addActiveProjectBtns(addTasksDiv, addNewToDoBtn, removeProjectBtn);
-    activeProjectDiv.appendChild(activeProjectHeaderDiv);
+    mainContent.appendChild(activeProjectHeaderDiv);
 
-    makeTaskCard();
-    addCardstoContainer();
-    activeProjectDiv.appendChild(showTasksDiv);
+    updateTaskCards();
+    displayContainer();
+    mainContent.appendChild(showTasksDiv);
     
-    main.appendChild(activeProjectDiv)
+    main.appendChild(mainContent)
 
     return main;
 }

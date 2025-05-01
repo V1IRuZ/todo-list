@@ -6,10 +6,8 @@ import { addDays, format } from "date-fns";
 addGlobalEventListener("click", ".details-btn", e => {
     let parentContainer = e.target.closest(".card-container");
     let details = parentContainer.querySelector(".details");
-    let buttons = parentContainer.querySelector(".edit-tasks");
 
     showHideDetails(details);
-    showHideDetails(buttons);
     changeButtonText(e);
 })
 

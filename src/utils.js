@@ -68,16 +68,6 @@ function updateCheckMark(task, input) {
     }
 }
 
-function addCardtoContainer(task, card, uncompletedContainer, completedContainer) {
-    if (!task.complete) {
-        uncompletedContainer.appendChild(card);
-    }
-
-    if (task.complete) {
-        completedContainer.appendChild(card);
-        card.style.backgroundColor = "green";
-    }
-}
 
 function showWhenTaskCompleted(task) {
     const today = format(new Date(), "yyyy-MM-dd");
@@ -86,4 +76,4 @@ function showWhenTaskCompleted(task) {
 }   
 
 
-export {resetDOM, closeModal, addGlobalEventListener, showHideDetails, changeButtonText, addActiveProjectBtns, updateActiveProjectHeader, addCardtoContainer, updateCheckMark, showWhenTaskCompleted, isDueDate}
+export {resetDOM, closeModal, addGlobalEventListener, showHideDetails, changeButtonText, addActiveProjectBtns, updateActiveProjectHeader, updateCheckMark, showWhenTaskCompleted, isDueDate}

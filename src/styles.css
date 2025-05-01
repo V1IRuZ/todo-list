@@ -265,15 +265,19 @@
   }
 
   .card-container {
+    display: grid;
+    grid-row: 1fr;
     font-size: 1.5rem;
     border: 2px solid var(--dark-gray);
+    padding: var(--btn-padding);
   }
 
   .task-card {
     display: grid;
     grid-template-columns: 5fr 2fr 1fr 1fr;
-    padding: var(--btn-padding);
+    gap: 1em;
   }
+
 
   .details-btn {
     background-color: var(--sky-blue);
@@ -284,6 +288,11 @@
   }
 
   .details {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .task-info {
     display: grid;
     grid-template-columns: 5fr 1fr;
     padding: var(--btn-padding);
