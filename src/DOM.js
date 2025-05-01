@@ -157,7 +157,7 @@ const makeMainTaskCard = (task, index) => {
     const detailsBtn = document.createElement("button");
     detailsBtn.setAttribute("data-index", index);
     detailsBtn.classList.add("details-btn");
-    detailsBtn.textContent = "details";
+    detailsBtn.textContent = "+";
 
     detailsBtnDiv.appendChild(detailsBtn)
     mainTaskInfo.appendChild(detailsBtnDiv)

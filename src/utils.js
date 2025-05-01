@@ -33,7 +33,7 @@ function showHideDetails(element) {
 }
 
 function changeButtonText(event) {
-    event.target.textContent = event.target.textContent === "details" ? "hide" : "details";
+    event.target.textContent = event.target.textContent === "+" ? "-" : "+";
 }
 
 function updateActiveProjectHeader(container, element) {
