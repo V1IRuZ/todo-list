@@ -1,5 +1,5 @@
 import { withActiveProject, getProjects, getActiveProject } from "./projects";
-import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, updateCheckMark } from "./utils";
+import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, updateStateOfCompleteBtn, enableDisableCheckBtn } from "./utils";
 
 const content = document.querySelector("#page");
 
@@ -139,18 +139,19 @@ const makeMainTaskCard = (task, index) => {
     taskCardDueDate.textContent = `${task.dueDate}`
     mainTaskInfo.appendChild(taskCardDueDate)
     
-    const checkBoxDiv = document.createElement("div");
+    const checkButtonDiv = document.createElement("div");
 
-    const label = document.createElement("label");
-    label.setAttribute("for", `completion${index}`);
-    checkBoxDiv.appendChild(label);
-    
-    const checkbox = document.createElement("input");
-    checkbox.id = `completion${index}`
-    checkbox.setAttribute("type", "checkbox");
-    checkbox.setAttribute("data-index", index);
-    checkBoxDiv.appendChild(checkbox);
-    mainTaskInfo.appendChild(checkBoxDiv)
+    const checkButton = document.createElement("button");
+    checkButton.classList.add("complete-btn");
+    checkButton.setAttribute("data-index", index);
+    checkButton.style.color = "white";
+
+    task.setToDoUncompleted();
+    updateStateOfCompleteBtn(task, checkButton);
+    enableDisableCheckBtn(task, checkButton);
+    checkButtonDiv.appendChild(checkButton);
+
+    mainTaskInfo.appendChild(checkButtonDiv)
     
     const detailsBtnDiv = document.createElement("div");
 
@@ -164,7 +165,6 @@ const makeMainTaskCard = (task, index) => {
 
     taskCard.appendChild(mainTaskInfo);
 
-    updateCheckMark(task, checkbox);
     return taskCard;
 }
 

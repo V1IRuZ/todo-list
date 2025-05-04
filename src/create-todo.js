@@ -1,9 +1,11 @@
-import { format, addDays } from "date-fns";
+import { format, addDays, isBefore, isAfter, isEqual } from "date-fns";
+import { showCurrentDate } from "./utils";
 
 class Todo {
-    #today = format(new Date(), "yyyy-MM-dd");
+    // Testing
+    // #today = format(new Date(), "yyyy-MM-dd");
     complete = false;
-    dayCompleted = "";
+    dayToReset = "";
 
     constructor(title, description, dueDate, remainder, priority) {
         this.title = title;
@@ -23,18 +25,18 @@ class Todo {
 
     setToDoCompleted() {
         this.complete = true;
-        this.dayCompleted = format(new Date(), "yyyy-MM-dd");
+        // this.dayToReset = addDays(this.#today, +this.remainder);
     }
 
     setToDoUncompleted() {
+        if (isEqual(showCurrentDate(), this.dueDate) || isBefore(showCurrentDate(), this.dueDate)) {
         this.complete = false;
+        }
     }
 
     updateDueToDate() {
-        if (this.complete) {
-
-            this.dueDate = format(addDays(this.#today, +this.remainder), "yyyy-MM-dd");
-        }
+        this.dueDate = format(addDays(showCurrentDate(), +this.remainder), "yyyy-MM-dd");
+        console.log(`duedate: ${this.dueDate}, Remainder: ${this.remainder}, Day completed: ${this.dayToReset}`);
     }
 }
 

@@ -1,5 +1,5 @@
 import { withActiveProject, getActiveProject, removeProject, getActiveProjectIndex, setActiveProject, switchActiveProject } from "./projects";
-import  { addGlobalEventListener, showHideDetails, changeButtonText, showWhenTaskCompleted } from "./utils";
+import  { addGlobalEventListener, showHideDetails, changeButtonText } from "./utils";
 import { updateMainDOM, updateDOM } from "./DOM";
 import { addDays, format } from "date-fns";
 
@@ -33,25 +33,17 @@ export function eventActions() {
             updateMainDOM();
     })
     
-    addGlobalEventListener("click", 'input[type="checkbox"]', e => {
+    addGlobalEventListener("click", ".complete-btn", e => {
         let index = e.target.getAttribute("data-index");
         let activeProjectTask = getActiveProject().tasks[index];
-        if (e.target.checked) {
+        console.log(activeProjectTask);
+        if(!activeProjectTask.complete) {
             activeProjectTask.setToDoCompleted();
-            showWhenTaskCompleted(activeProjectTask);
-            updateMainDOM();
-        } else {
-            activeProjectTask.setToDoUncompleted();
-            updateMainDOM();
-        }
-    })
+            activeProjectTask.updateDueToDate();
     
-    let today = "2025-04-28";
-    // Testing
-    addGlobalEventListener("click", ".test", e => {
-        
-        today = format(addDays(today, 1), "yyyy-MM-dd");
-        console.log(today);
+            updateMainDOM(); 
+        }   
     })
+
 }
 

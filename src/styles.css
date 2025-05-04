@@ -257,13 +257,6 @@
     gap: 2em;
   }
 
-  .completed-tasks,
-  .uncompleted-tasks {
-    display: grid; 
-    gap: 1em;
-    grid-template-rows: 1fr;
-  }
-
   .card-container {
     display: grid;
     grid-row: 1fr;
@@ -308,4 +301,21 @@
     color: var(--off-white);
     padding: var(--btn-padding);
     font-size: 1rem;
+  }
+
+  .complete-btn {
+    padding: var(--btn-padding);
+    font-size: 1rem;
+  }
+
+  .complete-btn.done {
+    background-color: var(--soft-green);
+  }
+
+  .complete-btn.not-done{
+    background-color: var(--warm-red);
+  }
+
+  .complete-btn:disabled {
+    background-color: var(--medium-gray);
   }
