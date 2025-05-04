@@ -36,7 +36,7 @@ export function eventActions() {
     addGlobalEventListener("click", ".complete-btn", e => {
         let index = e.target.getAttribute("data-index");
         let activeProjectTask = getActiveProject().tasks[index];
-        console.log(activeProjectTask);
+
         if(!activeProjectTask.complete) {
             activeProjectTask.setToDoCompleted();
             activeProjectTask.updateDueToDate();

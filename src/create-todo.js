@@ -2,8 +2,6 @@ import { format, addDays, isBefore, isAfter, isEqual } from "date-fns";
 import { showCurrentDate } from "./utils";
 
 class Todo {
-    // Testing
-    // #today = format(new Date(), "yyyy-MM-dd");
     complete = false;
     dayCompleted = "";
 
@@ -36,7 +34,6 @@ class Todo {
 
     updateDueToDate() {
         this.dueDate = format(addDays(showCurrentDate(), +this.remainder), "yyyy-MM-dd");
-        console.log(`duedate: ${this.dueDate}, Remainder: ${this.remainder}, Day completed: ${this.dayCompleted}`);
     }
 }
 

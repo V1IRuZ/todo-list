@@ -4,7 +4,7 @@ import { updateDOM } from "./DOM";
 
 
 
-let today = "2025-05-03";
+let today = "2025-05-04";
 // Testing
 addGlobalEventListener("click", ".test", e => {
     today = format(addDays(today, 1), "yyyy-MM-dd");
