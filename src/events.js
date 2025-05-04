@@ -1,7 +1,7 @@
 import { withActiveProject, getActiveProject, removeProject, getActiveProjectIndex, setActiveProject, switchActiveProject } from "./projects";
 import  { addGlobalEventListener, showHideDetails, changeButtonText } from "./utils";
 import { updateMainDOM, updateDOM } from "./DOM";
-import { addDays, format } from "date-fns";
+import { saveData } from "./local-storage";
 
 export function eventActions() {
     addGlobalEventListener("click", ".details-btn", e => {
@@ -18,6 +18,7 @@ export function eventActions() {
             removeProject(index);
             setActiveProject();
             updateDOM();
+            saveData();
         })
     })
     
@@ -25,6 +26,7 @@ export function eventActions() {
         let index = e.target.getAttribute("data-index");
         getActiveProject().removeToDo(index);
         updateMainDOM();
+        saveData();
     })
     
     addGlobalEventListener("click", ".project-btn", e => {
@@ -41,9 +43,9 @@ export function eventActions() {
             activeProjectTask.setToDoCompleted();
             activeProjectTask.updateDueToDate();
     
-            updateMainDOM(); 
+            updateMainDOM();
+            saveData();
         }   
     })
-
 }
 

@@ -1,8 +1,9 @@
-export class Project {
-    tasks = [];
+import { Todo } from "./create-todo";
 
-    constructor(name) {
+export class Project {
+constructor({name, tasks = []}) {
         this.name = name;
+        this.tasks = tasks.map(task => new Todo(task))
     }
 
     addToDo(todo) {

@@ -2,15 +2,14 @@ import { format, addDays, isBefore, isAfter, isEqual } from "date-fns";
 import { showCurrentDate } from "./utils";
 
 class Todo {
-    complete = false;
-    dayCompleted = "";
-
-    constructor(title, description, dueDate, remainder, priority) {
+    constructor({title, description, dueDate, remainder, priority, complete = false, dayCompleted = ""}) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.remainder = remainder;
         this.priority = priority;
+        this.complete = complete;
+        this.dayCompleted = dayCompleted;
     }
 
     editToDo(title, description, dueDate, remainder, priority) {

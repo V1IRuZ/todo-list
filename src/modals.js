@@ -2,6 +2,7 @@ import { updateMainDOM, updateDOM } from "./DOM";
 import { Todo } from "./create-todo";
 import { makeNewProject, setActiveProject, getActiveProject } from "./projects";
 import { closeModal } from "./utils";
+import { saveData } from "./local-storage";
 
 // Project modal
 const addProjectBtn = document.querySelector(".add-project");
@@ -34,6 +35,7 @@ function getProjectModal() {
         updateDOM();
         
         closeModal(e, projectModal, projectForm)
+        saveData();
     }) 
 
     const closeProjectModal = document.querySelector(".close-project");
@@ -54,11 +56,21 @@ function addTaskModal() {
 
     taskForm.addEventListener("submit", e => {
         if (e.target.classList.contains("create")) {
-            const toDo = new Todo(taskTitle.value, taskDescription.value, taskDueDate.value, taskRemainder.value, taskPriority.value)
+            const toDo = new Todo({
+                title: taskTitle.value,
+                description: taskDescription.value,
+                dueDate: taskDueDate.value,
+                remainder: taskRemainder.value,
+                priority: taskPriority.value,
+                complete: false, 
+                dayCompleted: "" 
+            });
+            
             getActiveProject().addToDo(toDo);
             closeModal(e, taskModal, taskForm);
             updateMainDOM();
             taskForm.classList.remove("create");
+            saveData();
         }
     })
 
@@ -104,6 +116,7 @@ function editTaskModal() {
         taskModalCloseBtn.addEventListener("click", e => {
             closeModal(e, taskModal, taskForm);
             taskForm.classList.remove("edit");
+            saveData();
         })
     })
 }

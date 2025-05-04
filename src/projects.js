@@ -1,9 +1,13 @@
 import { Todo } from "./create-todo";
 import { Project } from "./create-project";
 
-const projects = [];
+let projects = [];
 
 let activeProject;
+
+const updateProjects = (data) => {
+    projects = data;
+}
 
 const getProjects = () => projects;
 
@@ -18,7 +22,7 @@ const getActiveProjectIndex = () => {
 }
 
 const makeNewProject = (name) => {
-    const project = new Project(name);
+    const project = new Project({ name, tasks: []});
     projects.push(project);
     return project;
 }
@@ -44,12 +48,53 @@ const defaultProject = () => {
     const myProject = makeNewProject("Everyday tasks");
     activeProject = myProject;
 
-    activeProject.addToDo(new Todo("Brush teeth", "Wash thoroughly with a 2-minute timer", "2025-06-23", "1", "High"));
-    activeProject.addToDo(new Todo("Take allergy medicine", "1 allergy tablet and 2 sprays in both nostrils", "2025-06-25", "1", "Critical"));
-    activeProject.addToDo(new Todo("Visit the store", "Buy milk, bread and eggs", "2025-06-21", "3", "Medium"));
-    activeProject.addToDo(new Todo("Visit the library", "Borrow study books", "2025-06-20", "3", "Medium"));
-    activeProject.addToDo(new Todo("Dentist", "Book an appointment for a dental check-up", "2025-06-20", "2", "High"));
-    activeProject.addToDo(new Todo("Play videogames", "After a long day, relax and play some video games", "2025-06-22", "7", "Low"));
+    activeProject.addToDo(new Todo({ 
+        title: "Brush teeth", 
+        description: "Wash thoroughly with a 2-minute timer", 
+        dueDate: "2025-06-23", 
+        remainder: "1", 
+        priority: "High"
+    }));
+
+    activeProject.addToDo(new Todo({ 
+        title: "Take allergy medicine", 
+        description: "1 allergy tablet and 2 sprays in both nostrils", 
+        dueDate: "2025-06-25", 
+        remainder: "1", 
+        priority: "Critical"
+    }));
+
+    activeProject.addToDo(new Todo({ 
+        title: "Visit the store", 
+        description: "Buy milk, bread and eggs", 
+        dueDate: "2025-06-21", 
+        remainder: "3", 
+        priority: "Medium"
+    }));
+
+    activeProject.addToDo(new Todo({ 
+        title: "Visit the library", 
+        description: "Borrow study books", 
+        dueDate: "2025-06-20", 
+        remainder: "3", 
+        priority: "Medium"
+    }));
+
+    activeProject.addToDo(new Todo({ 
+        title: "Dentist", 
+        description: "Book an appointment for a dental check-up", 
+        dueDate: "2025-06-20", 
+        remainder: "2", 
+        priority: "High"
+    }));
+
+    activeProject.addToDo(new Todo({ 
+        title: "Play videogames", 
+        description: "After a long day, relax and play some video games", 
+        dueDate: "2025-06-22", 
+        remainder: "7", 
+        priority: "Low"
+    }));
 }
 
 defaultProject();
@@ -60,4 +105,4 @@ makeNewProject("Restaurant App");
 
 
 
-export { makeNewProject, getActiveProject, setActiveProject, getProjects, switchActiveProject, withActiveProject, defaultProject, removeProject, getActiveProjectIndex }
+export { makeNewProject, getActiveProject, setActiveProject, getProjects, switchActiveProject, withActiveProject, defaultProject, removeProject, getActiveProjectIndex, updateProjects }
