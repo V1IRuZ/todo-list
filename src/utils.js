@@ -18,7 +18,7 @@ function showCurrentDate() {
 }
 
 function isDueDate (task) {
-    return isEqual(showCurrentDate(), task.dueDate) || isAfter(showCurrentDate(), task.dueDate);
+    return isEqual(showCurrentDate(), task.dayCompleted) || (isEqual(showCurrentDate(), task.dueDate) || isAfter(showCurrentDate(), task.dueDate));
 }
 
 function resetDOM(container) {
@@ -66,7 +66,7 @@ function addActiveProjectBtns(container, ...buttons) {
 }
 
 function updateStateOfCompleteBtn (task, button) {
-    if (task.complete) {
+    if (isEqual(showCurrentDate(), task.dayCompleted)) {
         button.classList.add("done");
         button.textContent = "Done";
     } else {
@@ -86,13 +86,6 @@ function enableDisableCheckBtn(task, button) {
         button.disabled = true;
     }
 }
-
-
-// function showWhenTaskCompleted(task) {
-//     const today = format(new Date(), "yyyy-MM-dd");
-//     const test = isEqual(today, task.dayCompleted);
-//     console.log(test);
-// }   
-
+ 
 
 export {resetDOM, closeModal, addGlobalEventListener, showHideDetails, changeButtonText, addActiveProjectBtns, updateActiveProjectHeader, enableDisableCheckBtn, updateStateOfCompleteBtn, isDueDate, showCurrentDate}

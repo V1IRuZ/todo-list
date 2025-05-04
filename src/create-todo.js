@@ -5,7 +5,7 @@ class Todo {
     // Testing
     // #today = format(new Date(), "yyyy-MM-dd");
     complete = false;
-    dayToReset = "";
+    dayCompleted = "";
 
     constructor(title, description, dueDate, remainder, priority) {
         this.title = title;
@@ -25,7 +25,7 @@ class Todo {
 
     setToDoCompleted() {
         this.complete = true;
-        // this.dayToReset = addDays(this.#today, +this.remainder);
+        this.dayCompleted = showCurrentDate();
     }
 
     setToDoUncompleted() {
@@ -36,7 +36,7 @@ class Todo {
 
     updateDueToDate() {
         this.dueDate = format(addDays(showCurrentDate(), +this.remainder), "yyyy-MM-dd");
-        console.log(`duedate: ${this.dueDate}, Remainder: ${this.remainder}, Day completed: ${this.dayToReset}`);
+        console.log(`duedate: ${this.dueDate}, Remainder: ${this.remainder}, Day completed: ${this.dayCompleted}`);
     }
 }
 
