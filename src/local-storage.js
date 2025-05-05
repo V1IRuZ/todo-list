@@ -1,6 +1,7 @@
 import { getProjects, updateProjects, setActiveProject } from "./projects";
 import { Project } from "./create-project";
 import { Todo } from "./create-todo";
+import { updateDOM } from "./DOM";
 
 function saveData () {
     const projects = getProjects();
@@ -19,6 +20,7 @@ function loadData () {
 
     updateProjects(data);
     setActiveProject()
+    updateDOM();
 }
 
 export { saveData, loadData }
