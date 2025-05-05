@@ -2,19 +2,19 @@ import { withActiveProject, getActiveProject } from "./projects";
 import { format, addDays, isBefore, isEqual, isAfter } from "date-fns";
 import { updateDOM } from "./DOM";
 
-
-
-let today = "2025-05-04";
 // Testing
-addGlobalEventListener("click", ".test", e => {
-    today = format(addDays(today, 1), "yyyy-MM-dd");
-    e.target.textContent = `${today}`;
+
+// let today = "2025-05-04";
+// addGlobalEventListener("click", ".test", e => {
+//     today = format(addDays(today, 1), "yyyy-MM-dd");
+//     e.target.textContent = `${today}`;
     
-    updateDOM();
-})
+//     updateDOM();
+// })
+
 function showCurrentDate() {
-    return today;
-    // return format(new Date(), "yyyy-MM-dd");
+    // return today;
+    return format(new Date(), "yyyy-MM-dd");
 }
 
 function isDueDate (task) {

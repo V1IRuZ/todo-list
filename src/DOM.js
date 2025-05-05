@@ -1,5 +1,6 @@
 import { withActiveProject, getProjects, getActiveProject } from "./projects";
 import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, updateStateOfCompleteBtn, enableDisableCheckBtn } from "./utils";
+import { format } from "date-fns";
 
 const content = document.querySelector("#page");
 
@@ -132,12 +133,13 @@ const makeMainTaskCard = (task, index) => {
     mainTaskInfo.classList.add("task-card");
     
     const taskCardTitle = document.createElement("p");
-    taskCardTitle.textContent = `${task.title}`
-    mainTaskInfo.appendChild(taskCardTitle)
+    taskCardTitle.textContent = `${task.title}`;
+    mainTaskInfo.appendChild(taskCardTitle);
     
     const taskCardDueDate = document.createElement("p");
-    taskCardDueDate.textContent = `${task.dueDate}`
-    mainTaskInfo.appendChild(taskCardDueDate)
+    const date = format(task.dueDate, "EEE | d | MMM | yy");
+    taskCardDueDate.textContent = `${date}`;
+    mainTaskInfo.appendChild(taskCardDueDate);
     
     const checkButtonDiv = document.createElement("div");
 
