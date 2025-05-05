@@ -56,6 +56,7 @@ function addTaskModal() {
 
     taskForm.addEventListener("submit", e => {
         if (e.target.classList.contains("create")) {
+
             const toDo = new Todo({
                 title: taskTitle.value,
                 description: taskDescription.value,

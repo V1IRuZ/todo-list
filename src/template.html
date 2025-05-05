@@ -11,7 +11,7 @@
             <h2>Create a new project</h2>
             <div>
                 <label for="name">Name</label>
-                <input type="text" id="name" name="project-name" required>
+                <input type="text" id="name" name="project-name" minlength="1" maxlength="30" required>
             </div>
             <div>
                 <button type="submit" class="submit-project">Submit</button>
@@ -25,19 +25,19 @@
             <fieldset>
                 <div>
                     <label for="task-title">Title</label>
-                    <input type="text" id="task-title">
+                    <input type="text" id="task-title" name="title" minlength="1" maxlength="30" required>
                 </div>
                 <div>
                     <label for="task-description">Description</label>
-                    <input type="text" id="task-description">
+                    <textarea name="description" id="task-description" rows="2" cols="20"></textarea>
                 </div>
                 <div class="time">
                     <div>
                         <label for="task-start">Date</label>
-                        <input type="date" id="task-start">
+                        <input type="date" id="task-start" name="due-date" required>
                     </div>
                     <div>
-                        <label for="remainder">Remainder</label>
+                        <label for="remainder">Repeat</label>
                         <select name="task-remainder" id="remainder">
                             <option value="1">daily</option>
                             <option value="2">every other day</option>
