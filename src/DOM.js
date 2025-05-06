@@ -163,6 +163,8 @@ const makeMainTaskCard = (task, index) => {
     detailsBtn.textContent = "+";
 
     detailsBtnDiv.appendChild(detailsBtn)
+
+
     mainTaskInfo.appendChild(detailsBtnDiv)
 
     taskCard.appendChild(mainTaskInfo);
