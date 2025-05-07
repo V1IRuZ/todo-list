@@ -65,6 +65,23 @@ function addActiveProjectBtns(container, ...buttons) {
     })
 }
 
+function setPriorityColor (task, element) {
+    switch(task.priority) {
+        case "Low":
+            element.style.backgroundColor = "#90ee90";
+            break;
+        case "Medium":
+            element.style.backgroundColor = "#fdd835";
+            break;
+        case "High":
+            element.style.backgroundColor = "#ffa07a";
+            break;
+        case "Critical":
+            element.style.backgroundColor = "#ff6b6b";
+            break;
+    }
+}
+
 function updateStateOfCompleteBtn (task, button) {
     if (isEqual(showCurrentDate(), task.dayCompleted)) {
         button.classList.add("done");
@@ -88,4 +105,4 @@ function enableDisableCheckBtn(task, button) {
 }
  
 
-export {resetDOM, closeModal, addGlobalEventListener, showHideDetails, changeButtonText, addActiveProjectBtns, updateActiveProjectHeader, enableDisableCheckBtn, updateStateOfCompleteBtn, isDueDate, showCurrentDate}
+export {resetDOM, closeModal, addGlobalEventListener, showHideDetails, changeButtonText, addActiveProjectBtns, updateActiveProjectHeader, enableDisableCheckBtn, updateStateOfCompleteBtn, isDueDate, showCurrentDate, setPriorityColor}

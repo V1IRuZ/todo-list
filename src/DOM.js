@@ -1,5 +1,5 @@
 import { withActiveProject, getProjects, getActiveProject } from "./projects";
-import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, updateStateOfCompleteBtn, enableDisableCheckBtn } from "./utils";
+import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor } from "./utils";
 import { format } from "date-fns";
 
 const content = document.querySelector("#page");
@@ -164,8 +164,18 @@ const makeMainTaskCard = (task, index) => {
 
     detailsBtnDiv.appendChild(detailsBtn)
 
-
     mainTaskInfo.appendChild(detailsBtnDiv)
+
+    const priorityDiv = document.createElement("div");
+    priorityDiv.classList.add("priority-div");
+    
+    const priorityBall = document.createElement("div");
+    priorityBall.classList.add("priority-ball");
+    setPriorityColor(task, priorityBall);
+
+    priorityDiv.appendChild(priorityBall);
+
+    mainTaskInfo.appendChild(priorityDiv);
 
     taskCard.appendChild(mainTaskInfo);
 
@@ -185,9 +195,9 @@ const makeCardExtension = (task, index) => {
     taskDescription.textContent = `${task.description}`;
     infoDiv.appendChild(taskDescription);
 
-    const taskPriority = document.createElement("p");
-    taskPriority.textContent = `Priority: ${task.priority}`;
-    infoDiv.appendChild(taskPriority);
+    // const taskPriority = document.createElement("p");
+    // taskPriority.textContent = `Priority: ${task.priority}`;
+    // infoDiv.appendChild(taskPriority);
 
     detailsDiv.appendChild(infoDiv);
 

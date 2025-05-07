@@ -267,8 +267,19 @@
 
   .task-card {
     display: grid;
-    grid-template-columns: 5fr 2fr 1fr 1fr;
+    grid-template-columns: 4fr 3fr 2fr 2fr 3.125em;
     gap: 1em;
+  }
+
+  .priority-div {
+    align-content: center;
+    justify-items: center;
+  }
+
+  .priority-ball {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
   }
 
 
@@ -289,8 +300,7 @@
   }
 
   .task-info {
-    display: grid;
-    grid-template-columns: 5fr 1fr;
+    display: flex;
     padding: var(--btn-padding);
   }
 

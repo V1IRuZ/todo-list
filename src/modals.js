@@ -112,12 +112,12 @@ function editTaskModal() {
             updateMainDOM();
             taskForm.classList.remove("edit");
             taskForm.removeAttribute("data-index");
+            saveData();
         }
 
         taskModalCloseBtn.addEventListener("click", e => {
             closeModal(e, taskModal, taskForm);
             taskForm.classList.remove("edit");
-            saveData();
         })
     })
 }
