@@ -103,11 +103,6 @@
     font-size: 1.5rem;
   }
 
-  .add-project {
-    border: 2px solid var(--off-white);
-    background-color: var(--sky-blue);
-    color: var(--off-white);
-  }
 
   /* Add project modal */
 
@@ -177,21 +172,45 @@
 
   #page {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 2fr;
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
+  }
+
+  .icons {
+    width: 2em;
   }
 
   /* aside */
 
   aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
     padding: 2em;
+    background-color: var(--light-blue)
   }
 
-  aside > h1 {
-    padding-bottom: 1em;
-    font-size: 2rem;
+
+  .add-project {
+    display: flex;
+    gap: 0.5em;
+    font-size: 1.25rem;
+    font-weight: 900;
+    align-items: center;
+    color: var(--dark-gray);
+    background-color: var(--light-blue);
   }
+
+  .project-btn,
+  .add-project {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .add-project:hover,
+  .project-btn:hover {
+    transform: scale(1.2); /* Zooms in by 20% */
+}
 
   .my-projects {
     display: grid;
@@ -200,8 +219,19 @@
   }
 
   .project-btn {
-    background-color: var(--sky-blue);
-    color: var(--off-white);
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--dark-gray);
+    background-color: var(--light-blue);
+  }
+
+  .project-btn:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
   }
 
   /* Add task modal */

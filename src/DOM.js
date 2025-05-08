@@ -1,21 +1,16 @@
 import { withActiveProject, getProjects, getActiveProject } from "./projects";
 import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, taskIsDoneWithNoRepeat, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor } from "./utils";
 import { format } from "date-fns";
+import starImage from "./icons/star.svg";
 
 const content = document.querySelector("#page");
 
 // aside
-const aside = document.createElement("aside");
-
-const myProjectsH1 = document.createElement("h1");
-myProjectsH1.textContent = "My Projects";
-aside.appendChild(myProjectsH1);
+const aside = document.querySelector("aside");
 
 const myProjects = document.createElement("div");
 myProjects.classList.add("my-projects");
 aside.appendChild(myProjects);
-
-content.appendChild(aside);
 
 const makeProjectCard = (project, index) => {
     const projectCard = document.createElement("div");
@@ -25,6 +20,12 @@ const makeProjectCard = (project, index) => {
     projectCardBtn.classList.add("project-btn");
     projectCardBtn.textContent = `${project.name}`;
     projectCardBtn.setAttribute("data-index", index);
+
+    const image = document.createElement("img");
+    image.src = starImage;
+    image.alt = "Star";
+    image.style.width = "2em";
+    projectCardBtn.prepend(image);
 
     projectCard.appendChild(projectCardBtn);
     return projectCard;
