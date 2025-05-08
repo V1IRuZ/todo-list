@@ -26,13 +26,17 @@ class Todo {
     }
 
     setToDoUncompleted() {
-        if (isEqual(showCurrentDate(), this.dueDate) || isBefore(showCurrentDate(), this.dueDate)) {
-        this.complete = false;
-        }
+        if (this.remainder !== 'none') {
+            if (isEqual(showCurrentDate(), this.dueDate) || isBefore(showCurrentDate(), this.dueDate)) {
+                this.complete = false;
+            }
+        } 
     }
 
     updateDueToDate() {
-        this.dueDate = format(addDays(showCurrentDate(), +this.remainder), "yyyy-MM-dd");
+        if (this.remainder !== 'none') {
+            this.dueDate = format(addDays(showCurrentDate(), +this.remainder), "yyyy-MM-dd");
+        } 
     }
 }
 

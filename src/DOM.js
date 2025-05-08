@@ -1,5 +1,5 @@
 import { withActiveProject, getProjects, getActiveProject } from "./projects";
-import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor } from "./utils";
+import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, taskIsDoneWithNoRepeat, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor } from "./utils";
 import { format } from "date-fns";
 
 const content = document.querySelector("#page");
@@ -102,17 +102,24 @@ const makeContainerToTasksFactory = (className, headerText) => {
 
 const today = makeContainerToTasksFactory("today-container", "Today's tasks");
 const upcoming = makeContainerToTasksFactory("upcoming-container", "Upcoming tasks");
+const completed = makeContainerToTasksFactory("tasks-done", "One-time tasks")
 
 function displayContainer() {
     withActiveProject((activeProject) => {
-        const isTodayTasks = activeProject.tasks.some(task => isDueDate(task))
+        const isTodayTasks = activeProject.tasks.some(task => isDueDate(task) && !taskIsDoneWithNoRepeat(task))
         const isUpcomingTasks = activeProject.tasks.some(task => !isDueDate(task))
+        const isCompletedTasks = activeProject.tasks.some(task => taskIsDoneWithNoRepeat(task))
 
         today.container.remove();
         upcoming.container.remove();
+        completed.container.remove();
 
         if (activeProject.tasks.length === 0) {
             return;
+        }
+
+        if (isCompletedTasks) {
+            activeProjectTasks.appendChild(completed.container);
         }
 
         if (isTodayTasks) {
@@ -195,10 +202,6 @@ const makeCardExtension = (task, index) => {
     taskDescription.textContent = `${task.description}`;
     infoDiv.appendChild(taskDescription);
 
-    // const taskPriority = document.createElement("p");
-    // taskPriority.textContent = `Priority: ${task.priority}`;
-    // infoDiv.appendChild(taskPriority);
-
     detailsDiv.appendChild(infoDiv);
 
     const buttonsDiv = document.createElement("div");
@@ -224,6 +227,7 @@ const makeCardExtension = (task, index) => {
 function updateTaskCardsToContainers() {
     resetDOM(today.cardsContainer);
     resetDOM(upcoming.cardsContainer);
+    resetDOM(completed.cardsContainer);
 
     const tasks = getActiveProject().tasks;
 
@@ -233,7 +237,9 @@ function updateTaskCardsToContainers() {
         
         card.appendChild(cardExtendion);
 
-        if (isDueDate(task)) {
+        if (taskIsDoneWithNoRepeat(task)) {
+            completed.cardsContainer.appendChild(card);
+        } else if (isDueDate(task)) {
             today.cardsContainer.appendChild(card);
         } else {
             upcoming.cardsContainer.appendChild(card);

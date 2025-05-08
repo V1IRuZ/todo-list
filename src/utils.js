@@ -4,7 +4,7 @@ import { updateDOM } from "./DOM";
 
 // Testing
 
-// let today = "2025-05-04";
+// let today = "2025-05-07";
 // addGlobalEventListener("click", ".test", e => {
 //     today = format(addDays(today, 1), "yyyy-MM-dd");
 //     e.target.textContent = `${today}`;
@@ -19,6 +19,10 @@ function showCurrentDate() {
 
 function isDueDate (task) {
     return isEqual(showCurrentDate(), task.dayCompleted) || (isEqual(showCurrentDate(), task.dueDate) || isAfter(showCurrentDate(), task.dueDate));
+}
+
+function taskIsDoneWithNoRepeat (task) {
+    return task.remainder === 'none' && task.complete;
 }
 
 function resetDOM(container) {
@@ -83,7 +87,7 @@ function setPriorityColor (task, element) {
 }
 
 function updateStateOfCompleteBtn (task, button) {
-    if (isEqual(showCurrentDate(), task.dayCompleted)) {
+    if (isEqual(showCurrentDate(), task.dayCompleted) || task.remainder === 'none' && task.complete) {
         button.classList.add("done");
         button.textContent = "Done";
     } else {
@@ -95,9 +99,10 @@ function updateStateOfCompleteBtn (task, button) {
 function enableDisableCheckBtn(task, button) {
     const dueDateToday = isEqual(showCurrentDate(), task.dueDate)
     const dueDateLate = isBefore(task.dueDate, showCurrentDate())
-    // After testing change today to showCurrentDate()
-    
-    if (dueDateToday || dueDateLate) {
+
+    if (task.remainder === 'none' && task.complete) {
+        button.disabled = true;
+    } else if (dueDateToday || dueDateLate) {
         button.disabled = false;
     } else {
         button.disabled = true;
@@ -105,4 +110,4 @@ function enableDisableCheckBtn(task, button) {
 }
  
 
-export {resetDOM, closeModal, addGlobalEventListener, showHideDetails, changeButtonText, addActiveProjectBtns, updateActiveProjectHeader, enableDisableCheckBtn, updateStateOfCompleteBtn, isDueDate, showCurrentDate, setPriorityColor}
+export {resetDOM, closeModal, addGlobalEventListener, showHideDetails, changeButtonText, addActiveProjectBtns, updateActiveProjectHeader, enableDisableCheckBtn, updateStateOfCompleteBtn, isDueDate, showCurrentDate, setPriorityColor, taskIsDoneWithNoRepeat}
