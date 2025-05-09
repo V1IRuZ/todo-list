@@ -89,10 +89,11 @@ function setPriorityColor (task, element) {
 function updateStateOfCompleteBtn (task, button) {
     if (isEqual(showCurrentDate(), task.dayCompleted) || task.remainder === 'none' && task.complete) {
         button.classList.add("done");
-        button.textContent = "Done";
+        button.innerHTML = "&#10003;";
+        button.style.color = "green";
     } else {
         button.classList.add("not-done");
-        button.textContent = "Not Done";
+        button.textContent = ""
     }
 }
 

@@ -145,11 +145,13 @@ const makeMainTaskCard = (task, index) => {
     mainTaskInfo.appendChild(taskCardTitle);
     
     const taskCardDueDate = document.createElement("p");
-    const date = format(task.dueDate, "EEE | d | MMM | yy");
+    const date = format(task.dueDate, "MMMM d");
+    taskCardDueDate.classList.add("date-text");
     taskCardDueDate.textContent = `${date}`;
     mainTaskInfo.appendChild(taskCardDueDate);
     
     const checkButtonDiv = document.createElement("div");
+    checkButtonDiv.classList.add("complete-div");
 
     const checkButton = document.createElement("button");
     checkButton.classList.add("complete-btn");
@@ -161,7 +163,7 @@ const makeMainTaskCard = (task, index) => {
     enableDisableCheckBtn(task, checkButton);
     checkButtonDiv.appendChild(checkButton);
 
-    mainTaskInfo.appendChild(checkButtonDiv)
+    mainTaskInfo.prepend(checkButtonDiv)
     
     const detailsBtnDiv = document.createElement("div");
 

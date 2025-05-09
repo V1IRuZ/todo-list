@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto-Regular.woff2') format('woff2'),
+      url('./fonts/Roboto-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /*
   Josh's Custom CSS Reset
   https://www.joshwcomeau.com/css/custom-css-reset/
@@ -52,7 +61,7 @@
     --btn-padding: 0.5em 1em;
     /* Colors */
     /* background */
-    --ligth-gray: #F5F5F5;
+    --ligth-gray: #f5f5f5;
     --off-white: #FFFFFF;
     /* Action (buttons) */
     --sky-blue: #4A90E2;
@@ -73,7 +82,7 @@
   body {
     background-color: var(--ligth-gray);
     color: var(--dark-gray);
-    font-family: var(--system-ui);
+    font-family: 'Roboto', var(--system-ui);
   }
 
   button {
@@ -267,13 +276,14 @@
 
   /* main */
   main {
-    padding: 1em;
+    padding: 2em 5em 2em 2em;
   }
 
   .active-project {
     padding: 1em;
     display: flex;
     justify-content: space-between;
+    border-bottom: 2px solid var(--medium-gray);
   }
 
   .add-task {
@@ -283,21 +293,37 @@
 
   .view-tasks {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
+    padding: 0 2em;
     gap: 2em;
+  }
+
+  .upcoming-container > div,
+  .today-container > div,
+  .tasks-done > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .upcoming-container > h1,
+  .today-container > h1,
+  .tasks-done > h1 {
+    color: var(--medium-gray);
+    margin: 1em 0;
   }
 
   .card-container {
     display: grid;
     grid-template-rows: auto auto;
-    font-size: 1.5rem;
-    border: 2px solid var(--dark-gray);
+    font-size: 1.6rem;
     padding: var(--btn-padding);
+    box-shadow: 0 2px 5px var(--medium-gray);
   }
 
   .task-card {
     display: grid;
-    grid-template-columns: 4fr 3fr 2fr 2fr 3.125em;
+    grid-template-columns: 45px 16em 8em 2em 3.125em;
     gap: 1em;
   }
 
@@ -348,19 +374,33 @@
     font-size: 1rem;
   }
 
-  .complete-btn {
-    padding: var(--btn-padding);
-    font-size: 1rem;
+  .complete-div {
+    align-content: center;
+    justify-content: center;
   }
 
-  .complete-btn.done {
+  .complete-btn {
+    align-content: start;
+    padding: var(--btn-padding);
+    border: 2px solid var(--dark-gray);
+    border-radius: 0;
+    background-color: va;
+    font-size: 1rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+  }
+
+  /* .complete-btn.done {
     background-color: var(--soft-green);
   }
 
   .complete-btn.not-done{
     background-color: var(--warm-red);
-  }
+  } */
 
   .complete-btn:disabled {
-    background-color: var(--medium-gray);
+    border-color: #a0a0a0;
   }
