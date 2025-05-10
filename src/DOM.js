@@ -2,6 +2,7 @@ import { withActiveProject, getProjects, getActiveProject } from "./projects";
 import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, taskIsDoneWithNoRepeat, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor } from "./utils";
 import { format } from "date-fns";
 import starImage from "./icons/star.svg";
+import arrowDownImg from "./icons/arrow-down-drop-circle-outline.svg";
 
 const content = document.querySelector("#page");
 
@@ -170,7 +171,14 @@ const makeMainTaskCard = (task, index) => {
     const detailsBtn = document.createElement("button");
     detailsBtn.setAttribute("data-index", index);
     detailsBtn.classList.add("details-btn");
-    detailsBtn.textContent = "+";
+    detailsBtn.innerHTML = "&#10133";
+
+    // const arrowDown = document.createElement("img");
+    // arrowDown.src = arrowDownImg;
+    // arrowDown.alt = "Open";
+    // arrowDown.style.width = "2em";
+
+    // detailsBtn.appendChild(arrowDown);
 
     detailsBtnDiv.appendChild(detailsBtn)
 
