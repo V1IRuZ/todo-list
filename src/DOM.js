@@ -4,8 +4,6 @@ import { format } from "date-fns";
 import starImage from "./icons/star.svg";
 import arrowDownImg from "./icons/arrow-down-drop-circle-outline.svg";
 
-const content = document.querySelector("#page");
-
 // aside
 const aside = document.querySelector("aside");
 
@@ -49,7 +47,7 @@ const updateAsideDOM = () => {
 
 // main
 // Active project header
-const main = document.createElement("main");
+const main = document.querySelector("main");
 
 const activeProjectHeaderDiv = document.createElement("div");
 activeProjectHeaderDiv.classList.add("active-project");
@@ -82,8 +80,6 @@ function updateSelectedProject() {
 const activeProjectTasks = document.createElement("div");
 activeProjectTasks.classList.add("view-tasks");
 main.appendChild(activeProjectTasks)
-
-content.appendChild(main);
 
 const makeContainerToTasksFactory = (className, headerText) => {
     const container = document.createElement("div");
