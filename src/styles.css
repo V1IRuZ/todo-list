@@ -80,7 +80,7 @@
   /* Body */
 
   body {
-    background-color: var(--ligth-gray);
+    background: linear-gradient(to right, var(--sky-blue), var(--soft-green));
     color: var(--dark-gray);
     font-family: 'Roboto', var(--system-ui);
   }
@@ -277,6 +277,7 @@
   /* main */
   main {
     padding: 2em 5em 2em 2em;
+    background-color: var(--ligth-gray);
   }
 
   .active-project {
@@ -295,6 +296,7 @@
     display: flex;
     flex-direction: column;
     padding: 0 2em;
+    margin-bottom: 3em;
     gap: 2em;
   }
 
