@@ -342,11 +342,7 @@
 
 
   .details-btn {
-    background-color: var(--sky-blue);
-    color: var(--off-white);
-    font-size: 1rem;
-    font-weight: 900;
-    padding: var(--btn-padding)
+    cursor: pointer;
   }
 
   .details {

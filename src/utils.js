@@ -1,6 +1,8 @@
 import { withActiveProject, getActiveProject } from "./projects";
 import { format, addDays, isBefore, isEqual, isAfter } from "date-fns";
 import { updateDOM } from "./DOM";
+import arrowDownImg from "./icons/arrow-down-drop-circle-outline.svg";
+import arrowUpImg from "./icons/arrow-up-drop-circle-outline.svg";
 
 // Testing
 
@@ -49,7 +51,7 @@ function showHideDetails(element) {
 }
 
 function changeButtonText(event) {
-    event.target.textContent = event.target.textContent === "+" ? "-" : "+";
+    event.target.src = event.target.src.includes(arrowDownImg) ? arrowUpImg : arrowDownImg;
 }
 
 function updateActiveProjectHeader(container, element) {

@@ -161,24 +161,6 @@ const makeMainTaskCard = (task, index) => {
     checkButtonDiv.appendChild(checkButton);
 
     mainTaskInfo.prepend(checkButtonDiv)
-    
-    const detailsBtnDiv = document.createElement("div");
-
-    const detailsBtn = document.createElement("button");
-    detailsBtn.setAttribute("data-index", index);
-    detailsBtn.classList.add("details-btn");
-    detailsBtn.innerHTML = "&#10133";
-
-    // const arrowDown = document.createElement("img");
-    // arrowDown.src = arrowDownImg;
-    // arrowDown.alt = "Open";
-    // arrowDown.style.width = "2em";
-
-    // detailsBtn.appendChild(arrowDown);
-
-    detailsBtnDiv.appendChild(detailsBtn)
-
-    mainTaskInfo.appendChild(detailsBtnDiv)
 
     const priorityDiv = document.createElement("div");
     priorityDiv.classList.add("priority-div");
@@ -190,6 +172,18 @@ const makeMainTaskCard = (task, index) => {
     priorityDiv.appendChild(priorityBall);
 
     mainTaskInfo.appendChild(priorityDiv);
+
+    const detailsBtnDiv = document.createElement("div");
+
+    const arrowImg = document.createElement("img");
+    arrowImg.classList.add("details-btn");
+    arrowImg.src = arrowDownImg;
+    arrowImg.alt = "Toggle details";
+    arrowImg.style.width = "2em";
+
+    detailsBtnDiv.appendChild(arrowImg)
+
+    mainTaskInfo.appendChild(detailsBtnDiv)
 
     taskCard.appendChild(mainTaskInfo);
 
