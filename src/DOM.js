@@ -179,7 +179,7 @@ const makeMainTaskCard = (task, index) => {
     arrowImg.classList.add("details-btn");
     arrowImg.src = arrowDownImg;
     arrowImg.alt = "Toggle details";
-    arrowImg.style.width = "2em";
+    arrowImg.style.width = "1.75em";
 
     detailsBtnDiv.appendChild(arrowImg)
 
