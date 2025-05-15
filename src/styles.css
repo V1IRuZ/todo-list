@@ -7,6 +7,15 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Neuropolitical';
+  src: url('./fonts/Neuropolitical-Regular.woff2') format('woff2'),
+      url('./fonts/Neuropolitical-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /*
   Josh's Custom CSS Reset
   https://www.joshwcomeau.com/css/custom-css-reset/
@@ -106,12 +115,35 @@
     padding: 2em;
   }
 
+  .logo-icon {
+    text-align: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 28px;
+    border-radius: 50%;
+    background-color: var(--soft-green);
+    border: 2px solid var(--off-white);
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-text {
+    font-family: 'Neuropolitical';
+    color: var(--off-white);
+    text-shadow: 2px 2px 2px var(--dark-gray);
+  }
+
   footer { 
     grid-row: 3/4;
     text-align: center;
     font-size: 1.5rem;
   }
-
 
   /* Add project modal */
 
