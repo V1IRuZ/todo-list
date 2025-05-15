@@ -3,6 +3,8 @@ import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, t
 import { format } from "date-fns";
 import starImage from "./icons/star.svg";
 import arrowDownImg from "./icons/arrow-down-drop-circle-outline.svg";
+import plusImg from "./icons/plus-box-multiple.svg";
+import trashCanImg from "./icons/delete_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
 
 // aside
 const aside = document.querySelector("aside");
@@ -53,19 +55,37 @@ const activeProjectHeaderDiv = document.createElement("div");
 activeProjectHeaderDiv.classList.add("active-project");
 
 const activeProjectH1 = document.createElement("h1");
+activeProjectH1.classList.add("project-header");
 activeProjectH1.textContent = "No project selected";
 activeProjectHeaderDiv.appendChild(activeProjectH1)
 
 const addTasksDiv = document.createElement("div");
+addTasksDiv.classList.add("project-options");
 
 const addNewToDoBtn = document.createElement("button");
 addNewToDoBtn.classList.add("add-task");
 addNewToDoBtn.textContent = "Add new task";
+
+const addImg = document.createElement("img");
+addImg.classList.add("add-icon");
+addImg.src = plusImg;
+addImg.alt = "Add new task";
+addImg.style.width = "2em";
+
+addNewToDoBtn.prepend(addImg);
 addTasksDiv.appendChild(addNewToDoBtn);
 
 const removeProjectBtn = document.createElement("button");
-removeProjectBtn.textContent = "Delete";
+removeProjectBtn.textContent = "Remove project";
 removeProjectBtn.classList.add("remove-project");
+
+const removeProjectImg = document.createElement("img");
+removeProjectImg.classList.add("remove-icon");
+removeProjectImg.src = trashCanImg;
+removeProjectImg.alt = "Remove project";
+removeProjectImg.style.width = "2em";
+
+removeProjectBtn.prepend(removeProjectImg);
 addTasksDiv.appendChild(removeProjectBtn);
 
 activeProjectHeaderDiv.appendChild(addTasksDiv);

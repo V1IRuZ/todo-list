@@ -244,12 +244,16 @@
   }
 
   .project-btn,
-  .add-project {
+  .add-project,
+  .add-task,
+  .remove-project {
     transition: transform 0.3s ease-in-out;
   }
 
   .add-project:hover,
-  .project-btn:hover {
+  .project-btn:hover,
+  .add-task:hover,
+  .remove-project:hover {
     transform: scale(1.2); /* Zooms in by 20% */
 }
 
@@ -319,9 +323,20 @@
     border-bottom: 2px solid var(--medium-gray);
   }
 
-  .add-task {
-    background-color: var(--sky-blue);
-    color: var(--off-white);
+  .project-options {
+    display: flex;
+    gap: 1em;
+  }
+
+  .add-task,
+  .remove-project {
+    display: flex;
+    gap: 0.5em;
+    font-size: 1.25rem;
+    font-weight: 900;
+    align-items: center;
+    color: var(--dark-gray);
+    background-color: var(--ligth-gray);
   }
 
   .view-tasks {
@@ -397,7 +412,6 @@
     pointer-events: none; 
   }
 
-  .remove-project,
   .remove-task,
   .edit-btn {
     color: var(--off-white);
@@ -405,7 +419,6 @@
     font-size: 1rem;
   }
 
-  .remove-project,
   .remove-task {
     background-color: var(--warm-red);
   }
@@ -438,14 +451,6 @@
     width: 40px;
     height: 40px;
   }
-
-  /* .complete-btn.done {
-    background-color: var(--soft-green);
-  }
-
-  .complete-btn.not-done{
-    background-color: var(--warm-red);
-  } */
 
   .complete-btn:disabled {
     border-color: #a0a0a0;
