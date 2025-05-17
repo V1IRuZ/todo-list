@@ -12,16 +12,6 @@ export function eventActions() {
         changeButtonText(e);
     })
     
-    addGlobalEventListener("click", ".remove-project", e => {
-        withActiveProject(() => {
-            let index = getActiveProjectIndex();
-            removeProject(index);
-            setActiveProject();
-            updateDOM();
-            saveData();
-        })
-    })
-    
     addGlobalEventListener("click", ".remove-task", e => {
         let index = e.target.getAttribute("data-index");
         getActiveProject().removeToDo(index);

@@ -99,7 +99,7 @@
     border-style: none;
     cursor: pointer;
     padding: 0.5em 1em;
-    border-radius: 30px;
+    border-radius: 10px;
 
   }
 
@@ -199,14 +199,17 @@
   }
 
   .close-project,
-  .close-task {
+  .close-task,
+  .close-delete {
     padding: 2px;
     background-color: var(--sky-blue);
     border-radius: 10x;
   }
 
   .submit-project,
-  .submit-task {
+  .submit-task,
+  .confirm-delete,
+  .selection-btns > .cancel-delete {
     background-color: var(--sky-blue);
     width: 100px;
   }
@@ -350,6 +353,23 @@
     align-items: center;
     color: var(--dark-gray);
     background-color: var(--ligth-gray);
+  }
+
+  /* Remove project */
+
+  .selection-btns {
+    display: flex;
+    gap: 0.5em;
+    padding: 1em;
+  }
+
+  .selection-btns > button {
+    color: var(--off-white);
+  }
+
+  .warning {
+    padding: 1em 1em 0 1em;
+    font-size: 1.5rem;
   }
 
   .view-tasks {

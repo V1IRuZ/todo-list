@@ -1,6 +1,6 @@
 import { eventActions } from "./events";
 import { updateDOM } from "./DOM";
-import { getProjectModal, addTaskModal, editTaskModal } from "./modals";
+import { getProjectModal, addTaskModal, editTaskModal, deleteProject } from "./modals";
 import { getProjects } from "./projects";
 import { loadData } from "./local-storage";
 import "./styles.css";
@@ -14,6 +14,7 @@ function renderChanges () {
     addTaskModal();
     getProjectModal();
     editTaskModal();
+    deleteProject();
     console.log(getProjects());
 }
 
