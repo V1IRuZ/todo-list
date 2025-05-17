@@ -150,24 +150,32 @@
   dialog {
     margin: 0 auto;
     top: 20vh;
-    padding: 1.5em;
-    border-radius: 30px;
+    border-radius: 10px;
     font-weight: 900;
     color: var(--dark-gray);
+    border-style: none;
+    padding: 0;
+    box-shadow: 2px 2px 5px var(--medium-gray);
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--sky-blue);
+    color: var(--off-white);
+    padding: 0.25em 1em;
   }
   
   .project-form {
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 1em;
-  }
-
-  .project-form h2 {
-    font-size: 2rem;
+    padding: 1em;
   }
 
   .project-form > div {
     display: flex;
+    flex-direction: column;
     gap: 0.5em;
   }
 
@@ -189,17 +197,22 @@
   .task-btns > button {
     font-size: 1.2rem;
     padding: var(--btn-padding);
-    border-radius: 30px;
+    border-radius: 10px;
     color: var(--off-white);
   }
 
+  .close-project {
+    padding: 2px;
+    background-color: var(--sky-blue);
+    border-radius: 10x;
+  }
 
   .submit-project,
   .submit-task {
-    background-color: var(--soft-green);
+    background-color: var(--sky-blue);
+    width: 100px;
   }
 
-  .close-project,
   .close-task {
     background-color: var(--warm-red);
   }

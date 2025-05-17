@@ -7,15 +7,19 @@
 </head>
 <body>
     <dialog class="project-modal" id="project-modal">
-        <form action="" method="dialog" class="project-form">
+        <div class="modal-header">
             <h2>Create a new project</h2>
+            <button class="close-project">
+                <img src="./icons/close.svg" alt="Cancel creating a new project">
+            </button>
+        </div>
+        <form action="" method="dialog" class="project-form">
             <div>
                 <label for="name">Name</label>
                 <input type="text" id="name" name="project-name" minlength="1" maxlength="30" required>
             </div>
             <div>
                 <button type="submit" class="submit-project">Submit</button>
-                <button class="close-project">Close</button>
             </div>
         </form>
     </dialog>
