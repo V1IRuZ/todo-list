@@ -1,12 +1,13 @@
 import { Todo } from "./create-todo";
 import { Project } from "./create-project";
 
-let projects = [];
+const projects = [];
 
 let activeProject;
 
 const updateProjects = (data) => {
-    projects = data;
+    console.log("Updating projects with:", data);
+    projects.splice(0, projects.length, ...data);
 }
 
 const getProjects = () => projects;
@@ -22,7 +23,8 @@ const getActiveProjectIndex = () => {
 }
 
 const makeNewProject = (name) => {
-    const project = new Project({ name, tasks: []});
+    const project = new Project({name, tasks: []});
+
     projects.push(project);
     return project;
 }
@@ -46,6 +48,9 @@ function withActiveProject(callback) {
 
 const defaultProject = () => {
     const myProject = makeNewProject("Everyday tasks");
+    makeNewProject("Workout");
+    makeNewProject("Restaurant App");
+
     activeProject = myProject;
 
     activeProject.addToDo(new Todo({ 
@@ -97,12 +102,17 @@ const defaultProject = () => {
     }));
 }
 
-defaultProject();
+// defaultProject();
 
-makeNewProject("Workout");
-makeNewProject("Restaurant App");
-
-
-
-
-export { makeNewProject, getActiveProject, setActiveProject, getProjects, switchActiveProject, withActiveProject, defaultProject, removeProject, getActiveProjectIndex, updateProjects }
+export { 
+    makeNewProject, 
+    getActiveProject, 
+    setActiveProject, 
+    getProjects, 
+    switchActiveProject, 
+    withActiveProject, 
+    defaultProject, 
+    removeProject, 
+    getActiveProjectIndex, 
+    updateProjects
+}

@@ -1,5 +1,6 @@
 import { withActiveProject, getProjects, getActiveProject } from "./projects";
 import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, taskIsDoneWithNoRepeat, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor } from "./utils";
+import { addTaskModal, editTaskModal, deleteProject } from "./modals";
 import { format } from "date-fns";
 import starImage from "./icons/star.svg";
 import arrowDownImg from "./icons/arrow-down-drop-circle-outline.svg";
@@ -73,6 +74,7 @@ addImg.alt = "Add new task";
 addImg.style.width = "2em";
 
 addNewToDoBtn.prepend(addImg);
+addTaskModal(addNewToDoBtn);
 addTasksDiv.appendChild(addNewToDoBtn);
 
 const removeProjectBtn = document.createElement("button");
@@ -86,6 +88,7 @@ removeProjectImg.alt = "Remove project";
 removeProjectImg.style.width = "2em";
 
 removeProjectBtn.prepend(removeProjectImg);
+deleteProject(removeProjectBtn);
 addTasksDiv.appendChild(removeProjectBtn);
 
 activeProjectHeaderDiv.appendChild(addTasksDiv);
@@ -285,6 +288,7 @@ const updateMainDOM = () => {
 const updateDOM = () => {
     updateAsideDOM();
     updateMainDOM();
+    // console.log(getProjects());
 }
 
 export {updateMainDOM, updateDOM}

@@ -23,7 +23,6 @@ const taskPriority = document.querySelector("#priority");
 
 // Remove project modal
 
-const removeBtn = document.querySelector(".remove-project");
 const removeModal = document.querySelector(".remove-modal");
 const confirmDeleteBtn = document.querySelector(".confirm-delete");
 const cancelDeleteBtns = document.querySelectorAll(".cancel-delete");
@@ -53,8 +52,8 @@ function getProjectModal() {
 }
 
 
-function addTaskModal() {
-    const addNewToDoBtn = document.querySelector(".add-task");
+function addTaskModal(button) {
+    const addNewToDoBtn = button
 
     addNewToDoBtn.addEventListener("click", () => {
         taskForm.classList.add("create");
@@ -129,7 +128,10 @@ function editTaskModal() {
     })
 }
 
-function deleteProject() {
+function deleteProject(removeButton) {
+
+    const removeBtn = removeButton;
+
     removeBtn.addEventListener("click", ()=> {
         removeModal.showModal();
     })

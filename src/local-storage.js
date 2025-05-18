@@ -1,4 +1,4 @@
-import { getProjects, updateProjects, setActiveProject } from "./projects";
+import { getProjects, updateProjects, setActiveProject, defaultProject } from "./projects";
 import { Project } from "./create-project";
 import { Todo } from "./create-todo";
 import { updateDOM } from "./DOM";
@@ -12,13 +12,23 @@ function saveData () {
 }
 
 function loadData () {
-    const rawData = JSON.parse(localStorage.getItem("projects")) || [];
+    let rawData = JSON.parse(localStorage.getItem("projects")) || [];
+
+    if (!rawData || rawData.length === 0) {
+        defaultProject();
+        rawData = getProjects();
+    }
+
     const data = rawData.map(project => new Project({
         name: project.name,
         tasks: project.tasks.map(task => new Todo(task)) 
     }))
 
+    console.log("Data created again: ", rawData)
+
+    console.log("Before update:", getProjects());
     updateProjects(data);
+    console.log("After update:", getProjects());
     setActiveProject()
     updateDOM();
 }
