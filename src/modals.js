@@ -1,6 +1,6 @@
 import { updateMainDOM, updateDOM } from "./DOM";
 import { Todo } from "./create-todo";
-import { makeNewProject, setActiveProject, getActiveProject, getActiveProjectIndex, removeProject } from "./projects";
+import { makeNewProject, setActiveProject, getActiveProject, getActiveProjectIndex, removeProject, getProjects } from "./projects";
 import { closeModal } from "./utils";
 import { saveData } from "./local-storage";
 
@@ -142,8 +142,7 @@ function deleteProject(removeButton) {
         setActiveProject();
         updateDOM();
         saveData();
-        removeModal.close();
-        
+        removeModal.close(); 
     })
 
     cancelDeleteBtns.forEach(button => {

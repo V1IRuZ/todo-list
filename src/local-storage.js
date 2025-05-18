@@ -5,10 +5,8 @@ import { updateDOM } from "./DOM";
 
 function saveData () {
     const projects = getProjects();
-    if (projects.length > 0) {
-        localStorage.setItem("projects", JSON.stringify(projects));
-        console.log("data saved")
-    } 
+    localStorage.setItem("projects", JSON.stringify(projects));
+    console.log("data saved")
 }
 
 function loadData () {
@@ -24,11 +22,7 @@ function loadData () {
         tasks: project.tasks.map(task => new Todo(task)) 
     }))
 
-    console.log("Data created again: ", rawData)
-
-    console.log("Before update:", getProjects());
     updateProjects(data);
-    console.log("After update:", getProjects());
     setActiveProject()
     updateDOM();
 }

@@ -126,14 +126,14 @@ const upcoming = makeContainerToTasksFactory("upcoming-container", "Upcoming tas
 const completed = makeContainerToTasksFactory("tasks-done", "One-time tasks")
 
 function displayContainer() {
+    today.container.remove();
+    upcoming.container.remove();
+    completed.container.remove();
+   
     withActiveProject((activeProject) => {
         const isTodayTasks = activeProject.tasks.some(task => isDueDate(task) && !taskIsDoneWithNoRepeat(task))
         const isUpcomingTasks = activeProject.tasks.some(task => !isDueDate(task))
         const isCompletedTasks = activeProject.tasks.some(task => taskIsDoneWithNoRepeat(task))
-
-        today.container.remove();
-        upcoming.container.remove();
-        completed.container.remove();
 
         if (activeProject.tasks.length === 0) {
             return;
@@ -272,10 +272,13 @@ function updateTaskCardsToContainers() {
 }
 
 function updateTaskLists() {
-    withActiveProject(() => {
-        updateTaskCardsToContainers();
-        displayContainer();        
-    })
+    if (!getActiveProject()) {
+        resetDOM(activeProjectTasks);
+        return
+    }
+
+    updateTaskCardsToContainers();
+    displayContainer();        
 }
 
 
@@ -288,7 +291,6 @@ const updateMainDOM = () => {
 const updateDOM = () => {
     updateAsideDOM();
     updateMainDOM();
-    // console.log(getProjects());
 }
 
 export {updateMainDOM, updateDOM}
