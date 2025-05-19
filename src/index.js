@@ -5,11 +5,11 @@ import { getProjects, defaultProject } from "./projects";
 import { loadData } from "./local-storage";
 import "./styles.css";
 
-const test = document.querySelector(".test");
+// const test = document.querySelector(".test");
 
-test.addEventListener("click", () => {
-    localStorage.clear();
-})
+// test.addEventListener("click", () => {
+//     localStorage.clear();
+// })
 
 document.addEventListener("DOMContentLoaded", loadData);
 

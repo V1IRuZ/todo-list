@@ -1,5 +1,5 @@
 import { withActiveProject, getActiveProject } from "./projects";
-import { format, addDays, isBefore, isEqual, isAfter } from "date-fns";
+import { format, isBefore, isEqual, isAfter } from "date-fns";
 import { updateDOM } from "./DOM";
 import arrowDownImg from "./icons/arrow-down-drop-circle-outline.svg";
 import arrowUpImg from "./icons/arrow-up-drop-circle-outline.svg";
@@ -71,6 +71,17 @@ function addActiveProjectBtns(container, ...buttons) {
     })
 }
 
+function getCounterTextContent(project, element) {
+    if (project.getCounter() === 0) {
+        element.style.color = "green";
+        return element.innerHTML = "&#10003;";
+        
+    }
+
+    element.style.color = "#ff6b6b";
+    return element.textContent = project.getCounter();
+}
+
 function setPriorityColor (task, element) {
     switch(task.priority) {
         case "Low":
@@ -113,4 +124,19 @@ function enableDisableCheckBtn(task, button) {
 }
  
 
-export {resetDOM, closeModal, addGlobalEventListener, showHideDetails, changeButtonText, addActiveProjectBtns, updateActiveProjectHeader, enableDisableCheckBtn, updateStateOfCompleteBtn, isDueDate, showCurrentDate, setPriorityColor, taskIsDoneWithNoRepeat}
+export {
+    resetDOM, 
+    closeModal, 
+    addGlobalEventListener, 
+    showHideDetails, 
+    changeButtonText, 
+    addActiveProjectBtns, 
+    updateActiveProjectHeader, 
+    enableDisableCheckBtn, 
+    updateStateOfCompleteBtn, 
+    isDueDate, 
+    showCurrentDate, 
+    setPriorityColor, 
+    taskIsDoneWithNoRepeat,
+    getCounterTextContent
+}

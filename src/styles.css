@@ -274,6 +274,11 @@
     gap: 1em;
   }
 
+  .project-card {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .project-btn {
     display: flex;
     align-items: center;
@@ -288,6 +293,16 @@
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 4px;
+  }
+
+  .task-counters {
+    align-content: center;
+    
+  }
+
+  .counter {
+    font-size: 1.5rem;
+    font-weight: 900;
   }
 
   /* Add task modal */

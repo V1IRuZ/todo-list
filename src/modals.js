@@ -75,7 +75,7 @@ function addTaskModal(button) {
             
             getActiveProject().addToDo(toDo);
             closeModal(e, taskModal, taskForm);
-            updateMainDOM();
+            updateDOM();
             taskForm.classList.remove("create");
             saveData();
         }
@@ -115,7 +115,7 @@ function editTaskModal() {
             let index = e.target.getAttribute("data-index");
             getActiveProject().tasks[index].editToDo(taskTitle.value, taskDescription.value, taskDueDate.value, taskRemainder.value, taskPriority.value);
             closeModal(e, taskModal, taskForm);
-            updateMainDOM();
+            updateDOM();
             taskForm.classList.remove("edit");
             taskForm.removeAttribute("data-index");
             saveData();

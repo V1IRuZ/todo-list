@@ -1,4 +1,5 @@
 import { Todo } from "./create-todo";
+import { format, isEqual, isAfter } from "date-fns";
 
 export class Project {
 constructor({name, tasks = []}) {
@@ -12,5 +13,21 @@ constructor({name, tasks = []}) {
 
     removeToDo(index) {
         this.tasks.splice(index, 1);
+    }
+
+    getCounter() {
+        const today = format(new Date(), "yyyy-MM-dd");
+
+        return this.tasks.reduce((total, task) => {
+        const dueDateToday = isEqual(today, task.dueDate);
+        const dueDateLate = isAfter(today, task.dueDate);
+
+            if ((dueDateToday || dueDateLate) && !task.complete) {
+                total++
+            }
+
+            return total
+
+        }, 0);
     }
 }

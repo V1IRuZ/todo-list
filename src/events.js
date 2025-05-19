@@ -33,7 +33,7 @@ export function eventActions() {
             activeProjectTask.setToDoCompleted();
             activeProjectTask.updateDueToDate();
     
-            updateMainDOM();
+            updateDOM();
             saveData();
         }   
     })

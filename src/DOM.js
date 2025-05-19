@@ -1,5 +1,5 @@
 import { withActiveProject, getProjects, getActiveProject } from "./projects";
-import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, taskIsDoneWithNoRepeat, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor } from "./utils";
+import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, taskIsDoneWithNoRepeat, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor, getCounterTextContent } from "./utils";
 import { addTaskModal, editTaskModal, deleteProject } from "./modals";
 import { format } from "date-fns";
 import starImage from "./icons/star.svg";
@@ -29,7 +29,21 @@ const makeProjectCard = (project, index) => {
     image.style.width = "2em";
     projectCardBtn.prepend(image);
 
+    console.log(project.getCounter());
+
     projectCard.appendChild(projectCardBtn);
+
+    const taskCounterDiv = document.createElement("div");
+    taskCounterDiv.classList.add("task-counters");
+
+    const taskCounter = document.createElement("p");
+    taskCounter.classList.add("counter");
+    getCounterTextContent(project, taskCounter);
+
+    taskCounterDiv.appendChild(taskCounter);
+
+    projectCard.appendChild(taskCounterDiv);
+
     return projectCard;
 }
 
