@@ -254,12 +254,11 @@ const makeCardExtension = (task, index) => {
 
     const ediTaskBtn = document.createElement("button");
     ediTaskBtn.classList.add("edit-btn");
-    ediTaskBtn.textContent = "edit";
+    ediTaskBtn.textContent = "Edit task";
     ediTaskBtn.setAttribute("data-index", index);
 
     // here
     const editTaskImg = document.createElement("img");
-    // editTaskImg.classList.add("edit-icon");
     editTaskImg.src = editImg;
     editTaskImg.alt = "Edit task";
     editTaskImg.style.width = "2em";
