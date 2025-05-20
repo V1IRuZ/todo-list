@@ -17,7 +17,7 @@ function renderChanges () {
     updateDOM();
     eventActions();
     getProjectModal();
-    editTaskModal();
+    // editTaskModal();
     // console.log(getProjects());
 }
 

@@ -6,6 +6,7 @@ import starImage from "./icons/star.svg";
 import arrowDownImg from "./icons/arrow-down-drop-circle-outline.svg";
 import plusImg from "./icons/plus-box-multiple.svg";
 import trashCanImg from "./icons/delete_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
+import editImg from "./icons/edit.svg"
 
 // aside
 const aside = document.querySelector("aside");
@@ -255,6 +256,16 @@ const makeCardExtension = (task, index) => {
     ediTaskBtn.classList.add("edit-btn");
     ediTaskBtn.textContent = "edit";
     ediTaskBtn.setAttribute("data-index", index);
+
+    // here
+    const editTaskImg = document.createElement("img");
+    // editTaskImg.classList.add("edit-icon");
+    editTaskImg.src = editImg;
+    editTaskImg.alt = "Edit task";
+    editTaskImg.style.width = "2em";
+    ediTaskBtn.prepend(editTaskImg);
+    editTaskModal(ediTaskBtn);
+
     buttonsDiv.appendChild(ediTaskBtn);
 
     detailsDiv.appendChild(buttonsDiv);
