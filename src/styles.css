@@ -258,7 +258,8 @@
   .add-project,
   .add-task,
   .remove-project,
-  .edit-btn {
+  .edit-btn,
+  .remove-task {
     transition: transform 0.3s ease-in-out;
   }
 
@@ -266,7 +267,8 @@
   .project-btn:hover,
   .add-task:hover,
   .remove-project:hover,
-  .edit-btn:hover {
+  .edit-btn:hover,
+  .remove-task:hover {
     transform: scale(1.2); /* Zooms in by 20% */
 }
 
@@ -364,7 +366,8 @@
 
   .add-task,
   .remove-project, 
-  .edit-btn {
+  .edit-btn,
+  .remove-task {
     display: flex;
     gap: 0.5em;
     font-size: 1.25rem;
@@ -462,16 +465,6 @@
     opacity: 0;
     max-height: 0;
     pointer-events: none; 
-  }
-
-  .remove-task{
-    color: var(--off-white);
-    padding: var(--btn-padding);
-    font-size: 1rem;
-  }
-
-  .remove-task {
-    background-color: var(--warm-red);
   }
   
   .edit-tasks {

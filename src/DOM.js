@@ -1,6 +1,6 @@
 import { withActiveProject, getProjects, getActiveProject } from "./projects";
 import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, taskIsDoneWithNoRepeat, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor, getCounterTextContent } from "./utils";
-import { addTaskModal, editTaskModal, deleteProject } from "./modals";
+import { addTaskModal, editTaskModal, deleteProject, deleteTask } from "./modals";
 import { format } from "date-fns";
 import starImage from "./icons/star.svg";
 import arrowDownImg from "./icons/arrow-down-drop-circle-outline.svg";
@@ -29,8 +29,6 @@ const makeProjectCard = (project, index) => {
     image.alt = "Star";
     image.style.width = "2em";
     projectCardBtn.prepend(image);
-
-    console.log(project.getCounter());
 
     projectCard.appendChild(projectCardBtn);
 
@@ -248,8 +246,17 @@ const makeCardExtension = (task, index) => {
 
     const removeTaskBtn = document.createElement("button");
     removeTaskBtn.classList.add("remove-task");
-    removeTaskBtn.textContent = "delete";
+    removeTaskBtn.textContent = "Remove Task";
     removeTaskBtn.setAttribute("data-index", index);
+
+    const removeTaskImg = document.createElement("img");
+    removeTaskImg.classList.add("remove-icon");
+    removeTaskImg.src = trashCanImg;
+    removeTaskImg.alt = "Remove task";
+    removeTaskImg.style.width = "2em";
+
+    removeTaskBtn.prepend(removeTaskImg);
+    deleteTask(removeTaskBtn);
     buttonsDiv.appendChild(removeTaskBtn);
 
     const ediTaskBtn = document.createElement("button");

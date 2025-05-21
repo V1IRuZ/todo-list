@@ -147,6 +147,43 @@ function deleteProject(removeButton) {
     })
 }
 
+const removeTaskModal = document.querySelector(".remove-task-modal");
+const confirmDeleteTaskBtn = document.querySelector(".confirm-task");
+const cancelDeleteTaskBtns = document.querySelectorAll(".cancel-task");
 
-export { getProjectModal, addTaskModal, editTaskModal, deleteProject }
+function deleteTask(button) {
+    button.addEventListener("click", (e) => {    
+        let index = e.target.getAttribute("data-index");
+
+        confirmDeleteTaskBtn.setAttribute("data-index", index); 
+        removeTaskModal.showModal();
+    });
+
+    confirmDeleteTaskBtn.addEventListener("click", () => {
+        let buttonIndex = confirmDeleteTaskBtn.getAttribute("data-index");
+
+        if (buttonIndex !== null) {
+            console.log(getActiveProject());
+            console.log("Index:", buttonIndex);
+
+            getActiveProject().removeToDo(buttonIndex);
+            updateDOM();
+            saveData();
+        }
+
+        confirmDeleteTaskBtn.removeAttribute("data-index");
+        removeTaskModal.close();
+    });
+
+    cancelDeleteTaskBtns.forEach(button => {
+        button.addEventListener("click", () => {
+            confirmDeleteTaskBtn.removeAttribute("data-index");
+            removeTaskModal.close();
+        });
+    });
+}
+
+
+
+export { getProjectModal, addTaskModal, editTaskModal, deleteProject, deleteTask }
 
