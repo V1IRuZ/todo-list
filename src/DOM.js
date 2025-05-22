@@ -6,7 +6,8 @@ import starImage from "./icons/star.svg";
 import arrowDownImg from "./icons/arrow-down-drop-circle-outline.svg";
 import plusImg from "./icons/plus-box-multiple.svg";
 import trashCanImg from "./icons/delete_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
-import editImg from "./icons/edit.svg"
+import editImg from "./icons/edit.svg";
+import calendarImg from "./icons/calendar-month.svg";
 
 // aside
 const aside = document.querySelector("aside");
@@ -177,11 +178,21 @@ const makeMainTaskCard = (task, index) => {
     taskCardTitle.textContent = `${task.title}`;
     mainTaskInfo.appendChild(taskCardTitle);
     
-    const taskCardDueDate = document.createElement("p");
+    const taskCardDueDateDiv = document.createElement("div");
+    taskCardDueDateDiv.classList.add("task-date")
+    
+    const calendar = document.createElement("img");
+    calendar.src = calendarImg;
+    calendar.alt = "Task due date"
+    taskCardDueDateDiv.prepend(calendar);
+
+    const taskCardDueDatePara = document.createElement("p");
     const date = format(task.dueDate, "MMMM d");
-    taskCardDueDate.classList.add("date-text");
-    taskCardDueDate.textContent = `${date}`;
-    mainTaskInfo.appendChild(taskCardDueDate);
+    taskCardDueDatePara.classList.add("date-text");
+    taskCardDueDatePara.textContent = `${date}`;
+
+    taskCardDueDateDiv.appendChild(taskCardDueDatePara);
+    mainTaskInfo.appendChild(taskCardDueDateDiv)
     
     const checkButtonDiv = document.createElement("div");
     checkButtonDiv.classList.add("complete-div");
@@ -270,7 +281,7 @@ const makeCardExtension = (task, index) => {
     removeTaskImg.style.width = "2em";
     removeTaskBtn.prepend(removeTaskImg);
     deleteTask(removeTaskBtn);
-    
+
     buttonsDiv.appendChild(removeTaskBtn);
 
     // here

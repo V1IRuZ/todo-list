@@ -427,7 +427,7 @@
   .card-container {
     display: grid;
     grid-template-rows: auto auto;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     padding: var(--btn-padding);
     box-shadow: 2px 2px 5px var(--medium-gray);
   }
@@ -435,6 +435,12 @@
   .task-card {
     display: grid;
     grid-template-columns: 45px 16em auto 2em 3em;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .task-date {
+    display: flex;
     gap: 1em;
   }
 
@@ -490,7 +496,7 @@
   .complete-btn {
     align-content: start;
     padding: var(--btn-padding);
-    border: 2px solid var(--dark-gray);
+    border: 2px solid var(--sky-blue);
     border-radius: 0;
     background-color: va;
     font-size: 1rem;
