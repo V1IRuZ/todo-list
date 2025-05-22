@@ -244,6 +244,20 @@ const makeCardExtension = (task, index) => {
     const buttonsDiv = document.createElement("div");
     buttonsDiv.classList.add("edit-tasks")
 
+    const ediTaskBtn = document.createElement("button");
+    ediTaskBtn.classList.add("edit-btn");
+    ediTaskBtn.textContent = "Edit task";
+    ediTaskBtn.setAttribute("data-index", index);
+
+    const editTaskImg = document.createElement("img");
+    editTaskImg.src = editImg;
+    editTaskImg.alt = "Edit task";
+    editTaskImg.style.width = "2em";
+    ediTaskBtn.prepend(editTaskImg);
+    editTaskModal(ediTaskBtn);
+
+    buttonsDiv.appendChild(ediTaskBtn);
+
     const removeTaskBtn = document.createElement("button");
     removeTaskBtn.classList.add("remove-task");
     removeTaskBtn.textContent = "Remove Task";
@@ -254,25 +268,13 @@ const makeCardExtension = (task, index) => {
     removeTaskImg.src = trashCanImg;
     removeTaskImg.alt = "Remove task";
     removeTaskImg.style.width = "2em";
-
     removeTaskBtn.prepend(removeTaskImg);
     deleteTask(removeTaskBtn);
+    
     buttonsDiv.appendChild(removeTaskBtn);
 
-    const ediTaskBtn = document.createElement("button");
-    ediTaskBtn.classList.add("edit-btn");
-    ediTaskBtn.textContent = "Edit task";
-    ediTaskBtn.setAttribute("data-index", index);
-
     // here
-    const editTaskImg = document.createElement("img");
-    editTaskImg.src = editImg;
-    editTaskImg.alt = "Edit task";
-    editTaskImg.style.width = "2em";
-    ediTaskBtn.prepend(editTaskImg);
-    editTaskModal(ediTaskBtn);
 
-    buttonsDiv.appendChild(ediTaskBtn);
 
     detailsDiv.appendChild(buttonsDiv);
     return detailsDiv;

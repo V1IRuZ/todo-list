@@ -209,7 +209,9 @@
   .submit-project,
   .submit-task,
   .confirm-delete,
-  .selection-btns > .cancel-delete {
+  .selection-btns > .cancel-delete,
+  .confirm-task,
+  .selection-btns > .cancel-task {
     background-color: var(--sky-blue);
     width: 100px;
   }
