@@ -116,7 +116,7 @@
     padding: 2em;
   }
 
-  .logo-icon {
+  /* .logo-icon {
     text-align: center;
     align-items: center;
     font-weight: 900;
@@ -126,7 +126,7 @@
     border: 2px solid var(--off-white);
     width: 40px;
     height: 40px;
-  }
+  } */
 
   .logo {
     display: flex;
