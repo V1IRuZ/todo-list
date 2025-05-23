@@ -11,6 +11,10 @@ constructor({name, tasks = []}) {
         this.tasks.push(todo)
     }
 
+    editName(name) {
+        if (name !== undefined) this.name = name;
+    }
+
     removeToDo(index) {
         this.tasks.splice(index, 1);
     }
