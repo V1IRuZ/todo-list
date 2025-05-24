@@ -14,6 +14,18 @@ import arrowUpImg from "./icons/arrow-up-drop-circle-outline.svg";
 //     updateDOM();
 // })
 
+function createButton (className, buttonText, index) {
+    const button = document.createElement("button");
+    button.classList.add(className);
+    button.textContent = buttonText;
+
+    if (index) {
+        button.setAttribute("data-index", index);
+    }
+
+    return button;
+}
+
 function createIcon (srcIcon, altText, className, width) {
     const icon = document.createElement("img");
     icon.src = srcIcon;
@@ -155,5 +167,6 @@ export {
     setPriorityColor, 
     taskIsDoneWithNoRepeat,
     getCounterTextContent,
+    createButton,
     createIcon
 }
