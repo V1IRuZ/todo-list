@@ -82,23 +82,6 @@ function changeButtonText(event) {
     event.target.src = event.target.src.includes(arrowDownImg) ? arrowUpImg : arrowDownImg;
 }
 
-function updateActiveProjectHeader(container, element) {
-    if (!getActiveProject()) {
-        resetDOM(container)
-        element.textContent = "No projects";
-        return
-    }
-        element.textContent = `${getActiveProject().name}`
-}
-
-function addActiveProjectBtns(container, ...buttons) {
-    withActiveProject(() => {
-        buttons.forEach(button => {
-            container.appendChild(button);
-        })
-    })
-}
-
 function getCounterTextContent(project, element) {
     if (project.getCounter() === 0) {
         element.style.color = "green";
@@ -158,8 +141,6 @@ export {
     addGlobalEventListener, 
     showHideDetails, 
     changeButtonText, 
-    addActiveProjectBtns, 
-    updateActiveProjectHeader, 
     enableDisableCheckBtn, 
     updateStateOfCompleteBtn, 
     isDueDate, 
