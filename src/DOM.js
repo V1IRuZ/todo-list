@@ -1,6 +1,6 @@
 import { withActiveProject, getProjects, getActiveProject } from "./projects";
-import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, taskIsDoneWithNoRepeat, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor, getCounterTextContent } from "./utils";
-import { addTaskModal, editTaskModal, deleteProject, deleteTask } from "./modals";
+import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, taskIsDoneWithNoRepeat, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor, getCounterTextContent, createIcon } from "./utils";
+import { editProjectModal, addTaskModal, editTaskModal, deleteProject, deleteTask } from "./modals";
 import { format } from "date-fns";
 import starImage from "./icons/star.svg";
 import arrowDownImg from "./icons/arrow-down-drop-circle-outline.svg";
@@ -8,6 +8,7 @@ import plusImg from "./icons/plus-box-multiple.svg";
 import trashCanImg from "./icons/delete_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
 import editImg from "./icons/edit.svg";
 import calendarImg from "./icons/calendar-month.svg";
+import { ca } from "date-fns/locale";
 
 // aside
 const aside = document.querySelector("aside");
@@ -25,11 +26,8 @@ const makeProjectCard = (project, index) => {
     projectCardBtn.textContent = `${project.name}`;
     projectCardBtn.setAttribute("data-index", index);
 
-    const image = document.createElement("img");
-    image.src = starImage;
-    image.alt = "Star";
-    image.style.width = "2em";
-    projectCardBtn.prepend(image);
+    const starIcon = createIcon(starImage, "Star", "", "2em");
+    projectCardBtn.prepend(starIcon);
 
     projectCard.appendChild(projectCardBtn);
 
@@ -77,17 +75,20 @@ activeProjectHeaderDiv.appendChild(activeProjectH1)
 const addTasksDiv = document.createElement("div");
 addTasksDiv.classList.add("project-options");
 
+const editProjectNameBtn = document.createElement("button");
+editProjectNameBtn.classList.add("edit-project-name");
+editProjectNameBtn.textContent = "Edit name";
+
+editProjectModal(editProjectNameBtn);
+addTasksDiv.appendChild(editProjectNameBtn);
+
 const addNewToDoBtn = document.createElement("button");
 addNewToDoBtn.classList.add("add-task");
 addNewToDoBtn.textContent = "Add new task";
 
-const addImg = document.createElement("img");
-addImg.classList.add("add-icon");
-addImg.src = plusImg;
-addImg.alt = "Add new task";
-addImg.style.width = "2em";
+const plusBoxIcon = createIcon(plusImg, "Add new task", "add-icon", "2em");
+addNewToDoBtn.prepend(plusBoxIcon);
 
-addNewToDoBtn.prepend(addImg);
 addTaskModal(addNewToDoBtn);
 addTasksDiv.appendChild(addNewToDoBtn);
 
@@ -95,13 +96,9 @@ const removeProjectBtn = document.createElement("button");
 removeProjectBtn.textContent = "Remove project";
 removeProjectBtn.classList.add("remove-project");
 
-const removeProjectImg = document.createElement("img");
-removeProjectImg.classList.add("remove-icon");
-removeProjectImg.src = trashCanImg;
-removeProjectImg.alt = "Remove project";
-removeProjectImg.style.width = "2em";
+const trashCanIcon = createIcon(trashCanImg, "Remove project", "remove-icon", "2em");
 
-removeProjectBtn.prepend(removeProjectImg);
+removeProjectBtn.prepend(trashCanIcon);
 deleteProject(removeProjectBtn);
 addTasksDiv.appendChild(removeProjectBtn);
 
@@ -110,7 +107,7 @@ main.appendChild(activeProjectHeaderDiv);
 
 function updateSelectedProject() {
     updateActiveProjectHeader(addTasksDiv, activeProjectH1);
-    addActiveProjectBtns(addTasksDiv, addNewToDoBtn, removeProjectBtn);
+    addActiveProjectBtns(addTasksDiv, editProjectNameBtn, addNewToDoBtn, removeProjectBtn);
 }
 
 // Task Cards
@@ -181,10 +178,8 @@ const makeMainTaskCard = (task, index) => {
     const taskCardDueDateDiv = document.createElement("div");
     taskCardDueDateDiv.classList.add("task-date")
     
-    const calendar = document.createElement("img");
-    calendar.src = calendarImg;
-    calendar.alt = "Task due date"
-    taskCardDueDateDiv.prepend(calendar);
+    const calendarIcon = createIcon(calendarImg, "Task due date");
+    taskCardDueDateDiv.prepend(calendarIcon);
 
     const taskCardDueDatePara = document.createElement("p");
     const date = format(task.dueDate, "MMMM d");
@@ -222,13 +217,8 @@ const makeMainTaskCard = (task, index) => {
 
     const detailsBtnDiv = document.createElement("div");
 
-    const arrowImg = document.createElement("img");
-    arrowImg.classList.add("details-btn");
-    arrowImg.src = arrowDownImg;
-    arrowImg.alt = "Toggle details";
-    arrowImg.style.width = "1.75em";
-
-    detailsBtnDiv.appendChild(arrowImg)
+    const arrowIcon = createIcon(arrowDownImg, "Toggle details", "details-btn", "1.75em");
+    detailsBtnDiv.appendChild(arrowIcon)
 
     mainTaskInfo.appendChild(detailsBtnDiv)
 
@@ -260,11 +250,9 @@ const makeCardExtension = (task, index) => {
     ediTaskBtn.textContent = "Edit task";
     ediTaskBtn.setAttribute("data-index", index);
 
-    const editTaskImg = document.createElement("img");
-    editTaskImg.src = editImg;
-    editTaskImg.alt = "Edit task";
-    editTaskImg.style.width = "2em";
-    ediTaskBtn.prepend(editTaskImg);
+    const editIcon = createIcon(editImg, "Edit task", "", "2em");
+    ediTaskBtn.prepend(editIcon);
+
     editTaskModal(ediTaskBtn);
 
     buttonsDiv.appendChild(ediTaskBtn);
@@ -274,12 +262,9 @@ const makeCardExtension = (task, index) => {
     removeTaskBtn.textContent = "Remove Task";
     removeTaskBtn.setAttribute("data-index", index);
 
-    const removeTaskImg = document.createElement("img");
-    removeTaskImg.classList.add("remove-icon");
-    removeTaskImg.src = trashCanImg;
-    removeTaskImg.alt = "Remove task";
-    removeTaskImg.style.width = "2em";
-    removeTaskBtn.prepend(removeTaskImg);
+    const trashCanIcon = createIcon(trashCanImg, "Remove task", "remove-icon", "2em");
+    removeTaskBtn.prepend(trashCanIcon);
+
     deleteTask(removeTaskBtn);
 
     buttonsDiv.appendChild(removeTaskBtn);
