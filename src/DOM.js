@@ -1,5 +1,5 @@
 import { withActiveProject, getProjects, getActiveProject } from "./projects";
-import { resetDOM, updateActiveProjectHeader, addActiveProjectBtns, isDueDate, taskIsDoneWithNoRepeat, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor, getCounterTextContent, createIcon } from "./utils";
+import { resetDOM, isDueDate, taskIsDoneWithNoRepeat, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor, getCounterTextContent, createButton, createIcon } from "./utils";
 import { editProjectModal, addTaskModal, editTaskModal, deleteProject, deleteTask } from "./modals";
 import { format } from "date-fns";
 import starImage from "./icons/star.svg";
@@ -9,159 +9,147 @@ import trashCanImg from "./icons/delete_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.s
 import editImg from "./icons/edit.svg";
 import calendarImg from "./icons/calendar-month.svg";
 
-// aside
+// Aside DOM
 const aside = document.querySelector("aside");
 
-const myProjects = document.createElement("div");
-myProjects.classList.add("my-projects");
-aside.appendChild(myProjects);
+// Main container for project cards
+const projectsContainer = document.createElement("div");
+projectsContainer.classList.add("my-projects");
+aside.appendChild(projectsContainer);
 
 const createProjectCard = (project, index) => {
     const projectCard = document.createElement("div");
     projectCard.classList.add("project-card");
 
-    const projectCardBtn = document.createElement("button");
-    projectCardBtn.classList.add("project-btn");
-    projectCardBtn.textContent = `${project.name}`;
-    projectCardBtn.setAttribute("data-index", index);
-
+    const projectBtn = createButton("project-btn", `${project.name}`, index);
     const starIcon = createIcon(starImage, "Star", "", "2em");
-    projectCardBtn.prepend(starIcon);
+    projectBtn.prepend(starIcon);
+    projectCard.appendChild(projectBtn);
 
-    projectCard.appendChild(projectCardBtn);
-
-    const taskCounterDiv = document.createElement("div");
-    taskCounterDiv.classList.add("task-counters");
+    const taskCounterWrapper = document.createElement("div");
+    taskCounterWrapper.classList.add("task-counters");
 
     const taskCounter = document.createElement("p");
     taskCounter.classList.add("counter");
     getCounterTextContent(project, taskCounter);
+    taskCounterWrapper.appendChild(taskCounter);
 
-    taskCounterDiv.appendChild(taskCounter);
-
-    projectCard.appendChild(taskCounterDiv);
+    projectCard.appendChild(taskCounterWrapper);
 
     return projectCard;
 }
 
 const updateProjectCards = () => {
-    resetDOM(myProjects)
+    resetDOM(projectsContainer)
     const projects = getProjects();
 
     projects.forEach((project, index) => {
         const card = createProjectCard(project, index);
-        myProjects.appendChild(card);
+        projectsContainer.appendChild(card);
     })
 }
 
-const updateAsideDOM = () => {
-    updateProjectCards();
-    return aside;
-} 
 
-// main
-// Active project header
+// Main DOM
 const main = document.querySelector("main");
 
-const activeProjectHeaderDiv = document.createElement("div");
-activeProjectHeaderDiv.classList.add("active-project");
+// Active project
+const activeProjectContainer = document.createElement("div");
+activeProjectContainer.classList.add("active-project");
+main.appendChild(activeProjectContainer);
 
-const activeProjectH1 = document.createElement("h1");
-activeProjectH1.classList.add("project-header");
-activeProjectH1.textContent = "No project selected";
-activeProjectHeaderDiv.appendChild(activeProjectH1)
+const activeProject = document.createElement("h1");
+activeProject.classList.add("project-header");
+activeProject.textContent = "No project selected";
+activeProjectContainer.appendChild(activeProject)
 
-const addTasksDiv = document.createElement("div");
-addTasksDiv.classList.add("project-options");
+const activeProjectBtnsWrapper = document.createElement("div");
+activeProjectBtnsWrapper.classList.add("project-options");
 
-const editProjectNameBtn = document.createElement("button");
-editProjectNameBtn.classList.add("edit-btn");
-editProjectNameBtn.textContent = "Edit name";
-
+const editProjectNameBtn = createButton("edit-btn", "Edit name");
 const editIcon = createIcon(editImg, "Edit project name", "", "2em");
 editProjectNameBtn.prepend(editIcon);
-
 editProjectModal(editProjectNameBtn);
-addTasksDiv.appendChild(editProjectNameBtn);
+activeProjectBtnsWrapper.appendChild(editProjectNameBtn);
 
-const addNewToDoBtn = document.createElement("button");
-addNewToDoBtn.classList.add("add-task");
-addNewToDoBtn.textContent = "Add new task";
-
+const addNewToDoBtn = createButton("add-task", "Add new task")
 const plusBoxIcon = createIcon(plusImg, "Add new task", "add-icon", "2em");
 addNewToDoBtn.prepend(plusBoxIcon);
-
 addTaskModal(addNewToDoBtn);
-addTasksDiv.appendChild(addNewToDoBtn);
+activeProjectBtnsWrapper.appendChild(addNewToDoBtn);
 
-const removeProjectBtn = document.createElement("button");
-removeProjectBtn.textContent = "Remove project";
-removeProjectBtn.classList.add("remove-project");
-
+const removeProjectBtn = createButton("remove-project", "Remove project");
 const trashCanIcon = createIcon(trashCanImg, "Remove project", "remove-icon", "2em");
-
 removeProjectBtn.prepend(trashCanIcon);
 deleteProject(removeProjectBtn);
-addTasksDiv.appendChild(removeProjectBtn);
+activeProjectBtnsWrapper.appendChild(removeProjectBtn);
 
-activeProjectHeaderDiv.appendChild(addTasksDiv);
-main.appendChild(activeProjectHeaderDiv);
+activeProjectContainer.appendChild(activeProjectBtnsWrapper);
 
-function updateSelectedProject() {
-    updateActiveProjectHeader(addTasksDiv, activeProjectH1);
-    addActiveProjectBtns(addTasksDiv, editProjectNameBtn, addNewToDoBtn, removeProjectBtn);
+const updateActiveProjectContainer = (...buttons) => {
+    if (!getActiveProject()) {
+        resetDOM(activeProjectBtnsWrapper)
+        activeProject.textContent = "No projects";
+        return
+    }
+    
+    activeProject.textContent = `${getActiveProject().name}`;
+    buttons.forEach(button => {
+        activeProjectBtnsWrapper.appendChild(button);    
+    })
 }
 
 // Task Cards
-const activeProjectTasks = document.createElement("div");
-activeProjectTasks.classList.add("view-tasks");
-main.appendChild(activeProjectTasks)
+const tasksContainer = document.createElement("div");
+tasksContainer.classList.add("view-tasks");
+main.appendChild(tasksContainer)
 
-const createContainerToTasks = (className, headerText) => {
+const createContainerToTaskCards = (className, headerText) => {
     const container = document.createElement("div");
     container.classList.add(className);
 
-    const containerH1 = document.createElement("h1");
-    containerH1.textContent = headerText;
-    container.appendChild(containerH1);
+    const containerTitle = document.createElement("h1");
+    containerTitle.textContent = headerText;
+    container.appendChild(containerTitle);
 
-    const cardsContainer = document.createElement("div");
-    container.appendChild(cardsContainer);
+    const cardsWrapper = document.createElement("div");
+    container.appendChild(cardsWrapper);
 
     return {
         container,
-        cardsContainer
+        cardsWrapper
     }
 }
 
-const today = createContainerToTasks("today-container", "Today's tasks");
-const upcoming = createContainerToTasks("upcoming-container", "Upcoming tasks");
-const completed = createContainerToTasks("tasks-done", "One-time tasks")
+const todayTasks = createContainerToTaskCards("today-container", "Today's tasks");
+const upcomingTasks = createContainerToTaskCards("upcoming-container", "Upcoming tasks");
+const OneTimeTasks = createContainerToTaskCards("tasks-done", "One-time tasks")
 
 function displayContainer() {
-    today.container.remove();
-    upcoming.container.remove();
-    completed.container.remove();
+    todayTasks.container.remove();
+    upcomingTasks.container.remove();
+    OneTimeTasks.container.remove();
    
     withActiveProject((activeProject) => {
+        // If there is even one task in the container, show it
         const isTodayTasks = activeProject.tasks.some(task => isDueDate(task) && !taskIsDoneWithNoRepeat(task))
         const isUpcomingTasks = activeProject.tasks.some(task => !isDueDate(task))
-        const isCompletedTasks = activeProject.tasks.some(task => taskIsDoneWithNoRepeat(task))
+        const isOneTimeTasks = activeProject.tasks.some(task => taskIsDoneWithNoRepeat(task))
 
         if (activeProject.tasks.length === 0) {
             return;
         }
 
-        if (isCompletedTasks) {
-            activeProjectTasks.appendChild(completed.container);
+        if (isOneTimeTasks) {
+            tasksContainer.appendChild(OneTimeTasks.container);
         }
 
         if (isTodayTasks) {
-            activeProjectTasks.prepend(today.container);
+            tasksContainer.prepend(todayTasks.container);
         } 
 
         if (isUpcomingTasks) {
-            activeProjectTasks.appendChild(upcoming.container);
+            tasksContainer.appendChild(upcomingTasks.container);
         }
     })
 }
@@ -280,9 +268,9 @@ const createTaskCardExtension = (task, index) => {
 
 
 function updateTaskCardsToContainers() {
-    resetDOM(today.cardsContainer);
-    resetDOM(upcoming.cardsContainer);
-    resetDOM(completed.cardsContainer);
+    resetDOM(todayTasks.cardsWrapper);
+    resetDOM(upcomingTasks.cardsWrapper);
+    resetDOM(OneTimeTasks.cardsWrapper);
 
     const tasks = getActiveProject().tasks;
 
@@ -293,18 +281,18 @@ function updateTaskCardsToContainers() {
         card.appendChild(cardExtendion);
 
         if (taskIsDoneWithNoRepeat(task)) {
-            completed.cardsContainer.appendChild(card);
+            OneTimeTasks.cardsWrapper.appendChild(card);
         } else if (isDueDate(task)) {
-            today.cardsContainer.appendChild(card);
+            todayTasks.cardsWrapper.appendChild(card);
         } else {
-            upcoming.cardsContainer.appendChild(card);
+            upcomingTasks.cardsWrapper.appendChild(card);
         }
     })
 }
 
 function updateTaskLists() {
     if (!getActiveProject()) {
-        resetDOM(activeProjectTasks);
+        resetDOM(tasksContainer);
         return
     }
 
@@ -314,13 +302,13 @@ function updateTaskLists() {
 
 
 const updateMainDOM = () => {
-    updateSelectedProject()
+    updateActiveProjectContainer(editProjectNameBtn, addNewToDoBtn, removeProjectBtn)
     updateTaskLists();
     return main;
 }
 
 const updateDOM = () => {
-    updateAsideDOM();
+    updateProjectCards();
     updateMainDOM();
 }
 
