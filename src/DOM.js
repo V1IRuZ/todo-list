@@ -75,8 +75,11 @@ const addTasksDiv = document.createElement("div");
 addTasksDiv.classList.add("project-options");
 
 const editProjectNameBtn = document.createElement("button");
-editProjectNameBtn.classList.add("edit-project-name");
+editProjectNameBtn.classList.add("edit-btn");
 editProjectNameBtn.textContent = "Edit name";
+
+const editIcon = createIcon(editImg, "Edit project name", "", "2em");
+editProjectNameBtn.prepend(editIcon);
 
 editProjectModal(editProjectNameBtn);
 addTasksDiv.appendChild(editProjectNameBtn);
