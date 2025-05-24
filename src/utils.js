@@ -14,6 +14,22 @@ import arrowUpImg from "./icons/arrow-up-drop-circle-outline.svg";
 //     updateDOM();
 // })
 
+function createIcon (srcIcon, altText, className, width) {
+    const icon = document.createElement("img");
+    icon.src = srcIcon;
+    icon.alt = altText;
+
+    if (className) {
+        icon.classList.add(className);
+    }
+
+    if (width) {
+        icon.style.width = width;
+    }
+
+    return icon;
+}
+
 function showCurrentDate() {
     // return today;
     return format(new Date(), "yyyy-MM-dd");
@@ -138,5 +154,6 @@ export {
     showCurrentDate, 
     setPriorityColor, 
     taskIsDoneWithNoRepeat,
-    getCounterTextContent
+    getCounterTextContent,
+    createIcon
 }
