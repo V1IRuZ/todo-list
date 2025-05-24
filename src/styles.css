@@ -95,12 +95,123 @@
     font-family: 'Roboto', var(--system-ui);
   }
 
+  /* buttons */
+
   button {
     border-style: none;
     cursor: pointer;
     padding: 0.5em 1em;
     border-radius: 10px;
+  }
 
+  .project-form > div > button,
+  .task-btns > button {
+    font-size: 1.2rem;
+    padding: var(--btn-padding);
+    border-radius: 10px;
+    color: var(--off-white);
+  }
+
+  .close-project,
+  .close-task,
+  .close-delete {
+    padding: 2px;
+    background-color: var(--sky-blue);
+    border-radius: 10x;
+  }
+
+  .submit-project,
+  .submit-task,
+  .confirm-delete,
+  .selection-btns > .cancel-delete,
+  .confirm-task,
+  .selection-btns > .cancel-task {
+    background-color: var(--sky-blue);
+    width: 100px;
+  }
+
+  .selection-btns > button {
+    color: var(--off-white);
+  }
+
+  .add-project {
+    display: flex;
+    gap: 0.5em;
+    font-size: 1.25rem;
+    font-weight: 900;
+    align-items: center;
+    color: var(--dark-gray);
+    background-color: var(--ligth-gray);
+  }
+
+  .project-btn,
+  .add-project,
+  .add-task,
+  .remove-project,
+  .edit-btn,
+  .remove-task {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .add-project:hover,
+  .project-btn:hover,
+  .add-task:hover,
+  .remove-project:hover,
+  .edit-btn:hover,
+  .remove-task:hover {
+    transform: scale(1.2); /* Zooms in by 20% */
+}
+
+  .project-btn {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--dark-gray);
+    background-color: var(--ligth-gray);
+  }
+
+  .project-btn:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .add-task,
+  .remove-project, 
+  .edit-btn,
+  .remove-task {
+    display: flex;
+    gap: 0.5em;
+    font-size: 1.25rem;
+    font-weight: 900;
+    align-items: center;
+    color: var(--dark-gray);
+    background-color: var(--ligth-gray);
+  }
+
+  .details-btn {
+    cursor: pointer;
+    justify-self: center;
+  }
+
+  .complete-btn {
+    align-content: start;
+    padding: var(--btn-padding);
+    border: 2px solid var(--sky-blue);
+    border-radius: 0;
+    background-color: va;
+    font-size: 1rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+  }
+
+  .complete-btn:disabled {
+    border-color: #a0a0a0;
   }
 
   /* Header and footer*/
@@ -115,18 +226,6 @@
     grid-row: 1/2;
     padding: 2em;
   }
-
-  /* .logo-icon {
-    text-align: center;
-    align-items: center;
-    font-weight: 900;
-    font-size: 28px;
-    border-radius: 50%;
-    background-color: var(--soft-green);
-    border: 2px solid var(--off-white);
-    width: 40px;
-    height: 40px;
-  } */
 
   .logo {
     display: flex;
@@ -190,33 +289,6 @@
     color: var(--dark-gray);
   }
 
-  .project-form > div > button,
-  .task-btns > button {
-    font-size: 1.2rem;
-    padding: var(--btn-padding);
-    border-radius: 10px;
-    color: var(--off-white);
-  }
-
-  .close-project,
-  .close-task,
-  .close-delete {
-    padding: 2px;
-    background-color: var(--sky-blue);
-    border-radius: 10x;
-  }
-
-  .submit-project,
-  .submit-task,
-  .confirm-delete,
-  .selection-btns > .cancel-delete,
-  .confirm-task,
-  .selection-btns > .cancel-task {
-    background-color: var(--sky-blue);
-    width: 100px;
-  }
-
-
   ::backdrop {
     background: var(--background-color);
     opacity: 0.7;
@@ -247,35 +319,6 @@
     background-color: var(--ligth-gray)
   }
 
-
-  .add-project {
-    display: flex;
-    gap: 0.5em;
-    font-size: 1.25rem;
-    font-weight: 900;
-    align-items: center;
-    color: var(--dark-gray);
-    background-color: var(--ligth-gray);
-  }
-
-  .project-btn,
-  .add-project,
-  .add-task,
-  .remove-project,
-  .edit-btn,
-  .remove-task {
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .add-project:hover,
-  .project-btn:hover,
-  .add-task:hover,
-  .remove-project:hover,
-  .edit-btn:hover,
-  .remove-task:hover {
-    transform: scale(1.2); /* Zooms in by 20% */
-}
-
   .my-projects {
     display: grid;
     grid-template-rows:  repeat(3, 1fr);
@@ -287,22 +330,6 @@
   .project-card {
     display: flex;
     justify-content: space-between;
-  }
-
-  .project-btn {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: var(--dark-gray);
-    background-color: var(--ligth-gray);
-  }
-
-  .project-btn:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
   }
 
   .task-counters {
@@ -370,29 +397,12 @@
     gap: 1em;
   }
 
-  .add-task,
-  .remove-project, 
-  .edit-btn,
-  .remove-task {
-    display: flex;
-    gap: 0.5em;
-    font-size: 1.25rem;
-    font-weight: 900;
-    align-items: center;
-    color: var(--dark-gray);
-    background-color: var(--ligth-gray);
-  }
-
   /* Remove project */
 
   .selection-btns {
     display: flex;
     gap: 0.5em;
     padding: 1em;
-  }
-
-  .selection-btns > button {
-    color: var(--off-white);
   }
 
   .warning {
@@ -455,12 +465,6 @@
     border-radius: 50%;
   }
 
-
-  .details-btn {
-    cursor: pointer;
-    justify-self: center;
-  }
-
   .details {
     display: flex;
     flex-direction: column;
@@ -486,27 +490,8 @@
     padding-bottom: 1em;
   }
 
-
-
   .complete-div {
     align-content: center;
     justify-content: center;
   }
 
-  .complete-btn {
-    align-content: start;
-    padding: var(--btn-padding);
-    border: 2px solid var(--sky-blue);
-    border-radius: 0;
-    background-color: va;
-    font-size: 1rem;
-    font-size: 1.5rem;
-    font-weight: 900;
-    padding: 0;
-    width: 40px;
-    height: 40px;
-  }
-
-  .complete-btn:disabled {
-    border-color: #a0a0a0;
-  }
