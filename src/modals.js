@@ -8,6 +8,9 @@ import { saveData } from "./local-storage";
 const addProjectBtn = document.querySelector(".add-project");
 const projectModal = document.querySelector("#project-modal");
 const projectForm = document.querySelector(".project-form");
+const closeProjectModal = document.querySelector(".close-project");
+
+const projectName = document.querySelector("#name");
 
 // Task Modal
 
@@ -30,24 +33,52 @@ const cancelDeleteBtns = document.querySelectorAll(".cancel-delete");
 
 function getProjectModal() {
     addProjectBtn.addEventListener("click", () => {
+        projectForm.classList.add("create-project");
         projectModal.showModal();
     })
 
     projectForm.addEventListener("submit", e => {
-        const projectName = document.querySelector("#name").value;
+        if (e.target.classList.contains("create-project")) {
 
-        makeNewProject(projectName);
-        setActiveProject();
-        updateDOM();
-        
-        closeModal(e, projectModal, projectForm)
-        saveData();
+            makeNewProject(projectName.value);
+            setActiveProject();
+            updateDOM();
+            
+            projectForm.classList.remove("create-project");
+            
+            closeModal(e, projectModal, projectForm)
+            saveData();
+        }
     }) 
-
-    const closeProjectModal = document.querySelector(".close-project");
 
     closeProjectModal.addEventListener("click", (e) => {
         closeModal(e, projectModal, projectForm)
+        projectForm.classList.remove("create-project");
+    });
+}
+
+function editProjectModal(button) {
+    button.addEventListener("click", () => {
+        projectName.value = `${getActiveProject().name}`;
+        projectForm.classList.add("edit-project");
+        projectModal.showModal();
+    })
+
+    projectForm.addEventListener("submit", e => {
+        if (e.target.classList.contains("edit-project")) {
+            getActiveProject().editName(projectName.value);
+            updateDOM();
+
+            projectForm.classList.remove("edit-project");
+            closeModal(e, projectModal, projectForm);
+
+            saveData();
+        }
+    })
+
+    closeProjectModal.addEventListener("click", (e) => {
+        closeModal(e, projectModal, projectForm)
+        projectForm.classList.remove("edit-project");
     });
 }
 
@@ -185,5 +216,5 @@ function deleteTask(button) {
 
 
 
-export { getProjectModal, addTaskModal, editTaskModal, deleteProject, deleteTask }
+export { getProjectModal, editProjectModal, addTaskModal, editTaskModal, deleteProject, deleteTask }
 
