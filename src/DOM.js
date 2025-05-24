@@ -8,7 +8,6 @@ import plusImg from "./icons/plus-box-multiple.svg";
 import trashCanImg from "./icons/delete_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
 import editImg from "./icons/edit.svg";
 import calendarImg from "./icons/calendar-month.svg";
-import { ca } from "date-fns/locale";
 
 // aside
 const aside = document.querySelector("aside");
@@ -17,7 +16,7 @@ const myProjects = document.createElement("div");
 myProjects.classList.add("my-projects");
 aside.appendChild(myProjects);
 
-const makeProjectCard = (project, index) => {
+const createProjectCard = (project, index) => {
     const projectCard = document.createElement("div");
     projectCard.classList.add("project-card");
 
@@ -50,7 +49,7 @@ const updateProjectCards = () => {
     const projects = getProjects();
 
     projects.forEach((project, index) => {
-        const card = makeProjectCard(project, index);
+        const card = createProjectCard(project, index);
         myProjects.appendChild(card);
     })
 }
@@ -115,7 +114,7 @@ const activeProjectTasks = document.createElement("div");
 activeProjectTasks.classList.add("view-tasks");
 main.appendChild(activeProjectTasks)
 
-const makeContainerToTasksFactory = (className, headerText) => {
+const createContainerToTasks = (className, headerText) => {
     const container = document.createElement("div");
     container.classList.add(className);
 
@@ -132,9 +131,9 @@ const makeContainerToTasksFactory = (className, headerText) => {
     }
 }
 
-const today = makeContainerToTasksFactory("today-container", "Today's tasks");
-const upcoming = makeContainerToTasksFactory("upcoming-container", "Upcoming tasks");
-const completed = makeContainerToTasksFactory("tasks-done", "One-time tasks")
+const today = createContainerToTasks("today-container", "Today's tasks");
+const upcoming = createContainerToTasks("upcoming-container", "Upcoming tasks");
+const completed = createContainerToTasks("tasks-done", "One-time tasks")
 
 function displayContainer() {
     today.container.remove();
@@ -164,7 +163,7 @@ function displayContainer() {
     })
 }
 
-const makeMainTaskCard = (task, index) => {
+const createTaskCard = (task, index) => {
     const taskCard = document.createElement("div");
     taskCard.classList.add("card-container");
     
@@ -228,7 +227,7 @@ const makeMainTaskCard = (task, index) => {
 }
 
 
-const makeCardExtension = (task, index) => {
+const createTaskCardExtension = (task, index) => {
     const detailsDiv = document.createElement("div");
     detailsDiv.classList.add("details");
     detailsDiv.classList.add("hide");
@@ -285,8 +284,8 @@ function updateTaskCardsToContainers() {
     const tasks = getActiveProject().tasks;
 
     tasks.forEach((task, index) => {
-        const card = makeMainTaskCard(task, index);
-        const cardExtendion = makeCardExtension(task, index);
+        const card = createTaskCard(task, index);
+        const cardExtendion = createTaskCardExtension(task, index);
         
         card.appendChild(cardExtendion);
 
