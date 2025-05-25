@@ -1,6 +1,6 @@
 import { withActiveProject, getActiveProject, removeProject, getActiveProjectIndex, setActiveProject, switchActiveProject } from "./projects";
 import  { addGlobalEventListener, showHideDetails, changeButtonText } from "./utils";
-import { updateMainDOM, updateDOM } from "./DOM";
+import { updateDOM } from "./DOM";
 import { saveData } from "./local-storage";
 
 export function eventActions() {
@@ -22,7 +22,7 @@ export function eventActions() {
     addGlobalEventListener("click", ".project-btn", e => {
             let projectIndex = e.target.getAttribute("data-index");
             switchActiveProject(+projectIndex);
-            updateMainDOM();
+            updateDOM();
     })
     
     addGlobalEventListener("click", ".complete-btn", e => {

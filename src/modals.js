@@ -1,4 +1,4 @@
-import { updateMainDOM, updateDOM } from "./DOM";
+import { updateDOM } from "./DOM";
 import { Todo } from "./create-todo";
 import { makeNewProject, setActiveProject, getActiveProject, getActiveProjectIndex, removeProject, getProjects } from "./projects";
 import { closeModal } from "./utils";
