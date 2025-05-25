@@ -53,16 +53,18 @@ const updateProjectCards = () => {
 // Main DOM
 const main = document.querySelector("main");
 
-// Active project
+// ACTIVE PROJECT
 const activeProjectContainer = document.createElement("div");
 activeProjectContainer.classList.add("active-project");
 main.appendChild(activeProjectContainer);
 
+// title
 const activeProject = document.createElement("h1");
 activeProject.classList.add("project-header");
 activeProject.textContent = "No project selected";
 activeProjectContainer.appendChild(activeProject)
 
+// buttons
 const activeProjectBtnsWrapper = document.createElement("div");
 activeProjectBtnsWrapper.classList.add("project-options");
 
@@ -94,12 +96,11 @@ const updateActiveProjectContainer = (...buttons) => {
     }
     
     activeProject.textContent = `${getActiveProject().name}`;
-    buttons.forEach(button => {
-        activeProjectBtnsWrapper.appendChild(button);    
-    })
+    buttons.forEach(button => activeProjectBtnsWrapper.appendChild(button));
 }
 
-// Task Cards
+// TASK CARDS
+// Main wrapper container
 const tasksContainer = document.createElement("div");
 tasksContainer.classList.add("view-tasks");
 main.appendChild(tasksContainer)
@@ -121,175 +122,146 @@ const createContainerToTaskCards = (className, headerText) => {
     }
 }
 
+// Containers for each task, based on their status
 const todayTasks = createContainerToTaskCards("today-container", "Today's tasks");
 const upcomingTasks = createContainerToTaskCards("upcoming-container", "Upcoming tasks");
 const OneTimeTasks = createContainerToTaskCards("tasks-done", "One-time tasks")
 
-function displayContainer() {
+function updateContentToContainers() {
     const activeProject = getActiveProject();
-
-    // Make sure there is tasks in active project
-     if (activeProject.tasks.length === 0) {
-        return;
-    }
-
-    // If there is even one task in the container, append it to DOM
-    const isTodayTasks = activeProject.tasks.some(task => isDueDate(task) && !taskIsDoneWithNoRepeat(task))
-    const isUpcomingTasks = activeProject.tasks.some(task => !isDueDate(task))
-    const isOneTimeTasks = activeProject.tasks.some(task => taskIsDoneWithNoRepeat(task))
 
     // Remove old containers before adding them back
     todayTasks.container.remove();
     upcomingTasks.container.remove();
     OneTimeTasks.container.remove();
 
-    if (isOneTimeTasks) {
-        tasksContainer.appendChild(OneTimeTasks.container);
-    }
+    // Make sure there is tasks in active project
+    if (activeProject.tasks.length === 0) return;
+    
+    // If there is even one task in the container, append it to DOM
+    const isTodayTasks = activeProject.tasks.some(task => isDueDate(task) && !taskIsDoneWithNoRepeat(task))
+    const isUpcomingTasks = activeProject.tasks.some(task => !isDueDate(task))
+    const isOneTimeTasks = activeProject.tasks.some(task => taskIsDoneWithNoRepeat(task))
 
-    if (isTodayTasks) {
-        tasksContainer.prepend(todayTasks.container);
-    } 
+    if (isOneTimeTasks) tasksContainer.appendChild(OneTimeTasks.container);
 
-    if (isUpcomingTasks) {
-        tasksContainer.appendChild(upcomingTasks.container);
-    }
+    if (isTodayTasks) tasksContainer.prepend(todayTasks.container);
+
+    if (isUpcomingTasks) tasksContainer.appendChild(upcomingTasks.container);
     
 }
 
 const createTaskCard = (task, index) => {
-    const taskCard = document.createElement("div");
-    taskCard.classList.add("card-container");
+    // Card container
+    const cardContainer = document.createElement("div");
+    cardContainer.classList.add("card-container");
     
-    const mainTaskInfo = document.createElement("div");
-    mainTaskInfo.classList.add("task-card");
-    
-    const taskCardTitle = document.createElement("p");
-    taskCardTitle.textContent = `${task.title}`;
-    mainTaskInfo.appendChild(taskCardTitle);
-    
-    const taskCardDueDateDiv = document.createElement("div");
-    taskCardDueDateDiv.classList.add("task-date")
-    
-    const calendarIcon = createIcon(calendarImg, "Task due date");
-    taskCardDueDateDiv.prepend(calendarIcon);
+    // Allways visible section of card
+    const mainTaskCardWrapper = document.createElement("div");
+    mainTaskCardWrapper.classList.add("task-card");
+    cardContainer.appendChild(mainTaskCardWrapper);
 
-    const taskCardDueDatePara = document.createElement("p");
-    const date = format(task.dueDate, "MMMM d");
-    taskCardDueDatePara.classList.add("date-text");
-    taskCardDueDatePara.textContent = `${date}`;
+    // Check button for completeing task
+    const checkButtonWrapper = document.createElement("div");
+    checkButtonWrapper.classList.add("complete-div");
 
-    taskCardDueDateDiv.appendChild(taskCardDueDatePara);
-    mainTaskInfo.appendChild(taskCardDueDateDiv)
-    
-    const checkButtonDiv = document.createElement("div");
-    checkButtonDiv.classList.add("complete-div");
-
-    const checkButton = document.createElement("button");
-    checkButton.classList.add("complete-btn");
-    checkButton.setAttribute("data-index", index);
-    checkButton.style.color = "white";
-
-    task.setToDoUncompleted();
+    const checkButton = createButton("complete-btn", "", index)
     updateStateOfCompleteBtn(task, checkButton);
     enableDisableCheckBtn(task, checkButton);
-    checkButtonDiv.appendChild(checkButton);
+    checkButtonWrapper.appendChild(checkButton);
 
-    mainTaskInfo.prepend(checkButtonDiv)
-
-    const priorityDiv = document.createElement("div");
-    priorityDiv.classList.add("priority-div");
+    mainTaskCardWrapper.prepend(checkButtonWrapper)
     
-    const priorityBall = document.createElement("div");
-    priorityBall.classList.add("priority-ball");
-    setPriorityColor(task, priorityBall);
+    // Task title
+    const title = document.createElement("p");
+    title.textContent = `${task.title}`;
+    mainTaskCardWrapper.appendChild(title);
+    
+    // Task due date
+    const dueDateWrapper = document.createElement("div");
+    dueDateWrapper.classList.add("task-date");
+    mainTaskCardWrapper.appendChild(dueDateWrapper);
 
-    priorityDiv.appendChild(priorityBall);
+    const calendarIcon = createIcon(calendarImg, "Task due date");
+    dueDateWrapper.prepend(calendarIcon);
 
-    mainTaskInfo.appendChild(priorityDiv);
+    const dueDate = document.createElement("p");
+    dueDate.classList.add("date-text");
+    const formattedDate = format(task.dueDate, "MMMM d");
+    dueDate.textContent = `${formattedDate}`;
+    dueDateWrapper.appendChild(dueDate);
+    
+    // Task priority
+    const priorityWrapper = document.createElement("div");
+    priorityWrapper.classList.add("priority-div");
+    
+    const priority = document.createElement("div");
+    priority.classList.add("priority-ball");
+    setPriorityColor(task, priority);
+    priorityWrapper.appendChild(priority);
+    mainTaskCardWrapper.appendChild(priorityWrapper);
 
-    const detailsBtnDiv = document.createElement("div");
+    // Card extension toggle button 
+    const toggleExtensionWrapper = document.createElement("div");
 
     const arrowIcon = createIcon(arrowDownImg, "Toggle details", "details-btn", "1.75em");
-    detailsBtnDiv.appendChild(arrowIcon)
+    toggleExtensionWrapper.appendChild(arrowIcon)
+    mainTaskCardWrapper.appendChild(toggleExtensionWrapper)
 
-    mainTaskInfo.appendChild(detailsBtnDiv)
-
-    taskCard.appendChild(mainTaskInfo);
-
-    return taskCard;
-}
-
-
-const createTaskCardExtension = (task, index) => {
-    const detailsDiv = document.createElement("div");
-    detailsDiv.classList.add("details");
-    detailsDiv.classList.add("hide");
-
-    const infoDiv = document.createElement("div");
-    infoDiv.classList.add("task-info");
-
-    const taskDescription = document.createElement("p");
-    taskDescription.textContent = `${task.description}`;
-    infoDiv.appendChild(taskDescription);
-
-    detailsDiv.appendChild(infoDiv);
-
-    const buttonsDiv = document.createElement("div");
-    buttonsDiv.classList.add("edit-tasks")
-
-    const ediTaskBtn = document.createElement("button");
-    ediTaskBtn.classList.add("edit-btn");
-    ediTaskBtn.textContent = "Edit task";
-    ediTaskBtn.setAttribute("data-index", index);
-
+    // Hidden extension container
+    const cardExtensionContainer = document.createElement("div");
+    cardExtensionContainer.classList.add("details");
+    cardExtensionContainer.classList.add("hide");
+    cardContainer.appendChild(cardExtensionContainer);
+    
+    // Description
+    const descriptionWrapper = document.createElement("div");
+    descriptionWrapper.classList.add("task-info");
+    cardExtensionContainer.appendChild(descriptionWrapper);
+    
+    const description = document.createElement("p");
+    description.textContent = `${task.description}`;
+    descriptionWrapper.appendChild(description);
+    
+    // Extension edit and remove buttons
+    const buttonsWrapper = document.createElement("div");
+    buttonsWrapper.classList.add("edit-tasks")
+    cardExtensionContainer.appendChild(buttonsWrapper);
+    
+    const ediTaskBtn = createButton("edit-btn", "Edit task", index);
     const editIcon = createIcon(editImg, "Edit task", "", "2em");
     ediTaskBtn.prepend(editIcon);
-
     editTaskModal(ediTaskBtn);
-
-    buttonsDiv.appendChild(ediTaskBtn);
-
-    const removeTaskBtn = document.createElement("button");
-    removeTaskBtn.classList.add("remove-task");
-    removeTaskBtn.textContent = "Remove Task";
-    removeTaskBtn.setAttribute("data-index", index);
-
+    buttonsWrapper.appendChild(ediTaskBtn);
+    
+    const removeTaskBtn = createButton("remove-task", "Remove Task", index)
     const trashCanIcon = createIcon(trashCanImg, "Remove task", "remove-icon", "2em");
     removeTaskBtn.prepend(trashCanIcon);
-
     deleteTask(removeTaskBtn);
-
-    buttonsDiv.appendChild(removeTaskBtn);
-
-    // here
-
-
-    detailsDiv.appendChild(buttonsDiv);
-    return detailsDiv;
+    buttonsWrapper.appendChild(removeTaskBtn);
+    
+    return cardContainer;
 }
 
+function updateTaskCardsToWrappers() {
+    const tasks = getActiveProject().tasks;
 
-function updateTaskCardsToContainers() {
+    // Remove old cards from wrappers before adding updated cards
     resetDOM(todayTasks.cardsWrapper);
     resetDOM(upcomingTasks.cardsWrapper);
     resetDOM(OneTimeTasks.cardsWrapper);
 
-    const tasks = getActiveProject().tasks;
-
     tasks.forEach((task, index) => {
-        const card = createTaskCard(task, index);
-        const cardExtendion = createTaskCardExtension(task, index);
-        
-        card.appendChild(cardExtendion);
+        // First, reset the completion of all tasks based on the due date
+        task.setToDoUncompleted();
 
-        if (taskIsDoneWithNoRepeat(task)) {
-            OneTimeTasks.cardsWrapper.appendChild(card);
-        } else if (isDueDate(task)) {
-            todayTasks.cardsWrapper.appendChild(card);
-        } else {
-            upcomingTasks.cardsWrapper.appendChild(card);
-        }
+        const card = createTaskCard(task, index);
+
+        if (taskIsDoneWithNoRepeat(task)) return OneTimeTasks.cardsWrapper.appendChild(card);
+
+        if (isDueDate(task)) return todayTasks.cardsWrapper.appendChild(card);
+
+        upcomingTasks.cardsWrapper.appendChild(card);
     })
 }
 
@@ -299,8 +271,8 @@ function updateTaskLists() {
         return
     }
 
-    updateTaskCardsToContainers();
-    displayContainer();        
+    updateTaskCardsToWrappers();
+    updateContentToContainers();        
 }
 
 
