@@ -135,18 +135,26 @@ function updateContentToContainers() {
     OneTimeTasks.container.remove();
 
     // Make sure there is tasks in active project
-    if (activeProject.tasks.length === 0) return;
+    if (activeProject.tasks.length === 0) {
+        return;
+    }
     
     // If there is even one task in the container, append it to DOM
     const isTodayTasks = activeProject.tasks.some(task => isDueDate(task) && !taskIsDoneWithNoRepeat(task));
     const isUpcomingTasks = activeProject.tasks.some(task => !isDueDate(task));
     const isOneTimeTasks = activeProject.tasks.some(task => taskIsDoneWithNoRepeat(task));
 
-    if (isOneTimeTasks) tasksContainer.appendChild(OneTimeTasks.container);
+    if (isOneTimeTasks) {
+        tasksContainer.appendChild(OneTimeTasks.container);
+    }
 
-    if (isTodayTasks) tasksContainer.prepend(todayTasks.container);
+    if (isTodayTasks) {
+        tasksContainer.prepend(todayTasks.container);
+    }
 
-    if (isUpcomingTasks) tasksContainer.appendChild(upcomingTasks.container);
+    if (isUpcomingTasks) {
+        tasksContainer.appendChild(upcomingTasks.container);
+    }
     
 };
 
@@ -256,16 +264,22 @@ function updateTaskCardsToWrappers() {
 
         const card = createTaskCard(task, index);
 
-        if (taskIsDoneWithNoRepeat(task)) return OneTimeTasks.cardsWrapper.appendChild(card);
+        if (taskIsDoneWithNoRepeat(task)) {
+            return OneTimeTasks.cardsWrapper.appendChild(card);
+        }
 
-        if (isDueDate(task)) return todayTasks.cardsWrapper.appendChild(card);
+        if (isDueDate(task)) {
+            return todayTasks.cardsWrapper.appendChild(card);
+        }
 
         upcomingTasks.cardsWrapper.appendChild(card);
     });
 };
 
 const updateTaskCards = () => {
-    if (!getActiveProject()) return resetDOM(tasksContainer);
+    if (!getActiveProject()) {
+        return resetDOM(tasksContainer);
+    }
 
     updateTaskCardsToWrappers();
     updateContentToContainers();  
