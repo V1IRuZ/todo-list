@@ -33,17 +33,8 @@ const removeProject = (index) => {
     projects.splice(index, 1);
 }
 
-
 const switchActiveProject = (index) => {
    return activeProject = projects[index];
-}
-
-
-function withActiveProject(callback) {
-    if (!activeProject) {
-        return;
-    }
-    callback(activeProject);
 }
 
 const defaultProject = () => {
@@ -102,15 +93,12 @@ const defaultProject = () => {
     }));
 }
 
-// defaultProject();
-
 export { 
     createNewProject, 
     getActiveProject, 
     setActiveProject, 
     getProjects, 
     switchActiveProject, 
-    withActiveProject, 
     defaultProject, 
     removeProject, 
     getActiveProjectIndex, 

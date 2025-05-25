@@ -1,4 +1,4 @@
-import { withActiveProject, getActiveProject, removeProject, getActiveProjectIndex, setActiveProject, switchActiveProject } from "./projects";
+import { getActiveProject, switchActiveProject } from "./projects";
 import  { addGlobalEventListener, showHideTaskCardExpansion, switchIcon } from "./utils";
 import { updateDOM } from "./DOM";
 import { saveData } from "./local-storage";
