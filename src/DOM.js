@@ -126,32 +126,35 @@ const upcomingTasks = createContainerToTaskCards("upcoming-container", "Upcoming
 const OneTimeTasks = createContainerToTaskCards("tasks-done", "One-time tasks")
 
 function displayContainer() {
+    const activeProject = getActiveProject();
+
+    // Make sure there is tasks in active project
+     if (activeProject.tasks.length === 0) {
+        return;
+    }
+
+    // If there is even one task in the container, append it to DOM
+    const isTodayTasks = activeProject.tasks.some(task => isDueDate(task) && !taskIsDoneWithNoRepeat(task))
+    const isUpcomingTasks = activeProject.tasks.some(task => !isDueDate(task))
+    const isOneTimeTasks = activeProject.tasks.some(task => taskIsDoneWithNoRepeat(task))
+
+    // Remove old containers before adding them back
     todayTasks.container.remove();
     upcomingTasks.container.remove();
     OneTimeTasks.container.remove();
-   
-    withActiveProject((activeProject) => {
-        // If there is even one task in the container, show it
-        const isTodayTasks = activeProject.tasks.some(task => isDueDate(task) && !taskIsDoneWithNoRepeat(task))
-        const isUpcomingTasks = activeProject.tasks.some(task => !isDueDate(task))
-        const isOneTimeTasks = activeProject.tasks.some(task => taskIsDoneWithNoRepeat(task))
 
-        if (activeProject.tasks.length === 0) {
-            return;
-        }
+    if (isOneTimeTasks) {
+        tasksContainer.appendChild(OneTimeTasks.container);
+    }
 
-        if (isOneTimeTasks) {
-            tasksContainer.appendChild(OneTimeTasks.container);
-        }
+    if (isTodayTasks) {
+        tasksContainer.prepend(todayTasks.container);
+    } 
 
-        if (isTodayTasks) {
-            tasksContainer.prepend(todayTasks.container);
-        } 
-
-        if (isUpcomingTasks) {
-            tasksContainer.appendChild(upcomingTasks.container);
-        }
-    })
+    if (isUpcomingTasks) {
+        tasksContainer.appendChild(upcomingTasks.container);
+    }
+    
 }
 
 const createTaskCard = (task, index) => {
