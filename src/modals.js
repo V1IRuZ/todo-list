@@ -12,6 +12,12 @@ const closeProjectModal = document.querySelector(".close-project");
 
 const projectName = document.querySelector("#name");
 
+// Remove project modal
+
+const removeModal = document.querySelector(".remove-modal");
+const confirmDeleteBtn = document.querySelector(".confirm-delete");
+const cancelDeleteBtns = document.querySelectorAll(".cancel-delete");
+
 // Task Modal
 
 const taskModal = document.querySelector(".task-modal");
@@ -24,18 +30,17 @@ const taskDueDate = document.querySelector("#task-start");
 const taskRemainder = document.querySelector("#remainder");
 const taskPriority = document.querySelector("#priority");
 
-// Remove project modal
+// Remove task task modal
 
-const removeModal = document.querySelector(".remove-modal");
-const confirmDeleteBtn = document.querySelector(".confirm-delete");
-const cancelDeleteBtns = document.querySelectorAll(".cancel-delete");
-
+const removeTaskModal = document.querySelector(".remove-task-modal");
+const confirmDeleteTaskBtn = document.querySelector(".confirm-task");
+const cancelDeleteTaskBtns = document.querySelectorAll(".cancel-task");
 
 function getProjectModal() {
     addProjectBtn.addEventListener("click", () => {
         projectForm.classList.add("create-project");
         projectModal.showModal();
-    })
+    });
 
     projectForm.addEventListener("submit", e => {
         if (e.target.classList.contains("create-project")) {
@@ -49,20 +54,20 @@ function getProjectModal() {
             closeModal(e, projectModal, projectForm)
             saveData();
         }
-    }) 
+    }); 
 
     closeProjectModal.addEventListener("click", (e) => {
         closeModal(e, projectModal, projectForm)
         projectForm.classList.remove("create-project");
     });
-}
+};
 
 function editProjectModal(button) {
     button.addEventListener("click", () => {
         projectName.value = `${getActiveProject().name}`;
         projectForm.classList.add("edit-project");
         projectModal.showModal();
-    })
+    });
 
     projectForm.addEventListener("submit", e => {
         if (e.target.classList.contains("edit-project")) {
@@ -74,13 +79,13 @@ function editProjectModal(button) {
 
             saveData();
         }
-    })
+    });
 
     closeProjectModal.addEventListener("click", (e) => {
-        closeModal(e, projectModal, projectForm)
+        closeModal(e, projectModal, projectForm);
         projectForm.classList.remove("edit-project");
     });
-}
+};
 
 
 function addTaskModal(button) {
@@ -89,7 +94,7 @@ function addTaskModal(button) {
     addNewToDoBtn.addEventListener("click", () => {
         taskForm.classList.add("create");
         taskModal.showModal();
-    })
+    });
 
     taskForm.addEventListener("submit", e => {
         if (e.target.classList.contains("create")) {
@@ -101,7 +106,7 @@ function addTaskModal(button) {
                 remainder: taskRemainder.value,
                 priority: taskPriority.value,
                 complete: false, 
-                dayCompleted: "" 
+                dayCompleted: ""
             });
             
             getActiveProject().addToDo(toDo);
@@ -110,13 +115,13 @@ function addTaskModal(button) {
             taskForm.classList.remove("create");
             saveData();
         }
-    })
+    });
 
     taskModalCloseBtn.addEventListener("click", e => {
         closeModal(e, taskModal, taskForm);
         taskForm.classList.remove("create");
-    })
-}
+    });
+};
 
 
 function editTaskModal (button) {
@@ -133,7 +138,7 @@ function editTaskModal (button) {
         taskForm.classList.add("edit");
         taskForm.setAttribute("data-index", index);
         taskModal.showModal();
-    })
+    });
 
     taskForm.addEventListener("submit", e => {
         if (e.target.classList.contains("edit")) {
@@ -145,13 +150,13 @@ function editTaskModal (button) {
             taskForm.removeAttribute("data-index");
             saveData();
         }
-    })
+    });
 
     taskModalCloseBtn.addEventListener("click", e => {
             closeModal(e, taskModal, taskForm);
             taskForm.classList.remove("edit");
-    })
-}
+    });
+};
 
 
 function deleteProject(removeButton) {
@@ -160,7 +165,7 @@ function deleteProject(removeButton) {
 
     removeBtn.addEventListener("click", ()=> {
         removeModal.showModal();
-    })
+    });
 
     confirmDeleteBtn.addEventListener("click", () => {
         let index = getActiveProjectIndex();
@@ -169,18 +174,15 @@ function deleteProject(removeButton) {
         updateDOM();
         saveData();
         removeModal.close(); 
-    })
+    });
 
     cancelDeleteBtns.forEach(button => {
         button.addEventListener("click", () => {
             removeModal.close();
-        })
-    })
-}
+        });
+    });
+};
 
-const removeTaskModal = document.querySelector(".remove-task-modal");
-const confirmDeleteTaskBtn = document.querySelector(".confirm-task");
-const cancelDeleteTaskBtns = document.querySelectorAll(".cancel-task");
 
 function deleteTask(button) {
     button.addEventListener("click", (e) => {    
@@ -200,7 +202,7 @@ function deleteTask(button) {
             getActiveProject().removeToDo(buttonIndex);
             updateDOM();
             saveData();
-        }
+        };
 
         confirmDeleteTaskBtn.removeAttribute("data-index");
         removeTaskModal.close();
@@ -212,7 +214,7 @@ function deleteTask(button) {
             removeTaskModal.close();
         });
     });
-}
+};
 
 
 
