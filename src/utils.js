@@ -17,11 +17,9 @@ import arrowUpImg from "./icons/arrow-up-drop-circle-outline.svg";
 function createButton (className, buttonText, index) {
     const button = document.createElement("button");
     button.classList.add(className);
-    button.textContent = buttonText;
 
-    if (index) {
-        button.setAttribute("data-index", index);
-    }
+    if (buttonText) button.textContent = buttonText;
+    if (index) button.setAttribute("data-index", index);
 
     return button;
 }
