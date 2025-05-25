@@ -1,5 +1,5 @@
 import { withActiveProject, getActiveProject, removeProject, getActiveProjectIndex, setActiveProject, switchActiveProject } from "./projects";
-import  { addGlobalEventListener, showHideDetails, changeButtonText } from "./utils";
+import  { addGlobalEventListener, showHideTaskCardExpansion, switchIcon } from "./utils";
 import { updateDOM } from "./DOM";
 import { saveData } from "./local-storage";
 
@@ -8,8 +8,8 @@ export function eventActions() {
         let parentContainer = e.target.closest(".card-container");
         let details = parentContainer.querySelector(".details");
     
-        showHideDetails(details);
-        changeButtonText(e);
+        showHideTaskCardExpansion(details);
+        switchIcon(e);
     })
     
     // addGlobalEventListener("click", ".remove-task", e => {

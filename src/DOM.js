@@ -1,5 +1,5 @@
 import { getProjects, getActiveProject } from "./projects";
-import { resetDOM, isDueDate, taskIsDoneWithNoRepeat, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor, getCounterTextContent, createButton, createIcon } from "./utils";
+import { resetDOM, isDueDate, oneTimeTasksAreCompleted, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor, getCounterTextContent, createButton, createIcon } from "./utils";
 import { editProjectModal, addTaskModal, editTaskModal, deleteProject, deleteTask } from "./modals";
 import { format } from "date-fns";
 import starImage from "./icons/star.svg";
@@ -140,9 +140,9 @@ function updateContentToContainers() {
     }
     
     // If there is even one task in the container, append it to DOM
-    const isTodayTasks = activeProject.tasks.some(task => isDueDate(task) && !taskIsDoneWithNoRepeat(task));
+    const isTodayTasks = activeProject.tasks.some(task => isDueDate(task) && !oneTimeTasksAreCompleted(task));
     const isUpcomingTasks = activeProject.tasks.some(task => !isDueDate(task));
-    const isOneTimeTasks = activeProject.tasks.some(task => taskIsDoneWithNoRepeat(task));
+    const isOneTimeTasks = activeProject.tasks.some(task => oneTimeTasksAreCompleted(task));
 
     if (isOneTimeTasks) {
         tasksContainer.appendChild(OneTimeTasks.container);
@@ -264,7 +264,7 @@ function updateTaskCardsToWrappers() {
 
         const card = createTaskCard(task, index);
 
-        if (taskIsDoneWithNoRepeat(task)) {
+        if (oneTimeTasksAreCompleted(task)) {
             return OneTimeTasks.cardsWrapper.appendChild(card);
         }
 

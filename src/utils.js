@@ -1,6 +1,4 @@
-import { withActiveProject, getActiveProject } from "./projects";
 import { format, isBefore, isEqual, isAfter } from "date-fns";
-import { updateDOM } from "./DOM";
 import arrowDownImg from "./icons/arrow-down-drop-circle-outline.svg";
 import arrowUpImg from "./icons/arrow-up-drop-circle-outline.svg";
 
@@ -14,12 +12,18 @@ import arrowUpImg from "./icons/arrow-up-drop-circle-outline.svg";
 //     updateDOM();
 // })
 
+// DOM 
 function createButton (className, buttonText, index) {
     const button = document.createElement("button");
     button.classList.add(className);
 
-    if (buttonText) button.textContent = buttonText;
-    if (index) button.setAttribute("data-index", index);
+    if (buttonText) {
+        button.textContent = buttonText;
+    }
+
+    if (index) {
+        button.setAttribute("data-index", index);
+    }
 
     return button;
 }
@@ -40,43 +44,17 @@ function createIcon (srcIcon, altText, className, width) {
     return icon;
 }
 
-function showCurrentDate() {
-    // return today;
-    return format(new Date(), "yyyy-MM-dd");
-}
-
-function isDueDate (task) {
-    return isEqual(showCurrentDate(), task.dayCompleted) || (isEqual(showCurrentDate(), task.dueDate) || isAfter(showCurrentDate(), task.dueDate));
-}
-
-function taskIsDoneWithNoRepeat (task) {
-    return task.remainder === 'none' && task.complete;
-}
-
 function resetDOM(container) {
     while (container.firstChild) {
         container.removeChild(container.lastChild);
     }
 }
 
-function closeModal (event, modal, form) {
-    modal.close();
-    form.reset();
-
-    event.preventDefault();
+function showHideTaskCardExpansion(container) {
+    container.classList.toggle("hide");
 }
 
-function addGlobalEventListener(type, selector, callback) {
-    document.addEventListener(type, e => {
-        if (e.target.matches(selector)) callback(e);
-    })
-}
-
-function showHideDetails(element) {
-    element.classList.toggle("hide");
-}
-
-function changeButtonText(event) {
+function switchIcon(event) {
     event.target.src = event.target.src.includes(arrowDownImg) ? arrowUpImg : arrowDownImg;
 }
 
@@ -131,20 +109,50 @@ function enableDisableCheckBtn(task, button) {
         button.disabled = true;
     }
 }
- 
+
+// Events
+
+function addGlobalEventListener(type, selector, callback) {
+    document.addEventListener(type, e => {
+        if (e.target.matches(selector)) callback(e);
+    })
+}
+
+// Modal
+
+function closeModal (event, modal, form) {
+    modal.close();
+    form.reset();
+
+    event.preventDefault();
+}
+
+// Checking Date and task completion functions
+
+function showCurrentDate() {
+    return format(new Date(), "yyyy-MM-dd");
+}
+
+function isDueDate (task) {
+    return isEqual(showCurrentDate(), task.dayCompleted) || (isEqual(showCurrentDate(), task.dueDate) || isAfter(showCurrentDate(), task.dueDate));
+}
+
+function oneTimeTasksAreCompleted (task) {
+    return task.remainder === 'none' && task.complete;
+}
 
 export {
     resetDOM, 
     closeModal, 
     addGlobalEventListener, 
-    showHideDetails, 
-    changeButtonText, 
+    showHideTaskCardExpansion, 
+    switchIcon,
     enableDisableCheckBtn, 
     updateStateOfCompleteBtn, 
     isDueDate, 
     showCurrentDate, 
     setPriorityColor, 
-    taskIsDoneWithNoRepeat,
+    oneTimeTasksAreCompleted,
     getCounterTextContent,
     createButton,
     createIcon
