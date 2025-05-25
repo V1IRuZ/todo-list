@@ -1,6 +1,6 @@
 import { updateDOM } from "./DOM";
 import { Todo } from "./create-todo";
-import { makeNewProject, setActiveProject, getActiveProject, getActiveProjectIndex, removeProject, getProjects } from "./projects";
+import { createNewProject, setActiveProject, getActiveProject, getActiveProjectIndex, removeProject, getProjects } from "./projects";
 import { closeModal } from "./utils";
 import { saveData } from "./local-storage";
 
@@ -40,7 +40,7 @@ function getProjectModal() {
     projectForm.addEventListener("submit", e => {
         if (e.target.classList.contains("create-project")) {
 
-            makeNewProject(projectName.value);
+            createNewProject(projectName.value);
             setActiveProject();
             updateDOM();
             

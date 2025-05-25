@@ -22,7 +22,7 @@ const getActiveProjectIndex = () => {
     return projects.indexOf(activeProject);
 }
 
-const makeNewProject = (name) => {
+const createNewProject = (name) => {
     const project = new Project({name, tasks: []});
 
     projects.push(project);
@@ -47,9 +47,9 @@ function withActiveProject(callback) {
 }
 
 const defaultProject = () => {
-    const myProject = makeNewProject("Everyday tasks");
-    makeNewProject("Workout");
-    makeNewProject("Restaurant App");
+    const myProject = createNewProject("Everyday tasks");
+    createNewProject("Workout");
+    createNewProject("Restaurant App");
 
     activeProject = myProject;
 
@@ -105,7 +105,7 @@ const defaultProject = () => {
 // defaultProject();
 
 export { 
-    makeNewProject, 
+    createNewProject, 
     getActiveProject, 
     setActiveProject, 
     getProjects, 
