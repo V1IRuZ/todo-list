@@ -1,6 +1,6 @@
 import { updateDOM } from "./DOM";
 import { Todo } from "./create-todo";
-import { createNewProject, setActiveProject, getActiveProject, getActiveProjectIndex, removeProject, getProjects } from "./projects";
+import { createNewProject, setActiveProject, getActiveProject, getActiveProjectIndex, removeProject } from "./projects";
 import { closeModal } from "./utils";
 import { saveData } from "./local-storage";
 
@@ -9,34 +9,29 @@ const addProjectBtn = document.querySelector(".add-project");
 const projectModal = document.querySelector("#project-modal");
 const projectForm = document.querySelector(".project-form");
 const closeProjectModal = document.querySelector(".close-project");
-
 const projectName = document.querySelector("#name");
 
 // Remove project modal
-
-const removeModal = document.querySelector(".remove-modal");
-const confirmDeleteBtn = document.querySelector(".confirm-delete");
-const cancelDeleteBtns = document.querySelectorAll(".cancel-delete");
+const removeProjectModal = document.querySelector(".remove-modal");
+const confirmDeleteProjectBtn = document.querySelector(".confirm-delete");
+const cancelDeleteProjectBtns = document.querySelectorAll(".cancel-delete");
 
 // Task Modal
-
 const taskModal = document.querySelector(".task-modal");
 const taskForm = document.querySelector(".task-form");
 const taskModalCloseBtn = document.querySelector(".close-task");
-
 const taskTitle = document.querySelector("#task-title");
 const taskDescription = document.querySelector("#task-description");
 const taskDueDate = document.querySelector("#task-start");
 const taskRemainder = document.querySelector("#remainder");
 const taskPriority = document.querySelector("#priority");
 
-// Remove task task modal
-
+// Remove task modal
 const removeTaskModal = document.querySelector(".remove-task-modal");
 const confirmDeleteTaskBtn = document.querySelector(".confirm-task");
 const cancelDeleteTaskBtns = document.querySelectorAll(".cancel-task");
 
-function getProjectModal() {
+function showAddProjectModal() {
     addProjectBtn.addEventListener("click", () => {
         projectForm.classList.add("create-project");
         projectModal.showModal();
@@ -62,7 +57,7 @@ function getProjectModal() {
     });
 };
 
-function editProjectModal(button) {
+function showEditProjectModal(button) {
     button.addEventListener("click", () => {
         projectName.value = `${getActiveProject().name}`;
         projectForm.classList.add("edit-project");
@@ -87,11 +82,29 @@ function editProjectModal(button) {
     });
 };
 
+function showRemoveProjectModal(removeButton) {
+    removeButton.addEventListener("click", ()=> {
+        removeProjectModal.showModal();
+    });
 
-function addTaskModal(button) {
-    const addNewToDoBtn = button
+    confirmDeleteProjectBtn.addEventListener("click", () => {
+        let index = getActiveProjectIndex();
+        removeProject(index);
+        setActiveProject();
+        updateDOM();
+        saveData();
+        removeProjectModal.close(); 
+    });
 
-    addNewToDoBtn.addEventListener("click", () => {
+    cancelDeleteProjectBtns.forEach(button => {
+        button.addEventListener("click", () => {
+            removeProjectModal.close();
+        });
+    });
+};
+
+function showAddTaskModal(button) {
+    button.addEventListener("click", () => {
         taskForm.classList.add("create");
         taskModal.showModal();
     });
@@ -123,8 +136,7 @@ function addTaskModal(button) {
     });
 };
 
-
-function editTaskModal (button) {
+function showEditTaskModal (button) {
     button.addEventListener("click", () => {
         const activeProjectTasks = getActiveProject().tasks;
         let index = button.getAttribute("data-index");
@@ -158,34 +170,8 @@ function editTaskModal (button) {
     });
 };
 
-
-function deleteProject(removeButton) {
-
-    const removeBtn = removeButton;
-
-    removeBtn.addEventListener("click", ()=> {
-        removeModal.showModal();
-    });
-
-    confirmDeleteBtn.addEventListener("click", () => {
-        let index = getActiveProjectIndex();
-        removeProject(index);
-        setActiveProject();
-        updateDOM();
-        saveData();
-        removeModal.close(); 
-    });
-
-    cancelDeleteBtns.forEach(button => {
-        button.addEventListener("click", () => {
-            removeModal.close();
-        });
-    });
-};
-
-
-function deleteTask(button) {
-    button.addEventListener("click", (e) => {    
+function showRemoveTaskModal(removeButton) {
+    removeButton.addEventListener("click", (e) => {    
         let index = e.target.getAttribute("data-index");
 
         confirmDeleteTaskBtn.setAttribute("data-index", index); 
@@ -216,7 +202,5 @@ function deleteTask(button) {
     });
 };
 
-
-
-export { getProjectModal, editProjectModal, addTaskModal, editTaskModal, deleteProject, deleteTask }
+export { showAddProjectModal, showEditProjectModal, showAddTaskModal, showEditTaskModal, showRemoveProjectModal, showRemoveTaskModal }
 

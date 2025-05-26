@@ -1,6 +1,6 @@
 import { eventActions } from "./events";
 import { updateDOM } from "./DOM";
-import { getProjectModal } from "./modals";
+import { showAddProjectModal } from "./modals";
 import { loadData } from "./local-storage";
 import "./styles.css";
 
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", loadData);
 function renderChanges () {
     updateDOM();
     eventActions();
-    getProjectModal();
+    showAddProjectModal();
     // console.log(getProjects());
 }
 

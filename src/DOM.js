@@ -1,6 +1,6 @@
 import { getProjects, getActiveProject } from "./projects";
 import { resetDOM, isDueDate, oneTimeTasksAreCompleted, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor, getCounterTextContent, createButton, createIcon } from "./utils";
-import { editProjectModal, addTaskModal, editTaskModal, deleteProject, deleteTask } from "./modals";
+import { showEditProjectModal, showAddTaskModal, showEditTaskModal, showRemoveProjectModal, showRemoveTaskModal } from "./modals";
 import { format } from "date-fns";
 import starImage from "./icons/star.svg";
 import arrowDownImg from "./icons/arrow-down-drop-circle-outline.svg";
@@ -70,19 +70,19 @@ activeProjectBtnsWrapper.classList.add("project-options");
 const editProjectNameBtn = createButton("edit-btn", "Edit name");
 const editIcon = createIcon(editImg, "Edit project name", "", "2em");
 editProjectNameBtn.prepend(editIcon);
-editProjectModal(editProjectNameBtn);
+showEditProjectModal(editProjectNameBtn);
 activeProjectBtnsWrapper.appendChild(editProjectNameBtn);
 
 const addNewToDoBtn = createButton("add-task", "Add new task");
 const plusBoxIcon = createIcon(plusImg, "Add new task", "add-icon", "2em");
 addNewToDoBtn.prepend(plusBoxIcon);
-addTaskModal(addNewToDoBtn);
+showAddTaskModal(addNewToDoBtn);
 activeProjectBtnsWrapper.appendChild(addNewToDoBtn);
 
 const removeProjectBtn = createButton("remove-project", "Remove project");
 const trashCanIcon = createIcon(trashCanImg, "Remove project", "remove-icon", "2em");
 removeProjectBtn.prepend(trashCanIcon);
-deleteProject(removeProjectBtn);
+showRemoveProjectModal(removeProjectBtn);
 activeProjectBtnsWrapper.appendChild(removeProjectBtn);
 
 activeProjectContainer.appendChild(activeProjectBtnsWrapper);
@@ -238,13 +238,13 @@ const createTaskCard = (task, index) => {
     const ediTaskBtn = createButton("edit-btn", "Edit task", index);
     const editIcon = createIcon(editImg, "Edit task", "", "2em");
     ediTaskBtn.prepend(editIcon);
-    editTaskModal(ediTaskBtn);
+    showEditTaskModal(ediTaskBtn);
     buttonsWrapper.appendChild(ediTaskBtn);
     
     const removeTaskBtn = createButton("remove-task", "Remove Task", index);
     const trashCanIcon = createIcon(trashCanImg, "Remove task", "remove-icon", "2em");
     removeTaskBtn.prepend(trashCanIcon);
-    deleteTask(removeTaskBtn);
+    showRemoveTaskModal(removeTaskBtn);
     buttonsWrapper.appendChild(removeTaskBtn);
     
     return cardContainer;
