@@ -21,7 +21,7 @@ function createButton (className, buttonText, index) {
         button.textContent = buttonText;
     }
 
-    if (index) {
+    if (index || index === 0) {
         button.setAttribute("data-index", index);
     }
 
