@@ -32,6 +32,9 @@ class Todo {
         if (priority !== undefined) {
             this.priority = priority;
         }
+
+        this.complete = false;
+        this.dayCompleted = "";
     }
 
     setToDoCompleted() {
@@ -57,7 +60,7 @@ class Todo {
         if (this.remainder === 'monthly') {
            return this.dueDate = format(addMonths(showCurrentDate(), 1), "yyyy-MM-dd");
         }
-        
+
         this.dueDate = format(addDays(showCurrentDate(), +this.remainder), "yyyy-MM-dd");
     }
 }
