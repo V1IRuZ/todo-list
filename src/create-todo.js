@@ -1,4 +1,4 @@
-import { format, addDays, isBefore, isAfter, isEqual } from "date-fns";
+import { format, addDays, isBefore, isEqual } from "date-fns";
 import { showCurrentDate } from "./utils";
 
 class Todo {
@@ -13,11 +13,25 @@ class Todo {
     }
 
     editToDo(title, description, dueDate, remainder, priority) {
-        if (title !== undefined) this.title = title;
-        if (description !== undefined) this.description = description;
-        if (dueDate !== undefined) this.dueDate = dueDate;
-        if (remainder !== undefined) this.remainder = remainder;
-        if (priority !== undefined) this.priority = priority;
+        if (title !== undefined) {
+            this.title = title;
+        }
+
+        if (description !== undefined) {
+            this.description = description;
+        }
+
+        if (dueDate !== undefined) {
+            this.dueDate = dueDate;
+        }
+
+        if (remainder !== undefined) {
+            this.remainder = remainder;
+        }
+
+        if (priority !== undefined) {
+            this.priority = priority;
+        }
     }
 
     setToDoCompleted() {
@@ -26,11 +40,13 @@ class Todo {
     }
 
     setToDoUncompleted() {
-        if (this.remainder !== 'none') {
-            if (isEqual(showCurrentDate(), this.dueDate) || isBefore(showCurrentDate(), this.dueDate)) {
-                this.complete = false;
-            }
-        } 
+        if (this.remainder === 'none') {
+            return
+        }
+
+        if (isEqual(showCurrentDate(), this.dueDate) || isBefore(showCurrentDate(), this.dueDate)) {
+            this.complete = false;
+        }
     }
 
     updateDueToDate() {
