@@ -101,7 +101,7 @@ const updateActiveProjectContainer = (...buttons) => {
 // TASK CARDS
 // Main wrapper container
 const tasksContainer = document.createElement("div");
-tasksContainer.classList.add("view-tasks");
+tasksContainer.classList.add("tasks-container");
 main.appendChild(tasksContainer);
 
 const createContainerToTaskCards = (className, headerText) => {
@@ -163,14 +163,14 @@ const createTaskCard = (task, index) => {
     const cardContainer = document.createElement("div");
     cardContainer.classList.add("card-container");
     
-    // Allways visible section of card
+    // Allways visible container of card
     const mainTaskCardWrapper = document.createElement("div");
     mainTaskCardWrapper.classList.add("task-card");
     cardContainer.appendChild(mainTaskCardWrapper);
 
     // Check button for completeing task
     const checkButtonWrapper = document.createElement("div");
-    checkButtonWrapper.classList.add("complete-div");
+    checkButtonWrapper.classList.add("completion-box");
 
     const checkButton = createButton("complete-btn", "", index);
     updateStateOfCompleteBtn(task, checkButton);
@@ -211,19 +211,19 @@ const createTaskCard = (task, index) => {
     // Card extension toggle button 
     const toggleExtensionWrapper = document.createElement("div");
 
-    const arrowIcon = createIcon(arrowDownImg, "Toggle details", "details-btn", "1.75em");
+    const arrowIcon = createIcon(arrowDownImg, "Toggle details", "extension-btn", "1.75em");
     toggleExtensionWrapper.appendChild(arrowIcon);
     mainTaskCardWrapper.appendChild(toggleExtensionWrapper);
 
     // Hidden extension container
     const cardExtensionContainer = document.createElement("div");
-    cardExtensionContainer.classList.add("details");
+    cardExtensionContainer.classList.add("extension");
     cardExtensionContainer.classList.add("hide");
     cardContainer.appendChild(cardExtensionContainer);
     
     // Description
     const descriptionWrapper = document.createElement("div");
-    descriptionWrapper.classList.add("task-info");
+    descriptionWrapper.classList.add("extension-description");
     cardExtensionContainer.appendChild(descriptionWrapper);
     
     const description = document.createElement("p");
@@ -232,7 +232,7 @@ const createTaskCard = (task, index) => {
     
     // Extension edit and remove buttons
     const buttonsWrapper = document.createElement("div");
-    buttonsWrapper.classList.add("edit-tasks");
+    buttonsWrapper.classList.add("extension-btns");
     cardExtensionContainer.appendChild(buttonsWrapper);
     
     const ediTaskBtn = createButton("edit-btn", "Edit task", index);

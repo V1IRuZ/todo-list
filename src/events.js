@@ -4,9 +4,9 @@ import { updateDOM } from "./DOM";
 import { saveData } from "./local-storage";
 
 export function eventActions() {
-    addGlobalEventListener("click", ".details-btn", e => {
+    addGlobalEventListener("click", ".extension-btn", e => {
         let parentContainer = e.target.closest(".card-container");
-        let details = parentContainer.querySelector(".details");
+        let details = parentContainer.querySelector(".extension");
     
         showHideTaskCardExpansion(details);
         switchIcon(e);
