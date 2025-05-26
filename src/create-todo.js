@@ -1,4 +1,4 @@
-import { format, addDays, isBefore, isEqual } from "date-fns";
+import { format, addDays, addMonths, isBefore, isEqual } from "date-fns";
 import { showCurrentDate } from "./utils";
 
 class Todo {
@@ -50,9 +50,15 @@ class Todo {
     }
 
     updateDueToDate() {
-        if (this.remainder !== 'none') {
-            this.dueDate = format(addDays(showCurrentDate(), +this.remainder), "yyyy-MM-dd");
-        } 
+        if (this.remainder === 'none') {
+            return
+        }
+        
+        if (this.remainder === 'monthly') {
+           return this.dueDate = format(addMonths(showCurrentDate(), 1), "yyyy-MM-dd");
+        }
+        
+        this.dueDate = format(addDays(showCurrentDate(), +this.remainder), "yyyy-MM-dd");
     }
 }
 
