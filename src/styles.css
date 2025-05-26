@@ -242,7 +242,9 @@
   footer { 
     grid-row: 3/4;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    padding: 0.5em;
+    color: var(--off-white);
   }
 
   /* Add project modal */
