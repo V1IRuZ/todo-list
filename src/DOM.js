@@ -134,7 +134,7 @@ const createContainerToTaskCards = (className, headerText, icon) => {
 // Containers for each task, based on their status
 const todayTasks = createContainerToTaskCards("today-container", "Today's tasks", starAltImg);
 const upcomingTasks = createContainerToTaskCards("upcoming-container", "Upcoming tasks", calendarClockImg);
-const OneTimeTasks = createContainerToTaskCards("tasks-done", "One-time tasks", checkSignImg);
+const OneTimeTasks = createContainerToTaskCards("tasks-done", "Completed tasks (no repetition)", checkSignImg);
 
 function updateContentToContainers() {
     const activeProject = getActiveProject();
