@@ -68,24 +68,18 @@
   :root {
     --system-ui: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     --btn-padding: 0.5em 1em;
-    /* Colors */
-    /* background */
-    --ligth-gray: #f5f5f5;
-    --off-white: #FFFFFF;
-    /* Action (buttons) */
+    --linear-gradient: linear-gradient(to right, var(--sky-blue), var(--soft-green));
+    --para-color: #444040;
+    --dark-gray: #4b4747;
+    --light-gray: #f5f5f5;
     --sky-blue: #4A90E2;
-    /* Secondary */
+    --hover-blue: #56a5ff;
+    --off-white: #FFFFFF;
     --soft-green: #7ED321;
-    /* Text colors */
-    --dark-gray: #333333;
     --medium-gray: #666666;
-    /* Error or Warning Indicators: */
     --warm-red: #FF5A5F;
-    --amber: #F8D22A;
-    /* hover/focus */
-    --light-blue: #E5F1FB;
-    --background-color: linear-gradient(to right, var(--sky-blue), var(--soft-green));
     --shadow-color: #918e8e;
+    --text-shadow: 2px 2px 2px var(--dark-gray);
   }
 
   /* BASIC */
@@ -114,7 +108,7 @@
   header,
   footer {
     grid-column: 1/3;
-    background: var(--background-color);
+    background: var(--linear-gradient);
   }
 
   header {
@@ -128,10 +122,11 @@
     gap: 8px;
   }
 
-  .logo-text {
+  .logo-text, 
+  footer {
     font-family: 'Neuropolitical';
     color: var(--off-white);
-    text-shadow: 2px 2px 2px var(--dark-gray);
+    text-shadow: var(--text-shadow);
   }
 
   footer { 
@@ -149,7 +144,7 @@
     flex-direction: column;
     gap: 1em;
     padding: 2em;
-    background-color: var(--ligth-gray)
+    background-color: var(--light-gray)
   }
 
   .my-projects {
@@ -179,7 +174,7 @@
 
   main {
     padding: 2em 10em 2em 5em;
-    background-color: var(--ligth-gray);
+    background-color: var(--light-gray);
   }
 
   /* Active Project */
@@ -190,6 +185,13 @@
     justify-content: space-between;
     border-bottom: 2px solid var(--medium-gray);
     max-width: 1200px;
+  }
+
+  .project-header {
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    max-width: 350px;
   }
 
   .project-options {
@@ -229,6 +231,7 @@
   .card-container {
     display: grid;
     grid-template-rows: auto auto;
+    color: var(--para-color);
     font-size: 1.5rem;
     padding: var(--btn-padding);
     border-radius: 10px;
@@ -288,7 +291,7 @@
   button {
     border-style: none;
     cursor: pointer;
-    padding: 0.5em 1em;
+    padding: var(--btn-padding);
     border-radius: 10px;
   }
 
@@ -299,7 +302,7 @@
     font-weight: 900;
     align-items: center;
     color: var(--dark-gray);
-    background-color: var(--ligth-gray);
+    background-color: var(--light-gray);
   }
 
   .project-form > div > button,
@@ -335,7 +338,7 @@
     font-size: 1.5rem;
     font-weight: 900;
     color: var(--dark-gray);
-    background-color: var(--ligth-gray);
+    background-color: var(--light-gray);
   }
 
   .project-btn:hover {
@@ -354,7 +357,7 @@
     font-weight: 900;
     align-items: center;
     color: var(--dark-gray);
-    background-color: var(--ligth-gray);
+    background-color: var(--light-gray);
   }
 
   .project-btn,
@@ -373,6 +376,12 @@
   .edit-btn:hover,
   .remove-task:hover {
     transform: scale(1.2);
+  }
+
+  .task-btns > button:hover,
+  .submit-project:hover,
+  .selection-btns > button:hover {
+    background-color: var(--hover-blue);
   }
 
   .selection-btns > button {
@@ -449,7 +458,7 @@
   }
 
   ::backdrop {
-    background: var(--background-color);
+    background: var(--linear-gradient);
     opacity: 0.7;
   }
 
