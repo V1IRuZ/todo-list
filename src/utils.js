@@ -2,16 +2,6 @@ import { format, isBefore, isEqual, isAfter } from "date-fns";
 import arrowDownImg from "./icons/arrow-down-drop-circle-outline.svg";
 import arrowUpImg from "./icons/arrow-up-drop-circle-outline.svg";
 
-// Testing
-
-// let today = "2025-05-07";
-// addGlobalEventListener("click", ".test", e => {
-//     today = format(addDays(today, 1), "yyyy-MM-dd");
-//     e.target.textContent = `${today}`;
-    
-//     updateDOM();
-// })
-
 // DOM 
 function createButton (className, buttonText, index) {
     const button = document.createElement("button");
@@ -26,7 +16,7 @@ function createButton (className, buttonText, index) {
     }
 
     return button;
-}
+};
 
 function createIcon (srcIcon, altText, className, width) {
     const icon = document.createElement("img");
@@ -42,21 +32,21 @@ function createIcon (srcIcon, altText, className, width) {
     }
 
     return icon;
-}
+};
 
 function resetDOM(container) {
     while (container.firstChild) {
         container.removeChild(container.lastChild);
     }
-}
+};
 
 function showHideTaskCardExpansion(container) {
     container.classList.toggle("hide");
-}
+};
 
 function switchIcon(event) {
     event.target.src = event.target.src.includes(arrowDownImg) ? arrowUpImg : arrowDownImg;
-}
+};
 
 function getCounterTextContent(project, element) {
     if (project.getCounter() === 0) {
@@ -67,7 +57,7 @@ function getCounterTextContent(project, element) {
 
     element.style.color = "#ff6b6b";
     return element.textContent = project.getCounter();
-}
+};
 
 function setPriorityColor (task, element) {
     switch(task.priority) {
@@ -84,7 +74,7 @@ function setPriorityColor (task, element) {
             element.style.backgroundColor = "#ff6b6b";
             break;
     }
-}
+};
 
 function updateStateOfCompleteBtn (task, button) {
     if (isEqual(showCurrentDate(), task.dayCompleted) || task.remainder === 'none' && task.complete) {
@@ -93,13 +83,13 @@ function updateStateOfCompleteBtn (task, button) {
         button.style.color = "green";
     } else {
         button.classList.add("not-done");
-        button.textContent = ""
+        button.textContent = "";
     }
-}
+};
 
 function enableDisableCheckBtn(task, button) {
-    const dueDateToday = isEqual(showCurrentDate(), task.dueDate)
-    const dueDateLate = isBefore(task.dueDate, showCurrentDate())
+    const dueDateToday = isEqual(showCurrentDate(), task.dueDate);
+    const dueDateLate = isBefore(task.dueDate, showCurrentDate());
 
     if (task.remainder === 'none' && task.complete) {
         button.disabled = true;
@@ -108,7 +98,7 @@ function enableDisableCheckBtn(task, button) {
     } else {
         button.disabled = true;
     }
-}
+};
 
 // Events
 
@@ -116,7 +106,7 @@ function addGlobalEventListener(type, selector, callback) {
     document.addEventListener(type, e => {
         if (e.target.matches(selector)) callback(e);
     })
-}
+};
 
 // Modal
 
@@ -125,21 +115,21 @@ function closeModal (event, modal, form) {
     form.reset();
 
     event.preventDefault();
-}
+};
 
 // Checking Date and task completion functions
 
 function showCurrentDate() {
     return format(new Date(), "yyyy-MM-dd");
-}
+};
 
 function isDueDate (task) {
     return isEqual(showCurrentDate(), task.dayCompleted) || (isEqual(showCurrentDate(), task.dueDate) || isAfter(showCurrentDate(), task.dueDate));
-}
+};
 
 function oneTimeTasksAreCompleted (task) {
     return task.remainder === 'none' && task.complete;
-}
+};
 
 export {
     resetDOM, 
@@ -156,4 +146,4 @@ export {
     getCounterTextContent,
     createButton,
     createIcon
-}
+};
