@@ -85,6 +85,7 @@
     /* hover/focus */
     --light-blue: #E5F1FB;
     --background-color: linear-gradient(to right, var(--sky-blue), var(--soft-green));
+    --shadow-color: #918e8e;
   }
 
   /* BASIC */
@@ -107,6 +108,7 @@
   .icons {
     width: 2em;
   }
+
   /* HEADER & FOOTER */
 
   header,
@@ -206,19 +208,22 @@
     gap: 2em;
   }
 
-  .upcoming-container > div,
-  .today-container > div,
-  .tasks-done > div {
+  .container-title {
     display: flex;
-    flex-direction: column;
     gap: 1em;
   }
 
-  .upcoming-container > h1,
-  .today-container > h1,
-  .tasks-done > h1 {
+  .container-title > h1 {
     color: var(--medium-gray);
     margin: 1em 0;
+  }
+
+  .upcoming-container > div + div,
+  .today-container > div + div,
+  .tasks-done > div + div{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
   }
 
   .card-container {
@@ -226,7 +231,8 @@
     grid-template-rows: auto auto;
     font-size: 1.5rem;
     padding: var(--btn-padding);
-    box-shadow: 2px 2px 5px var(--medium-gray);
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px var(--shadow-color);
   }
 
   .task-card {
@@ -275,11 +281,6 @@
     display: flex;
     gap: 2em;
     padding-bottom: 1em;
-  }
-
-  .completion-box {
-    align-content: center;
-    justify-content: center;
   }
 
   /* BUTTONS */
@@ -384,7 +385,6 @@
   }
 
   .complete-btn {
-    align-content: start;
     padding: var(--btn-padding);
     border: 2px solid var(--sky-blue);
     border-radius: 0;
@@ -398,7 +398,8 @@
   }
 
   .complete-btn:disabled {
-    border-color: #a0a0a0;
+    border-color: #c0bfbf;
+    cursor: default;
   }
 
   /* MODALS */
