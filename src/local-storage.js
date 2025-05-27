@@ -6,8 +6,8 @@ import { updateDOM } from "./DOM";
 function saveData () {
     const projects = getProjects();
     localStorage.setItem("projects", JSON.stringify(projects));
-    console.log("data saved")
-}
+    console.log("data saved");
+};
 
 function loadData () {
     let rawData = JSON.parse(localStorage.getItem("projects")) || [];
@@ -23,8 +23,8 @@ function loadData () {
     }))
 
     updateProjects(data);
-    setActiveProject()
+    setActiveProject();
     updateDOM();
-}
+};
 
-export { saveData, loadData }
+export { saveData, loadData };
