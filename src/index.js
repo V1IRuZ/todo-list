@@ -5,12 +5,6 @@ import { showAddProjectModal } from "./modals";
 import { loadData, saveData } from "./local-storage";
 import "./styles.css";
 
-// const test = document.querySelector(".test");
-
-// test.addEventListener("click", () => {
-//     localStorage.clear();
-// })
-
 document.addEventListener("DOMContentLoaded", loadData);
 
 addGlobalEventListener("click", ".extension-btn", e => {
@@ -41,5 +35,4 @@ addGlobalEventListener("click", ".complete-btn", e => {
 })
 
 updateDOM();
-eventActions();
 showAddProjectModal();
