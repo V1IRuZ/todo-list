@@ -1,7 +1,8 @@
-import { eventActions } from "./events";
+import { getActiveProject, switchActiveProject } from "./projects";
+import { addGlobalEventListener, showHideTaskCardExpansion, switchIcon } from "./utils";
 import { updateDOM } from "./DOM";
 import { showAddProjectModal } from "./modals";
-import { loadData } from "./local-storage";
+import { loadData, saveData } from "./local-storage";
 import "./styles.css";
 
 // const test = document.querySelector(".test");
@@ -12,11 +13,33 @@ import "./styles.css";
 
 document.addEventListener("DOMContentLoaded", loadData);
 
-function renderChanges () {
-    updateDOM();
-    eventActions();
-    showAddProjectModal();
-    // console.log(getProjects());
-}
+addGlobalEventListener("click", ".extension-btn", e => {
+    let parentContainer = e.target.closest(".card-container");
+    let details = parentContainer.querySelector(".extension");
 
-renderChanges();
+    showHideTaskCardExpansion(details);
+    switchIcon(e);
+})
+
+addGlobalEventListener("click", ".project-btn", e => {
+        let projectIndex = e.target.getAttribute("data-index");
+        switchActiveProject(+projectIndex);
+        updateDOM();
+})
+
+addGlobalEventListener("click", ".complete-btn", e => {
+    let index = e.target.getAttribute("data-index");
+    let activeProjectTask = getActiveProject().tasks[index];
+
+    if(!activeProjectTask.complete) {
+        activeProjectTask.setToDoCompleted();
+        activeProjectTask.updateDueToDate();
+
+        updateDOM();
+        saveData();
+    }   
+})
+
+updateDOM();
+eventActions();
+showAddProjectModal();

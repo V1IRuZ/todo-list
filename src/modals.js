@@ -203,4 +203,3 @@ function showRemoveTaskModal(removeButton) {
 };
 
 export { showAddProjectModal, showEditProjectModal, showAddTaskModal, showEditTaskModal, showRemoveProjectModal, showRemoveTaskModal }
-
