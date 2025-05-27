@@ -8,6 +8,9 @@ import plusImg from "./icons/plus-box-multiple.svg";
 import trashCanImg from "./icons/delete_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
 import editImg from "./icons/edit.svg";
 import calendarImg from "./icons/calendar-month.svg";
+import calendarClockImg from "./icons/calendar-clock-svgrepo-com.svg";
+import checkSignImg from "./icons/sign-check-svgrepo-com.svg";
+import starAltImg from "./icons/star-alt-svgrepo-com.svg";
 
 // Aside DOM
 const aside = document.querySelector("aside");
@@ -104,13 +107,20 @@ const tasksContainer = document.createElement("div");
 tasksContainer.classList.add("tasks-container");
 main.appendChild(tasksContainer);
 
-const createContainerToTaskCards = (className, headerText) => {
+const createContainerToTaskCards = (className, headerText, icon) => {
     const container = document.createElement("div");
     container.classList.add(className);
 
+    const titleWrapper = document.createElement("div");
+    titleWrapper.classList.add("container-title");
+    container.appendChild(titleWrapper);
+
+    const containerIcon = createIcon(icon, headerText, "", "3em");
+    titleWrapper.appendChild(containerIcon);
+
     const containerTitle = document.createElement("h1");
     containerTitle.textContent = headerText;
-    container.appendChild(containerTitle);
+    titleWrapper.appendChild(containerTitle);
 
     const cardsWrapper = document.createElement("div");
     container.appendChild(cardsWrapper);
@@ -122,9 +132,9 @@ const createContainerToTaskCards = (className, headerText) => {
 };
 
 // Containers for each task, based on their status
-const todayTasks = createContainerToTaskCards("today-container", "Today's tasks");
-const upcomingTasks = createContainerToTaskCards("upcoming-container", "Upcoming tasks");
-const OneTimeTasks = createContainerToTaskCards("tasks-done", "One-time tasks");
+const todayTasks = createContainerToTaskCards("today-container", "Today's tasks", starAltImg);
+const upcomingTasks = createContainerToTaskCards("upcoming-container", "Upcoming tasks", calendarClockImg);
+const OneTimeTasks = createContainerToTaskCards("tasks-done", "One-time tasks", checkSignImg);
 
 function updateContentToContainers() {
     const activeProject = getActiveProject();
