@@ -9,7 +9,7 @@ let activeProject;
 const updateProjects = (data) => {
     console.log("Updating projects with:", data);
     projects.splice(0, projects.length, ...data);
-}
+};
 
 const getProjects = () => projects;
 
@@ -21,22 +21,22 @@ const setActiveProject = () => {
 
 const getActiveProjectIndex = () => {
     return projects.indexOf(activeProject);
-}
+};
 
 const createNewProject = (name) => {
     const project = new Project({name, tasks: []});
 
     projects.push(project);
     return project;
-}
+};
 
 const removeProject = (index) => {
     projects.splice(index, 1);
-}
+};
 
 const switchActiveProject = (index) => {
    return activeProject = projects[index];
-}
+};
 
 const defaultProject = () => {
     const myProject = createNewProject("Tutorial");
@@ -110,7 +110,7 @@ const defaultProject = () => {
         remainder: "none", 
         priority: "Low"
     }));
-}
+};
 
 export { 
     createNewProject, 
@@ -122,4 +122,4 @@ export {
     removeProject, 
     getActiveProjectIndex, 
     updateProjects
-}
+};

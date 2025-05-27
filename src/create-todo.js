@@ -10,7 +10,7 @@ class Todo {
         this.priority = priority;
         this.complete = complete;
         this.dayCompleted = dayCompleted;
-    }
+    };
 
     editToDo(title, description, dueDate, remainder, priority) {
         if (title !== undefined) {
@@ -35,26 +35,26 @@ class Todo {
 
         this.complete = false;
         this.dayCompleted = "";
-    }
+    };
 
     setToDoCompleted() {
         this.complete = true;
         this.dayCompleted = showCurrentDate();
-    }
+    };
 
     setToDoUncompleted() {
         if (this.remainder === 'none') {
-            return
+            return;
         }
 
         if (isEqual(showCurrentDate(), this.dueDate) || isBefore(showCurrentDate(), this.dueDate)) {
             this.complete = false;
         }
-    }
+    };
 
     updateDueToDate() {
         if (this.remainder === 'none') {
-            return
+            return;
         }
         
         if (this.remainder === 'monthly') {
@@ -62,8 +62,8 @@ class Todo {
         }
 
         this.dueDate = format(addDays(showCurrentDate(), +this.remainder), "yyyy-MM-dd");
-    }
-}
+    };
+};
 
 export { Todo }
 

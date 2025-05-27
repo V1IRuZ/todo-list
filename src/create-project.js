@@ -4,20 +4,20 @@ import { format, isEqual, isAfter } from "date-fns";
 export class Project {
 constructor({name, tasks = []}) {
         this.name = name;
-        this.tasks = tasks.map(task => new Todo(task))
-    }
+        this.tasks = tasks.map(task => new Todo(task));
+    };
 
     addToDo(todo) {
-        this.tasks.push(todo)
-    }
+        this.tasks.push(todo);
+    };
 
     editName(name) {
         if (name !== undefined) this.name = name;
-    }
+    };
 
     removeToDo(index) {
         this.tasks.splice(index, 1);
-    }
+    };
 
     getCounter() {
         const today = format(new Date(), "yyyy-MM-dd");
@@ -27,11 +27,11 @@ constructor({name, tasks = []}) {
         const dueDateLate = isAfter(today, task.dueDate);
 
             if ((dueDateToday || dueDateLate) && !task.complete) {
-                total++
+                total++;
             }
 
-            return total
+            return total;
 
         }, 0);
-    }
-}
+    };
+};
