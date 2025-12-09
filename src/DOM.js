@@ -1,5 +1,5 @@
 import { getProjects, getActiveProject } from "./projects";
-import { resetDOM, isDueDate, oneTimeTasksAreCompleted, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor, getCounterTextContent, createButton, createIcon } from "./utils";
+import { resetDOM, isDueDate, oneTimeTasksAreCompleted, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor, getCounterTextContent, createButton, createIcon, applyFadeInAnimation } from "./utils";
 import { showEditProjectModal, showAddTaskModal, showEditTaskModal, showRemoveProjectModal, showRemoveTaskModal } from "./modals";
 import { format } from "date-fns";
 import starImage from "./icons/star.svg";
@@ -296,9 +296,12 @@ const updateTaskCards = () => {
 };
 
 const updateDOM = () => {
+    applyFadeInAnimation(tasksContainer);
+    applyFadeInAnimation(activeProjectContainer);
+
     updateProjectCards();
     updateActiveProjectContainer(editProjectNameBtn, addNewToDoBtn, removeProjectBtn);
     updateTaskCards();
 };
 
-export { updateDOM };
+export { updateDOM, updateProjectCards };
