@@ -128,7 +128,7 @@ function isDueDate (task) {
 };
 
 function oneTimeTasksAreCompleted (task) {
-    return task.remainder === 'none' && task.complete;
+    return task.remainder === 'none' && task.complete && isAfter(showCurrentDate(), task.dayCompleted);
 };
 
 export {
