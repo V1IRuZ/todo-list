@@ -79,11 +79,11 @@ function setPriorityColor (task, element) {
 function updateStateOfCompleteBtn (task, button) {
     if (isEqual(showCurrentDate(), task.dayCompleted) || task.remainder === 'none' && task.complete) {
         button.classList.add("done");
-        button.innerHTML = "&#10003;";
+        // button.innerHTML = "&#10003;";
         button.style.color = "green";
     } else {
         button.classList.add("not-done");
-        button.textContent = "";
+        // button.textContent = "";
     }
 };
 
@@ -98,6 +98,12 @@ function enableDisableCheckBtn(task, button) {
     } else {
         button.disabled = true;
     }
+};
+
+function applyFadeInAnimation(container) {
+    container.classList.remove("fade-in");
+    void container.offsetWidth;
+    container.classList.add("fade-in");
 };
 
 // Events
@@ -145,5 +151,6 @@ export {
     oneTimeTasksAreCompleted,
     getCounterTextContent,
     createButton,
-    createIcon
+    createIcon,
+    applyFadeInAnimation
 };
