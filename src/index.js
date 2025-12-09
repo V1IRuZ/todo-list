@@ -1,6 +1,6 @@
 import { getActiveProject, switchActiveProject } from "./projects";
-import { addGlobalEventListener, showHideTaskCardExpansion, switchIcon } from "./utils";
-import { updateDOM } from "./DOM";
+import { addGlobalEventListener, showHideTaskCardExpansion, switchIcon, updateStateOfCompleteBtn, enableDisableCheckBtn } from "./utils";
+import { updateDOM, updateProjectCards } from "./DOM";
 import { showAddProjectModal } from "./modals";
 import { loadData, saveData } from "./local-storage";
 import "./styles.css";
@@ -29,7 +29,9 @@ addGlobalEventListener("click", ".complete-btn", e => {
         activeProjectTask.setToDoCompleted();
         activeProjectTask.updateDueToDate();
 
-        updateDOM();
+        updateStateOfCompleteBtn(activeProjectTask, e.target);
+        enableDisableCheckBtn(activeProjectTask, e.target);
+        updateProjectCards();
         saveData();
     }   
 })
