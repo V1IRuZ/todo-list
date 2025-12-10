@@ -450,7 +450,7 @@ dialog {
 }
 
 dialog[open] {
-  animation: slideIn 500ms ease-in-out forwards;
+  animation: slideIn 500ms ease-in both;
 }
 
 @keyframes slideIn {
@@ -475,6 +475,27 @@ dialog[open] {
   100% {
     transform: translateY(20vh);
     opacity: 1;
+  }
+}
+
+dialog.closing {
+  animation: slideOut 500ms ease-out both;
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateY(22vh);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(12vh);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 0;
   }
 }
 
