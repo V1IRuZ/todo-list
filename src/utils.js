@@ -115,11 +115,25 @@ function addGlobalEventListener(type, selector, callback) {
 // Modal
 
 function closeModal (event, modal, form) {
-    modal.close();
-    form.reset();
+    modal.classList.add("closing")
 
-    event.preventDefault();
+    modal.addEventListener("animationend", function handler() {
+        modal.classList.remove("closing");
+        form.reset();
+        event.preventDefault();
+        modal.close();
+        modal.removeEventListener("animationend", handler);
+    })
 };
+
+function closeRemovingModal (modal) {
+    modal.classList.add("closing");
+        modal.addEventListener("animationend", function handler() {
+        modal.classList.remove("closing");
+        modal.close();
+        modal.removeEventListener("animationend", handler);
+    })
+}
 
 // Checking Date and task completion functions
 
@@ -137,7 +151,8 @@ function oneTimeTasksAreCompleted (task) {
 
 export {
     resetDOM, 
-    closeModal, 
+    closeModal,
+    closeRemovingModal, 
     addGlobalEventListener, 
     showHideTaskCardExpansion, 
     switchIcon,
