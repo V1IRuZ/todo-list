@@ -1,7 +1,7 @@
 import { updateDOM } from "./DOM";
 import { Todo } from "./create-todo";
 import { createNewProject, setActiveProject, getActiveProject, getActiveProjectIndex, removeProject } from "./projects";
-import { closeModal } from "./utils";
+import { closeModal, closeRemovingModal } from "./utils";
 import { saveData } from "./local-storage";
 
 // Project modal
@@ -93,12 +93,12 @@ function showRemoveProjectModal(removeButton) {
         setActiveProject();
         updateDOM();
         saveData();
-        removeProjectModal.close(); 
+        closeRemovingModal(removeProjectModal)
     });
 
     cancelDeleteProjectBtns.forEach(button => {
         button.addEventListener("click", () => {
-            removeProjectModal.close();
+            closeRemovingModal(removeProjectModal);
         });
     });
 };
@@ -191,13 +191,13 @@ function showRemoveTaskModal(removeButton) {
         };
 
         confirmDeleteTaskBtn.removeAttribute("data-index");
-        removeTaskModal.close();
+        closeRemovingModal(removeTaskModal);
     });
 
     cancelDeleteTaskBtns.forEach(button => {
         button.addEventListener("click", () => {
             confirmDeleteTaskBtn.removeAttribute("data-index");
-            removeTaskModal.close();
+            closeRemovingModal(removeTaskModal);
         });
     });
 };
