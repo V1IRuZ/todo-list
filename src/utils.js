@@ -18,6 +18,14 @@ function createButton (className, buttonText, index) {
     return button;
 };
 
+function createSpan (className, spanText) {
+    const span = document.querySelector("span");
+    span.classList.add(className);
+    span.textContent = spanText;
+
+    return span;
+}
+
 function createIcon (srcIcon, altText, className, width) {
     const icon = document.createElement("img");
     icon.src = srcIcon;
@@ -165,5 +173,6 @@ export {
     getCounterTextContent,
     createButton,
     createIcon,
+    createSpan,
     applyFadeInAnimation
 };
