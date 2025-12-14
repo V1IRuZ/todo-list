@@ -265,7 +265,7 @@ main {
 
 .task-card {
   display: grid;
-  grid-template-columns: 45px 16em auto 2em 3em;
+  grid-template-columns: 1fr 10fr 5fr 1fr 1fr;
   align-items: center;
   gap: 1em;
 }
