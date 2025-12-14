@@ -1,5 +1,5 @@
 import { getProjects, getActiveProject } from "./projects";
-import { resetDOM, isDueDate, oneTimeTasksAreCompleted, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor, getCounterTextContent, createButton, createIcon, applyFadeInAnimation } from "./utils";
+import { resetDOM, isDueDate, oneTimeTasksAreCompleted, updateStateOfCompleteBtn, enableDisableCheckBtn, setPriorityColor, getCounterTextContent, createButton, createIcon, createSpan, applyFadeInAnimation } from "./utils";
 import { showEditProjectModal, showAddTaskModal, showEditTaskModal, showRemoveProjectModal, showRemoveTaskModal } from "./modals";
 import { format } from "date-fns";
 import starImage from "./icons/star.svg";
@@ -70,21 +70,27 @@ activeProjectContainer.appendChild(activeProject);
 const activeProjectBtnsWrapper = document.createElement("div");
 activeProjectBtnsWrapper.classList.add("project-options");
 
-const editProjectNameBtn = createButton("edit-btn", "Edit name");
+const editProjectNameBtn = createButton("edit-btn");
 const editIcon = createIcon(editImg, "Edit project name", "", "2em");
+const editSpan = createSpan("label", "Edit name")
 editProjectNameBtn.prepend(editIcon);
+editProjectNameBtn.append(editSpan);
 showEditProjectModal(editProjectNameBtn);
 activeProjectBtnsWrapper.appendChild(editProjectNameBtn);
 
-const addNewToDoBtn = createButton("add-task", "Add new task");
+const addNewToDoBtn = createButton("add-task");
 const plusBoxIcon = createIcon(plusImg, "Add new task", "add-icon", "2em");
+const addSpan = createSpan("label", "Add new task");
 addNewToDoBtn.prepend(plusBoxIcon);
+addNewToDoBtn.append(addSpan);
 showAddTaskModal(addNewToDoBtn);
 activeProjectBtnsWrapper.appendChild(addNewToDoBtn);
 
-const removeProjectBtn = createButton("remove-project", "Remove project");
+const removeProjectBtn = createButton("remove-project");
 const trashCanIcon = createIcon(trashCanImg, "Remove project", "remove-icon", "2em");
+const removeSpan = createSpan("label", "Remove project");
 removeProjectBtn.prepend(trashCanIcon);
+removeProjectBtn.append(removeSpan);
 showRemoveProjectModal(removeProjectBtn);
 activeProjectBtnsWrapper.appendChild(removeProjectBtn);
 
