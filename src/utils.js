@@ -19,7 +19,7 @@ function createButton (className, buttonText, index) {
 };
 
 function createSpan (className, spanText) {
-    const span = document.querySelector("span");
+    const span = document.createElement("span");
     span.classList.add(className);
     span.textContent = spanText;
 
