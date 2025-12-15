@@ -227,8 +227,10 @@ const createTaskCard = (task, index) => {
     // Card extension toggle button 
     const toggleExtensionWrapper = document.createElement("div");
 
+    const toggleBtn = createButton("toggle-btn");
     const arrowIcon = createIcon(arrowDownImg, "Toggle details", "extension-btn", "1.75em");
-    toggleExtensionWrapper.appendChild(arrowIcon);
+    toggleBtn.appendChild(arrowIcon);
+    toggleExtensionWrapper.appendChild(toggleBtn);
     mainTaskCardWrapper.appendChild(toggleExtensionWrapper);
 
     // Hidden extension container
