@@ -525,10 +525,18 @@ label[for="name"] {
   font-size: 1.5rem;
 }
 
-input[type="text"] {
+input#name,
+input#task-title {
   font-size: 2rem;
   padding-left: 0.2em;
   color: var(--dark-gray);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border: 2px solid var(--sky-blue)
 }
 
 ::backdrop {
