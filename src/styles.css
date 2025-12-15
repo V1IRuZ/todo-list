@@ -110,6 +110,11 @@ h6 {
 
 /* BASIC */
 
+html {
+  scrollbar-gutter: stable;
+}
+
+
 body {
   background: var(--dark-gray);
   color: var(--dark-gray);
@@ -410,6 +415,11 @@ button {
 
 .selection-btns > button {
   color: var(--off-white);
+}
+
+.toggle-btn {
+  padding: 2px;
+  background-color: var(--light-gray);
 }
 
 .extension-btn {
