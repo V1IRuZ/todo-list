@@ -459,7 +459,7 @@ dialog {
 }
 
 dialog[open] {
-  animation: slideIn 500ms ease-in both;
+  animation: slideIn 350ms ease-in both;
 }
 
 @keyframes slideIn {
@@ -468,17 +468,8 @@ dialog[open] {
     opacity: 0;
   }
 
-  25% {
-    opacity: 0.3;
-  }
-
   50% {
-    opacity: 0.8;
-  }
-
-  75% {
-    transform: translateY(22vh);
-    opacity: 1;
+    opacity: 0.5;
   }
 
   100% {
@@ -488,17 +479,16 @@ dialog[open] {
 }
 
 dialog.closing {
-  animation: slideOut 500ms ease-out both;
+  animation: slideOut 350ms ease-out both;
 }
 
 @keyframes slideOut {
   0% {
-    transform: translateY(22vh);
+    transform: translateY(20vh);
     opacity: 1;
   }
 
   50% {
-    transform: translateY(12vh);
     opacity: 0.5;
   }
 
@@ -598,7 +588,7 @@ fieldset > div,
 
 .fade-in {
   opacity: 0;
-  animation: fadeIn 500ms ease both;
+  animation: fadeIn 250ms ease both;
 }
 
 @keyframes fadeIn {
@@ -613,10 +603,6 @@ fieldset > div,
   opacity: 0;
   animation: popIn 0.5s ease-out forwards;
 }
-
-/* .complete-btn.done::after {
-  content: "✓";
-} */
 
 @keyframes popIn {
   0% {
